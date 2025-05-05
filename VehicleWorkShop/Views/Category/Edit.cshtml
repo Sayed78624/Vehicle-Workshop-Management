@@ -1,0 +1,55 @@
+﻿@using VehicleWorkShop.ViewModels
+@model CategoryVM
+@{
+}
+<form asp-action="Edit" enctype="multipart/form-data" method="post" onsubmit="return ValidateForm()">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+            <h4 class="mb-0"><i class="bi bi-card-list me-2"></i>Category Information</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <input asp-for="CategoryId" hidden />
+
+                   <div class="form-group mb-3">
+                        <label for="CategoryName" class="form-label">
+                            <i class="bi bi-tags me-2"></i>Category Name <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="Name" class="form-control" id="CategoryName" placeholder="Enter Category Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="IsActive" class="form-label">
+                            <i class="bi bi-check-circle me-2"></i>Is Active <span class="text-danger">*</span>
+                        </label>
+                        <select asp-for="IsActive" class="form-control" id="IsActive">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <div class="row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="bi bi-save me-2"></i>Update
+                    </button>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <a asp-action="Index" class="btn btn-secondary w-100">
+                        <i class="bi bi-arrow-left-circle me-2"></i>Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

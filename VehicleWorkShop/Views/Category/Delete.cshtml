@@ -1,0 +1,41 @@
+﻿@model VehicleWorkShop.ViewModels.CategoryVM
+
+
+<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="card shadow rounded-4 border-0" style="max-width: 600px;">
+        <div class="card-header bg-danger text-white text-center rounded-top-4">
+            <h4 class="mb-0">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> Confirm Delete
+            </h4>
+        </div>
+
+        <div class="card-body p-4">
+            <h6 class="text-center text-muted mb-4">
+                Are you sure you want to delete this category?<br />This action cannot be undone.
+            </h6>
+
+            <ul class="list-group mb-4">
+                <li class="list-group-item d-flex justify-content-between">
+                    <span><i class="bi bi-tag-fill text-primary me-2"></i> Name</span>
+                    <span>@Model.Name</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span><i class="bi bi-check2-all text-success me-2"></i> Active</span>
+                    <span class="fw-bold">@(Model.IsActive ? "Yes" : "No")</span>
+                </li>
+            </ul>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="CategoryId" />
+                <div class="d-flex justify-content-center gap-3">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash me-1"></i> Yes, Delete
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left-circle me-1"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

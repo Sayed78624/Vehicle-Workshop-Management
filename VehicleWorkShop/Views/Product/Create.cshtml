@@ -1,0 +1,37 @@
+﻿@using VehicleWorkShop.ViewModels
+@model ProductVM
+@{
+}
+
+<form asp-action="Create" enctype="multipart/form-data" method="post">
+    <div class="form-group">
+        <label asp-for="ProductName"></label>
+        <input asp-for="ProductName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PartNo"></label>
+        <input asp-for="PartNo" class="form-control" />
+    </div>
+    @* <div class="form-group"> *@
+    @*     <label asp-for="Description"></label> *@
+    @*     <input asp-for="PartNo" class="form-control" /> *@
+    @* </div> *@
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price"type="number" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId">Category</label>
+        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+            <option value="">-- Select Category --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+     <div class="form-group"> 
+        <label asp-for="Image"></label> 
+         <input asp-for="Image" type="file" class="form-control" /> 
+     </div> 
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+</form>

@@ -1,0 +1,54 @@
+﻿@model VehicleWorkShop.ViewModels.InventoryTypeVM
+
+@{
+    ViewData["Title"] = "Create Inventory Type";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0 shadow-lg rounded-5">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-plus-circle me-2"></i> Create Inventory Type</h5>
+                    <a asp-action="Index" class="btn btn-outline-light btn-sm rounded-pill">
+                        <i class="bi bi-arrow-left-circle me-2"></i> Back to List
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="mb-4">
+                            <label asp-for="Name" class="form-label text-primary fw-bold">
+                                <i class="bi bi-box me-2"></i> Name
+                            </label>
+                            <input asp-for="Name" class="form-control form-control-lg" placeholder="Enter inventory type name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Remarks" class="form-label text-primary fw-bold">
+                                <i class="bi bi-chat-left-text me-2"></i> Remarks
+                            </label>
+                            <input asp-for="Remarks" class="form-control form-control-lg" placeholder="Enter any remarks" />
+                            <span asp-validation-for="Remarks" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-check-circle me-2"></i> Create
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

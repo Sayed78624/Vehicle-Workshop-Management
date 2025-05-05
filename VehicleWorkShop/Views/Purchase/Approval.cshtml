@@ -1,0 +1,93 @@
+﻿@* @model VehicleWorkShop.ViewModels.PurchaseVM *@
+
+@* @{ *@
+@*     ViewBag.Title = "Approve Purchase"; *@
+@* } *@
+
+@* <h2>Approve Purchase</h2> *@
+@* <div class="card p-4"> *@
+@*     <h4>Purchase ID: @Model.PurchaseId</h4> <p><strong>Supplier:</strong> @Model.SupplierName</p>  *@
+@*     php-template *@
+@*     Copy *@
+@*     Edit *@
+@*     <h5>Purchase Details</h5> *@
+@*     <table class="table table-bordered"> *@
+@*         <thead> *@
+@*             <tr> *@
+@*                 <th>Product</th> *@
+@*                 <th>Store</th> *@
+@*                 <th>Quantity</th> *@
+@*                 <th>Price</th> *@
+@*                 <th>VAT</th> *@
+@*                 <th>SubTotal</th> *@
+@*             </tr> *@
+@*         </thead> *@
+@*         <tbody> *@
+@*             @foreach (var detail in Model.PurchaseDetails) *@
+@*             { *@
+@*                 <tr> *@
+@*                     <td>@detail.ProductName</td> *@
+@*                     <td>@detail.Quantity</td> *@
+@*                     <td>@detail.Price</td> *@
+@*                     <td>@detail.Vat</td> *@
+@*                     <td>@detail.SubTotal</td> *@
+@*                 </tr> *@
+@*             } *@
+@*         </tbody> *@
+@*     </table> *@
+
+@*     @if (!Model.IsApprove) *@
+@*     { *@
+@*         <form asp-action="ConfirmApprove" asp-route-id="@Model.PurchaseId" method="post"> *@
+@*             <button type="submit" class="btn btn-success">Approve</button> *@
+@*             <a asp-action="Index" class="btn btn-secondary">Cancel</a> *@
+@*         </form> *@
+@*     } *@
+@*     else *@
+@*     { *@
+@*         <div class="alert alert-success">This purchase is already approved.</div> *@
+@*         <a asp-action="Index" class="btn btn-secondary">Back to List</a> *@
+@*     } *@
+@* </div> *@
+@model VehicleWorkShop.ViewModels.PurchaseVM
+@{
+    ViewData["Title"] = "Approve Purchase";
+}
+
+<h2>Approve Purchase</h2>
+
+<div>
+    <h4>Supplier: @Model.SupplierId</h4>
+    <h4>Description: @Model.Description</h4>
+</div>
+
+<hr />
+<h5>Purchase Details</h5>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>VAT</th>
+            <th>SubTotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.PurchaseDetails)
+        {
+            <tr>
+                <td>@detail.ProductId</td>
+                <td>@detail.Quantity</td>
+                <td>@detail.Price</td>
+                <td>@detail.Vat</td>
+                <td>@detail.SubTotal</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="ConfirmApprove" method="post">
+    <input type="hidden" name="id" value="@Model.PurchaseId" />
+    <button type="submit" class="btn btn-success">Approve Purchase</button>
+</form>

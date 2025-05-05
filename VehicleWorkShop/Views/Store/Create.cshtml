@@ -1,0 +1,35 @@
+﻿@model VehicleWorkShop.ViewModels.StoreVM
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card shadow-sm rounded-4" style="max-width: 600px; width: 100%;">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0 text-center"><i class="bi bi-box-arrow-in-right me-2"></i>Store Entry Form</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-4">
+                    <label asp-for="Name" class="form-label fw-bold">
+                        <i class="bi bi-tags me-2"></i> Store Name
+                    </label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter store name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle me-1"></i> Save Store
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-3">
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left-circle me-2"></i> Back to List
+    </a>
+</div>

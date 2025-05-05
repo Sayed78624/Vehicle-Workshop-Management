@@ -1,0 +1,51 @@
+﻿@model IEnumerable<VehicleWorkShop.ViewModels.WorkShopVM>
+
+<div class="col-12 text-end mb-3">
+    <a asp-action="Create" asp-controller="WorkShop" class="btn btn-success">
+        <i class="bi bi-plus-circle me-1"></i> Create New
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header text-uppercase text-white text-center p-0" style="background:#21909F;">
+        <p style="font-family: 'Brush Script'; font-size: 20px; padding: 5px;">WorkShop Information</p>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-sm table-striped table-bordered">
+                <thead>
+                    <tr style="background:#21909F;" class="text-white text-center">
+                        <th scope="col">WorkShop Id</th>
+                        <th scope="col">WorkShop Name</th>
+                        <th scope="col">Number Of Bay</th>
+                        <th scope="col">Number Of Level</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var w in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@w.WorkShopId</td>
+                            <td>@w.WorkShopName</td>
+                            <td class="text-center">@w.NumberOfBay</td>
+                            <td class="text-center">@w.NumberOfLevel</td>
+                            <td class="text-center">
+                                <a asp-action="Edit" asp-route-id="@w.WorkShopId" class="btn btn-sm btn-warning me-1" title="Edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@w.WorkShopId" class="btn btn-sm btn-info me-1" title="Details">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@w.WorkShopId" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure to delete?');">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

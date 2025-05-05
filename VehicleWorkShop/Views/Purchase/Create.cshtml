@@ -1,0 +1,78 @@
+﻿@model VehicleWorkShop.ViewModels.PurchaseVM
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="SupplierId">Supplier Name</label>
+        <select asp-for="SupplierId" class="form-control" asp-items="  ViewBag.Suppliers ">
+            <option value="">-- Select Supplier --</option>
+        </select>
+        <span asp-validation-for="SupplierId" class="text-danger"></span>
+    </div>
+   <div>
+       <label>Description</label>
+       <input asp-for="Description" class="form-control" />
+   </div>
+    <div>
+        <label>GrandTotal</label>
+        <input asp-for="GrandTotal" class="form-control" />
+    </div>
+    <div class="mb-4 form-check">
+        <input class="form-check-input" asp-for="IsApprove" id="IsActive" />
+        <label class="form-check-label" for="IsActive">
+            <i class="bi bi-check-circle me-2"></i>@Html.DisplayNameFor(model => model.IsApprove)
+        </label>
+    </div>
+
+   <h4>Purchase Details</h4>
+   <table class="table">
+       <thead>
+           <tr>
+               <th>Product</th>
+               <th>Price</th>
+               <th>Qty</th>
+               <th>VAT</th>
+               <th>SubTotal</th>
+               <th>Store</th>
+           </tr>
+       </thead>
+       <tbody>
+           @for (var i = 0; i < Model.PurchaseDetails.Count; i++)
+           {
+               <tr>
+                   <td>
+                       <select name="PurchaseDetails[@i].ProductId" class="form-control">
+                           <option value="">-- Select Product --</option>
+                           @foreach (SelectListItem item in ViewBag.Products)
+                           {
+                               <option value="@item.Value" selected="@(item.Value == Model.PurchaseDetails[i].ProductId.ToString())">@item.Text</option>
+                           }
+                       </select>
+                   </td>
+                   <td>
+                       <input name="PurchaseDetails[@i].Price" value="@Model.PurchaseDetails[i].Price" class="form-control" />
+                   </td>
+                   <td>
+                       <input name="PurchaseDetails[@i].Quantity" value="@Model.PurchaseDetails[i].Quantity" class="form-control" />
+                   </td>
+                   <td>
+                       <input name="PurchaseDetails[@i].Vat" value="@Model.PurchaseDetails[i].Vat" class="form-control" />
+                   </td>
+                    <td>
+                        <input name="PurchaseDetails[@i].SubTotal" value="@Model.PurchaseDetails[i].SubTotal" class="form-control" />
+                    </td>
+                  <td>
+                        <select name="PurchaseDetails[@i].StoreId" class="form-control">
+                            <option value="">-- Select Product --</option>
+                            @foreach (SelectListItem item in ViewBag.Stores)
+                            {
+                                <option value="@item.Value" selected="@(item.Value == Model.PurchaseDetails[i].StoreId.ToString())">@item.Text</option>
+                            }
+                        </select>
+                    </td>
+               </tr>
+           }
+       </tbody>
+   </table>
+
+   <button type="submit" class="btn btn-primary">Submit</button>
+</form>

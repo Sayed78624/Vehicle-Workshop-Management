@@ -1,0 +1,50 @@
+﻿@model VehicleWorkShop.ViewModels.InventoryTypeVM
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <!-- Card for Delete Confirmation -->
+            <div class="card shadow-lg rounded">
+                <div class="card-header bg-danger text-white text-center">
+                    <i class="bi bi-exclamation-triangle"></i> <strong>Delete Confirmation</strong>
+                </div>
+                <div class="card-body">
+                    <h3 class="text-center text-danger">Are you sure you want to delete this?</h3>
+                    <div class="mt-4">
+                        <h4 class="text-center">Inventory Type Details</h4>
+                        <hr />
+
+                        <dl class="row">
+                            <dt class="col-sm-3 font-weight-bold">
+                                Type Name
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Name)
+                            </dd>
+
+                            <dt class="col-sm-3 font-weight-bold">
+                                @Html.DisplayNameFor(model => model.Remarks)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @Html.DisplayFor(model => model.Remarks)
+                            </dd>
+                        </dl>
+                    </div>
+
+                    <div class="text-center">
+                        <form asp-action="Delete" class="d-inline-block">
+                            <input type="hidden" asp-for="InventoryTypeId" />
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </form>
+
+                        <a asp-action="Index" class="btn btn-secondary btn-lg ml-3">
+                            <i class="bi bi-arrow-left-circle"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

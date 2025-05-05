@@ -1,0 +1,36 @@
+﻿@model IEnumerable<VehicleWorkShop.ViewModels.ProductVM>
+@*     @using VehicleWorkShop.ViewModels *@
+@* @model List<ProductVM> *@
+
+
+
+<h2>Product List</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add New Product</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Part No</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+		@foreach(var item in Model)
+		{
+		<tr>
+			<td>@item.ProductName</td>
+			<td>@item.PartNo</td>
+			<td>@item.Description</td>
+			<td>@item.Price</td>
+			<td><img src="@Url.Content("~/Images/" + item.Image)" alt="Product Image" width="50" height="50" /></td>
+			<td>@item.CategoryId</td>
+		</tr>
+		})
+    </tbody>
+</table>
+

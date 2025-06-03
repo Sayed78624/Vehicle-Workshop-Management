@@ -14,11 +14,19 @@ namespace VehicleWorkShop.Utilities
             CreateMap<Supplier, SupplierVM>().ReverseMap();    
             CreateMap<InventoryType, InventoryTypeVM>().ReverseMap();
             CreateMap<Product, ProductVM>().ReverseMap();
-            CreateMap<Purchase, PurchaseVM>().ReverseMap();
+
+            CreateMap<Purchase, PurchaseVM>().ReverseMap(); 
+
             CreateMap<PurchaseDetail, PurchaseDetailVM>().ReverseMap();
             CreateMap<Role, RoleVM>().ReverseMap();   
             CreateMap<Users, UserVM>().ReverseMap();
             CreateMap<Store, StoreVM>().ReverseMap();
+            CreateMap<Customer, CustomerVM>().ReverseMap();
+            CreateMap<Sale, SaleVM>().ReverseMap();
+            CreateMap<SaleDetails, SaleDetailVM>().ReverseMap();
+
+            CreateMap<VehicleModel, VehicleModelVM>().ReverseMap();
+
 
         }
     }

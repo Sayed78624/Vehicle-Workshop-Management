@@ -1,37 +1,77 @@
 ﻿@using VehicleWorkShop.ViewModels
 @model ProductVM
+
 @{
+    ViewData["Title"] = "Create Product";
 }
 
-<form asp-action="Create" enctype="multipart/form-data" method="post">
-    <div class="form-group">
-        <label asp-for="ProductName"></label>
-        <input asp-for="ProductName" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="PartNo"></label>
-        <input asp-for="PartNo" class="form-control" />
-    </div>
-    @* <div class="form-group"> *@
-    @*     <label asp-for="Description"></label> *@
-    @*     <input asp-for="PartNo" class="form-control" /> *@
-    @* </div> *@
-    <div class="form-group">
-        <label asp-for="Price"></label>
-        <input asp-for="Price"type="number" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="CategoryId">Category</label>
-        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
-            <option value="">-- Select Category --</option>
-        </select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
-    </div>
+<div class="container mt-5">
+    <div class="card shadow rounded-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                <i class="bi bi-plus-circle me-2"></i>Create New Product
+            </h4>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Create" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
+                <div class="row g-4">
 
-     <div class="form-group"> 
-        <label asp-for="Image"></label> 
-         <input asp-for="Image" type="file" class="form-control" /> 
-     </div> 
+                    <div class="col-md-6">
+                        <label asp-for="ProductName" class="form-label fw-semibold"></label>
+                        <input asp-for="ProductName" class="form-control rounded-3" />
+                        <span asp-validation-for="ProductName" class="text-danger small"></span>
+                    </div>
 
-    <input type="submit" value="Save" class="btn btn-primary" />
-</form>
+                    <div class="col-md-6">
+                        <label asp-for="PartNo" class="form-label fw-semibold"></label>
+                        <input asp-for="PartNo" class="form-control rounded-3" />
+                        <span asp-validation-for="PartNo" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Description" class="form-label fw-semibold"></label>
+                        <textarea asp-for="Description" class="form-control rounded-3" rows="3"></textarea>
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Price" class="form-label fw-semibold"></label>
+                        <div class="input-group">
+                            <span class="input-group-text">৳</span>
+                            <input asp-for="Price" type="number" step="0.01" class="form-control rounded-3" />
+                        </div>
+                        <span asp-validation-for="Price" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Category</label>
+                        @Html.DropDownListFor(model => model.CategoryId, Model.Categories, "Select a Category", new { @class = "form-select rounded-3" })
+                        <span asp-validation-for="CategoryId" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Vehicle Model</label>
+                        @Html.DropDownListFor(model => model.ModelId, Model.VehicleModel, "Select a Model", new { @class = "form-select rounded-3" })
+                        <span asp-validation-for="ModelId" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Image" class="form-label fw-semibold"></label>
+                        <input asp-for="Image" type="file" class="form-control rounded-3" />
+                        <span asp-validation-for="Image" class="text-danger small"></span>
+                    </div>
+
+                </div>
+
+                <div class="mt-4 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success px-4 rounded-pill">
+                        <i class="bi bi-save2"></i> Save Product
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4 rounded-pill">
+                        <i class="bi bi-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,4 @@
-﻿using AspNetCore.ReportingServices.ReportProcessing.ReportObjectModel;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using VehicleWorkShop.Models;
 
 namespace VehicleWorkShop.Data
@@ -30,6 +29,11 @@ namespace VehicleWorkShop.Data
         public DbSet <DamageDetail> DamageDetails { get; set;}
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Store> Stores { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<PaymentType> PaymentTypes { get; set; }
+        public DbSet<VehicleModel> VehicleModels { get; set; }
+        public DbSet<Transfer> Transfers { get; set; }
+        public DbSet<TransferDetail> TransferDetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder); 
@@ -56,9 +60,16 @@ namespace VehicleWorkShop.Data
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<SaleDetails>()
                 .HasOne(sd => sd.Sale)
-                .WithMany()
+                .WithMany(s => s.SaleDetails)
+                 .HasForeignKey(sd => sd.SaleId)
+             .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<SaleDetails>()
+                .HasOne(sd => sd.Sale)
+                .WithMany(s => s.SaleDetails)
                 .HasForeignKey(sd => sd.SaleId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Restrict); 
+
             modelBuilder.Entity<SalesReturnDetail>()
                  .HasOne(s => s.Product)
                  .WithMany()
@@ -69,7 +80,38 @@ namespace VehicleWorkShop.Data
                 .WithMany()
                 .HasForeignKey(s => s.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
-        
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.Sale)
+                .WithMany()
+                .HasForeignKey(p => p.SaleId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.Customer)
+                .WithMany()
+                .HasForeignKey(p => p.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.PaymentType)
+                .WithMany()
+                .HasForeignKey(p => p.PaymentTypeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Sale>()
+                .HasOne(s => s.Customer)
+                .WithMany()
+                .HasForeignKey(s => s.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<TransferDetail>()
+                .HasOne(p => p.Transfer)
+                .WithMany(t => t.TransferDetails)
+                 .HasForeignKey(p => p.Tran_Id)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<TransferDetail>()
+                .HasOne(p => p.Product)
+                .WithMany()
+                .HasForeignKey(p => p.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 

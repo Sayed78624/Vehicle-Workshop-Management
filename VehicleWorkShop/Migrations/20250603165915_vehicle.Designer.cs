@@ -12,8 +12,8 @@ using VehicleWorkShop.Data;
 namespace VehicleWorkShop.Migrations
 {
     [DbContext(typeof(WorkShopDbContext))]
-    [Migration("20250501174241_vehic")]
-    partial class vehic
+    [Migration("20250603165915_vehicle")]
+    partial class vehicle
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -205,6 +205,62 @@ namespace VehicleWorkShop.Migrations
                     b.ToTable("Ledgers");
                 });
 
+            modelBuilder.Entity("VehicleWorkShop.Models.Payment", b =>
+                {
+                    b.Property<int>("PaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"), 1L, 1);
+
+                    b.Property<string>("AccNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BankName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SaleId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("Time")
+                        .HasColumnType("time");
+
+                    b.HasKey("PaymentId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("PaymentTypeId");
+
+                    b.HasIndex("SaleId");
+
+                    b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("VehicleWorkShop.Models.PaymentType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("PaymentTypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PaymentTypes");
+                });
+
             modelBuilder.Entity("VehicleWorkShop.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
@@ -221,9 +277,12 @@ namespace VehicleWorkShop.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("ImageName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PartNo")
                         .IsRequired()
@@ -240,6 +299,8 @@ namespace VehicleWorkShop.Migrations
                     b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ModelId");
 
                     b.ToTable("Products");
                 });
@@ -281,6 +342,9 @@ namespace VehicleWorkShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PurchaseDetailId"), 1L, 1);
 
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -303,6 +367,8 @@ namespace VehicleWorkShop.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("PurchaseDetailId");
+
+                    b.HasIndex("ModelId");
 
                     b.HasIndex("ProductId");
 
@@ -442,16 +508,16 @@ namespace VehicleWorkShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SaleDetailsId"), 1L, 1);
 
-                    b.Property<int>("BayId")
+                    b.Property<int?>("BayId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("EndTime")
+                    b.Property<TimeSpan?>("EndTime")
                         .HasColumnType("time");
 
-                    b.Property<int>("LevelId")
+                    b.Property<int?>("LevelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ModelId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -464,14 +530,13 @@ namespace VehicleWorkShop.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("RegisterNo")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("SaleId")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("StartTime")
+                    b.Property<TimeSpan?>("StartTime")
                         .HasColumnType("time");
 
                     b.Property<int>("StoreId")
@@ -484,16 +549,16 @@ namespace VehicleWorkShop.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Vin")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("WorkShopId")
+                    b.Property<int?>("WorkShopId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("SaleDetailsId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("ModelId");
 
                     b.HasIndex("ProductId");
 
@@ -668,6 +733,60 @@ namespace VehicleWorkShop.Migrations
                     b.ToTable("Suppliers");
                 });
 
+            modelBuilder.Entity("VehicleWorkShop.Models.Transfer", b =>
+                {
+                    b.Property<int>("Tran_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Tran_Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsApprove")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Tran_Id");
+
+                    b.ToTable("Transfers");
+                });
+
+            modelBuilder.Entity("VehicleWorkShop.Models.TransferDetail", b =>
+                {
+                    b.Property<int>("DetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DetailId"), 1L, 1);
+
+                    b.Property<string>("DestinationStore")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SourceStore")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Tran_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("DetailId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("Tran_Id");
+
+                    b.ToTable("TransferDetails");
+                });
+
             modelBuilder.Entity("VehicleWorkShop.Models.UserRole", b =>
                 {
                     b.Property<int>("UserRoleId")
@@ -721,6 +840,23 @@ namespace VehicleWorkShop.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("VehicleWorkShop.Models.VehicleModel", b =>
+                {
+                    b.Property<int>("ModelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModelId"), 1L, 1);
+
+                    b.Property<string>("ModelName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ModelId");
+
+                    b.ToTable("VehicleModels");
                 });
 
             modelBuilder.Entity("VehicleWorkShop.Models.WorkShop", b =>
@@ -814,6 +950,33 @@ namespace VehicleWorkShop.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("VehicleWorkShop.Models.Payment", b =>
+                {
+                    b.HasOne("VehicleWorkShop.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VehicleWorkShop.Models.PaymentType", "PaymentType")
+                        .WithMany()
+                        .HasForeignKey("PaymentTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VehicleWorkShop.Models.Sale", "Sale")
+                        .WithMany()
+                        .HasForeignKey("SaleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("PaymentType");
+
+                    b.Navigation("Sale");
+                });
+
             modelBuilder.Entity("VehicleWorkShop.Models.Product", b =>
                 {
                     b.HasOne("VehicleWorkShop.Models.Category", "Category")
@@ -822,7 +985,15 @@ namespace VehicleWorkShop.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("VehicleWorkShop.Models.VehicleModel", "VehicleModel")
+                        .WithMany()
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("VehicleModel");
                 });
 
             modelBuilder.Entity("VehicleWorkShop.Models.Purchase", b =>
@@ -838,6 +1009,12 @@ namespace VehicleWorkShop.Migrations
 
             modelBuilder.Entity("VehicleWorkShop.Models.PurchaseDetail", b =>
                 {
+                    b.HasOne("VehicleWorkShop.Models.VehicleModel", "VehicleModel")
+                        .WithMany()
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("VehicleWorkShop.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -861,6 +1038,8 @@ namespace VehicleWorkShop.Migrations
                     b.Navigation("Purchase");
 
                     b.Navigation("Store");
+
+                    b.Navigation("VehicleModel");
                 });
 
             modelBuilder.Entity("VehicleWorkShop.Models.PurchaseReturn", b =>
@@ -910,7 +1089,7 @@ namespace VehicleWorkShop.Migrations
                     b.HasOne("VehicleWorkShop.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -918,9 +1097,9 @@ namespace VehicleWorkShop.Migrations
 
             modelBuilder.Entity("VehicleWorkShop.Models.SaleDetails", b =>
                 {
-                    b.HasOne("VehicleWorkShop.Models.Customer", "Customer")
+                    b.HasOne("VehicleWorkShop.Models.VehicleModel", "VehicleModel")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -931,9 +1110,9 @@ namespace VehicleWorkShop.Migrations
                         .IsRequired();
 
                     b.HasOne("VehicleWorkShop.Models.Sale", "Sale")
-                        .WithMany()
+                        .WithMany("SaleDetails")
                         .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("VehicleWorkShop.Models.Store", "Store")
@@ -948,13 +1127,13 @@ namespace VehicleWorkShop.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
-
                     b.Navigation("Product");
 
                     b.Navigation("Sale");
 
                     b.Navigation("Store");
+
+                    b.Navigation("VehicleModel");
 
                     b.Navigation("WorkShop");
                 });
@@ -1016,6 +1195,25 @@ namespace VehicleWorkShop.Migrations
                     b.Navigation("Store");
                 });
 
+            modelBuilder.Entity("VehicleWorkShop.Models.TransferDetail", b =>
+                {
+                    b.HasOne("VehicleWorkShop.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VehicleWorkShop.Models.Transfer", "Transfer")
+                        .WithMany("TransferDetails")
+                        .HasForeignKey("Tran_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Transfer");
+                });
+
             modelBuilder.Entity("VehicleWorkShop.Models.UserRole", b =>
                 {
                     b.HasOne("VehicleWorkShop.Models.Role", "Role")
@@ -1048,6 +1246,16 @@ namespace VehicleWorkShop.Migrations
             modelBuilder.Entity("VehicleWorkShop.Models.PurchaseReturn", b =>
                 {
                     b.Navigation("PurchaseReturnDetails");
+                });
+
+            modelBuilder.Entity("VehicleWorkShop.Models.Sale", b =>
+                {
+                    b.Navigation("SaleDetails");
+                });
+
+            modelBuilder.Entity("VehicleWorkShop.Models.Transfer", b =>
+                {
+                    b.Navigation("TransferDetails");
                 });
 #pragma warning restore 612, 618
         }

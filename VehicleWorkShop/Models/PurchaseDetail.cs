@@ -17,6 +17,10 @@ namespace VehicleWorkShop.Models
         public decimal SubTotal { get; set; }
         [ForeignKey("Store")]
         public int StoreId { get; set; }
+        [ForeignKey("VehicleModel")]
+        public int ModelId { get; set; }
+
+        public virtual VehicleModel VehicleModel { get; set; }
         public virtual Purchase Purchase { get; set; }
         public virtual Product Product { get; set; }
         public virtual Store Store { get; set; }

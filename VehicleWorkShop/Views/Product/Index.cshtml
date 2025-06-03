@@ -1,36 +1,44 @@
 ﻿@model IEnumerable<VehicleWorkShop.ViewModels.ProductVM>
-@*     @using VehicleWorkShop.ViewModels *@
-@* @model List<ProductVM> *@
 
+@* Font Awesome CDN *@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary"><i class="fas fa-boxes"></i> Product List</h2>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="fas fa-plus-circle"></i> Add New Product
+        </a>
+    </div>
 
-<h2>Product List</h2>
-
-<a asp-action="Create" class="btn btn-primary mb-3">Add New Product</a>
-
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Product Name</th>
-            <th>Part No</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Image</th>
-            <th>Category</th>
-        </tr>
-    </thead>
-    <tbody>
-		@foreach(var item in Model)
-		{
-		<tr>
-			<td>@item.ProductName</td>
-			<td>@item.PartNo</td>
-			<td>@item.Description</td>
-			<td>@item.Price</td>
-			<td><img src="@Url.Content("~/Images/" + item.Image)" alt="Product Image" width="50" height="50" /></td>
-			<td>@item.CategoryId</td>
-		</tr>
-		})
-    </tbody>
-</table>
-
+    <table class="table table-hover table-bordered shadow-sm">
+        <thead class="thead-dark">
+            <tr class="table-primary">
+                <th><i class="fas fa-hashtag"></i> Product ID</th>
+                <th><i class="fas fa-tag"></i> Product Name</th>
+                <th><i class="fas fa-barcode"></i> Part No</th>
+                <th><i class="fas fa-align-left"></i> Description</th>
+                <th><i class="fas fa-dollar-sign"></i> Price</th>
+                <th><i class="fas fa-image"></i> Image</th>
+                <th><i class="fas fa-list"></i> Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductId</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.PartNo</td>
+                    <td>@item.Description</td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>
+                        <img src="@Url.Content("~/Images/" + item.Image)" alt="Product Image"
+                             class="img-thumbnail" style="width: 60px; height: 60px;" />
+                    </td>
+                    <td>@item.CategoryId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

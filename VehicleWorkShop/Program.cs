@@ -23,6 +23,9 @@ builder.Services.AddTransient<IPurchase, PurchaseRP>();
 builder.Services.AddTransient<IRole, RoleRP>();
 builder.Services.AddTransient<IUser, UserRP>();
 builder.Services.AddTransient<IStore, StoreRP>();
+builder.Services.AddTransient<ICustomer, CustomerRP>();
+builder.Services.AddTransient<ISale, SaleRP>();
+builder.Services.AddTransient<IVehicleModel, VehicleModelRP>();
 
 var app = builder.Build();
 
@@ -43,6 +46,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=WorkShop}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Home}/{id?}");
 
 app.Run();

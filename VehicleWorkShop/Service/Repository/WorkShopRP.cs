@@ -80,5 +80,11 @@ namespace VehicleWorkShop.Service.Repository
             var data = mapper.Map<WorkShopVM>(supplierId);
             return data;
         }
+
+        public async Task<IList<WorkShop>> GetAllWorkshops()
+        {
+            var list = await db.WorkShops.ToListAsync();
+            return list;
+        }
     }
 }

@@ -25,10 +25,28 @@ namespace VehicleWorkShop.Service.Repository
 
         public async Task<List<ProductVM>> GetAll()
         {
-            var list = await db.Products.Include(p => p.Category).ToListAsync();
-            var productList = mapper.Map<List<ProductVM>>(list);
-            return productList;
+            var list = await (from p in db.Products
+                              join c in db.Categories on p.CategoryId equals c.CategoryId
+                              join m in db.VehicleModels on p.ModelId equals m.ModelId
+                              select new ProductVM
+                              {
+                                  ProductId = p.ProductId,
+                                  ProductName = p.ProductName,
+                                  PartNo = p.PartNo,
+                                  Description = p.Description,
+                                  Price = p.Price,
+                                  CategoryId = p.CategoryId,
+                                  ModelId = p.ModelId,
+                                  CategoryName = c.Name,
+                                  ModelName = m.ModelName
+                              }).ToListAsync();
+
+            return list;
         }
+
+
+
+
 
         public async Task<IActionResult> Create(ProductVM model)
         {
@@ -42,6 +60,7 @@ namespace VehicleWorkShop.Service.Repository
                     PartNo = model.PartNo,
                     Description = model.Description ?? "",
                     CategoryId = model.CategoryId,
+                    ModelId = model.ModelId,
                 };
 
                 if (model.Image != null)
@@ -54,22 +73,22 @@ namespace VehicleWorkShop.Service.Repository
                         await model.Image.CopyToAsync(stream);
                     }
 
-                    product.ImageName = uniqueFileName; 
+                    product.ImageName = uniqueFileName;
                 }
                 else
                 {
-                    product.ImageName = "default_image.png"; 
+                    product.ImageName = "default_image.png";
                 }
 
                 db.Products.Add(product);
                 await db.SaveChangesAsync();
 
-                return new OkResult(); 
+                return new OkResult();
             }
             catch (Exception ex)
             {
                 var error = ex.Message;
-                return new BadRequestObjectResult(error); 
+                return new BadRequestObjectResult(error);
             }
         }
 
@@ -83,40 +102,3 @@ namespace VehicleWorkShop.Service.Repository
 
 
 }
-//public async Task<IActionResult> Create(ProductVM model)
-//{
-//    try
-//    {
-//        var product = mapper.Map<Product>(model);
-
-//        if (model.Image != null)
-//        {
-//            string fileName = UploadImage(model.Image);
-//            //product.ImageUrl = fileName;
-//        }
-
-//        await db.Products.AddAsync(product);
-//        await db.SaveChangesAsync();
-//        return new OkResult();
-//    }
-//    catch (Exception)
-//    {
-//        return new BadRequestResult();
-//    }
-//}
-//public async Task<IList<Product>> GetAllProducts()
-//{
-//    return await db.Products.ToListAsync();  //.Include(p => p.Category)
-//}
-//private string UploadImage(IFormFile image)
-//{
-//    string fileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-//    string uploadPath = Path.Combine(en.WebRootPath, "Images", fileName);
-
-//    using (var stream = new FileStream(uploadPath, FileMode.Create))
-//    {
-//        image.CopyTo(stream);
-//    }
-
-//    return fileName;
-//}

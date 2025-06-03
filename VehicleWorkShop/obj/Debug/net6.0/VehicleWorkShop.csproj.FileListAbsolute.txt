@@ -300,3 +300,4 @@ D:\VehicleWorkShop\VehicleWorkShop\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3
 D:\VehicleWorkShop\VehicleWorkShop\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
 D:\VehicleWorkShop\VehicleWorkShop\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\VehicleWorkShop\VehicleWorkShop\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\VehicleWorkShop\VehicleWorkShop\obj\Debug\net6.0\VehicleWorkShop.sourcelink.json

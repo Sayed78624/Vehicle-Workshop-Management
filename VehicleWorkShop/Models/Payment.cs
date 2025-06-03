@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VehicleWorkShop.Models
 {
     public class Payment
     {
+        [Key]
         public int PaymentId { get; set; }
         [ForeignKey("Sale")]
         public int SaleId { get; set; }

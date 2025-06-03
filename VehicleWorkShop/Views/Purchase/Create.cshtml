@@ -1,78 +1,181 @@
 ﻿@model VehicleWorkShop.ViewModels.PurchaseVM
+<div class="container mt-4 bg-white p-4 rounded shadow-sm d-flex justify-content-center">
+    <div class="w-75">
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="SupplierId">Supplier Name</label>
-        <select asp-for="SupplierId" class="form-control" asp-items="  ViewBag.Suppliers ">
-            <option value="">-- Select Supplier --</option>
-        </select>
-        <span asp-validation-for="SupplierId" class="text-danger"></span>
-    </div>
-   <div>
-       <label>Description</label>
-       <input asp-for="Description" class="form-control" />
-   </div>
-    <div>
-        <label>GrandTotal</label>
-        <input asp-for="GrandTotal" class="form-control" />
-    </div>
-    <div class="mb-4 form-check">
-        <input class="form-check-input" asp-for="IsApprove" id="IsActive" />
-        <label class="form-check-label" for="IsActive">
-            <i class="bi bi-check-circle me-2"></i>@Html.DisplayNameFor(model => model.IsApprove)
-        </label>
-    </div>
+        <h4 class="mb-4 text-success text-center">Purchase Entry </h4>
+        <h6 style="color:black">@ViewBag.ErrorMessage</h6>
+        <form asp-action="Create">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <input asp-for="PurchaseId" type="hidden" />
+                    <label class="form-label text-dark">Supplier</label>
 
-   <h4>Purchase Details</h4>
-   <table class="table">
-       <thead>
-           <tr>
-               <th>Product</th>
-               <th>Price</th>
-               <th>Qty</th>
-               <th>VAT</th>
-               <th>SubTotal</th>
-               <th>Store</th>
-           </tr>
-       </thead>
-       <tbody>
-           @for (var i = 0; i < Model.PurchaseDetails.Count; i++)
-           {
-               <tr>
-                   <td>
-                       <select name="PurchaseDetails[@i].ProductId" class="form-control">
-                           <option value="">-- Select Product --</option>
-                           @foreach (SelectListItem item in ViewBag.Products)
-                           {
-                               <option value="@item.Value" selected="@(item.Value == Model.PurchaseDetails[i].ProductId.ToString())">@item.Text</option>
-                           }
-                       </select>
-                   </td>
-                   <td>
-                       <input name="PurchaseDetails[@i].Price" value="@Model.PurchaseDetails[i].Price" class="form-control" />
-                   </td>
-                   <td>
-                       <input name="PurchaseDetails[@i].Quantity" value="@Model.PurchaseDetails[i].Quantity" class="form-control" />
-                   </td>
-                   <td>
-                       <input name="PurchaseDetails[@i].Vat" value="@Model.PurchaseDetails[i].Vat" class="form-control" />
-                   </td>
-                    <td>
-                        <input name="PurchaseDetails[@i].SubTotal" value="@Model.PurchaseDetails[i].SubTotal" class="form-control" />
-                    </td>
-                  <td>
-                        <select name="PurchaseDetails[@i].StoreId" class="form-control">
-                            <option value="">-- Select Product --</option>
-                            @foreach (SelectListItem item in ViewBag.Stores)
-                            {
-                                <option value="@item.Value" selected="@(item.Value == Model.PurchaseDetails[i].StoreId.ToString())">@item.Text</option>
-                            }
-                        </select>
-                    </td>
-               </tr>
-           }
-       </tbody>
-   </table>
+                    @Html.DropDownListFor(
+                             model => model.SupplierId,
+                             Model.Suppliers,
+                             "Select a Supplier",
+                             new { @class = "form-control" }
+                             )
+                    <span asp-validation-for="SupplierId" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label text-dark">Description</label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
 
-   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+            <div class="row mb-3">
+
+                <div class="col-md-6">
+                    <label class="form-label text-dark">Grand Total</label>
+                    <input asp-for="GrandTotal" class="form-control form-control-sm" readonly />
+                </div>
+            </div>
+
+            <div class="table-responsive mb-3">
+                <table class="table table-bordered text-center align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-dark">Product</th>
+                            <th class="text-dark">Model</th>
+                            <th class="text-dark">Qty</th>
+                            <th class="text-dark">Price</th>
+                            <th class="text-dark">VAT (%)</th>
+                            <th class="text-dark">Sub Total</th>
+                            <th class="text-dark">Store</th>
+                            <th class="text-dark">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailsTable">
+                        <tr>
+                            <td>
+                                @Html.DropDownListFor(
+                                         model => model.ProductId,
+                                         Model.Products,
+                                         "Select a Product",
+                                         new { @class = "form-control" }
+                                         )
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </td>
+                            <td>
+                                @Html.DropDownListFor(
+                                         model => model.ModelId,
+                                         Model.Models,
+                                         "Select a Model",
+                                         new { @class = "form-control" }
+                                         )
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Quantity" class="form-control" value="0" onchange="calculateItem()" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Price" class="form-control" value="0" onchange="calculateItem()" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Vat" class="form-control" value="0" onchange="calculateItem()" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="SubTotal" class="form-control" readonly />
+                            </td>
+                            <td>
+
+                                @Html.DropDownListFor(
+                                         model => model.StoreId,
+                                         Model.Stores,
+                                         "Select a Store",
+                                         new { @class = "form-control" }
+                                         )
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-success">Add</button>
+                            </td>
+                        </tr>
+                        @foreach (var item in Model.PurchaseDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @item.ProductName
+                                </td>
+                                <td>
+                                    @item.ModelName
+                                </td>
+                                <td>
+                                    @item.Quantity
+                                </td>
+                                <td>
+                                    @item.Price
+                                </td>
+                                <td>
+                                    @item.Vat
+                                </td>
+                                <td>
+                                    @item.SubTotal
+                                </td>
+                                <td>
+                                    @item.StoreName
+                                </td>
+                                <td>
+                                    <a asp-action="RemoveDetail" asp-route-id="@item.PurchaseId">Remove</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6 d-flex justify-content-end align-items-end">
+                    @if (Model.PurchaseId > 0)
+                    {
+                        <button type="submit" class="btn btn-success px-4">Save Change</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-success px-4">Save</button>
+                    }
+                </div>
+                <div class="col-md-6 d-flex justify-content-end align-items-end">
+                    <a asp-action="Index">Back to List</a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<!-- JavaScript for Add Row  and Remove-->
+<script>
+    function addRow() {
+        const table = document.getElementById("detailsTable");
+        const newRow = table.rows[0].cloneNode(true);
+
+        newRow.querySelectorAll("input").forEach(input => {
+            input.value = input.classList.contains('qty') ? 1 : 0;
+            if (input.classList.contains('subtotal')) input.value = '';
+        });
+
+        table.appendChild(newRow);
+    }
+    function removeRow(button) {
+        const table = document.getElementById("detailsTable");
+        if (table.rows.length > 1) {
+            button.closest('tr').remove();
+            calculateTotal();
+        }
+    }
+
+    function calculateItem(){
+        var Quantity =  parseFloat(document.getElementById("Quantity").value);
+        var Price = parseFloat(document.getElementById("Price").value);
+        var Vat = parseFloat(document.getElementById("Vat").value);
+        var total = Quantity * Price;
+        var vated = total * (Vat / 100)
+        document.getElementById("SubTotal").value = total + vated;
+    }
+</script>

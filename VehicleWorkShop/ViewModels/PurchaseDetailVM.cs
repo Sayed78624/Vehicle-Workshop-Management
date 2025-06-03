@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
+﻿
 namespace VehicleWorkShop.ViewModels
 {
-    using System.ComponentModel.DataAnnotations;
 
     public class PurchaseDetailVM
     {
@@ -21,8 +19,12 @@ namespace VehicleWorkShop.ViewModels
         public decimal SubTotal { get; set; }
 
         public int StoreId { get; set; }
+        public int ModelId { get; set; }
 
-        public string ProductName { get; set; }
+
+        public string ProductName { get; set; } = string.Empty;
+        public string StoreName { get; set; } = string.Empty;
+        public string ModelName { get; set; } = string.Empty;
+
     }
-
 }

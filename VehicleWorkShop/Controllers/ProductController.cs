@@ -10,11 +10,13 @@ namespace VehicleWorkShop.Controllers
     {
         private readonly IProduct product;
         private readonly ICategory category;
+        private readonly IVehicleModel vehicleModel;
 
-        public ProductController(IProduct product, ICategory category)
+        public ProductController(IProduct product, ICategory category, IVehicleModel vehicleModel)
         {
             this.product = product;
             this.category = category;
+            this.vehicleModel = vehicleModel;
         }
 
         public async Task<IActionResult> Index()
@@ -26,9 +28,29 @@ namespace VehicleWorkShop.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.Categories = new SelectList(await category.GetAllCategories(), "CategoryId", "Name");
-            ProductVM productVM = new ProductVM();
-            return View(productVM);
+            var categoryList = await category.GetAllCategories() ?? new List<Category>();
+            var modelList = await vehicleModel.GetAllModels() ?? new List<VehicleModel>();
+
+            var categories = new List<SelectListItem>();
+            foreach (var item in categoryList)
+            {
+                var selec = new SelectListItem();
+                selec.Value = item.CategoryId.ToString();
+                selec.Text = item.Name;
+                categories.Add(selec);
+            }
+            var models = new List<SelectListItem>();
+            foreach (var item in modelList)
+            {
+                var selec = new SelectListItem();
+                selec.Value = item.ModelId.ToString();
+                selec.Text = item.ModelName;
+                models.Add(selec);
+            }
+            var productvm = new ProductVM();
+            productvm.Categories = categories;
+            productvm.VehicleModel = models;
+            return View(productvm);
         }
 
         [HttpPost]
@@ -45,8 +67,25 @@ namespace VehicleWorkShop.Controllers
                 Console.WriteLine(error.ErrorMessage);
             }
 
-            ViewBag.Categories = new SelectList(await category.GetAllCategories(), "CategoryId", "Name");
+            var categoryList = await category.GetAllCategories() ?? new List<Category>();
+            var modelList = await vehicleModel.GetAllModels() ?? new List<VehicleModel>();
 
+            var categories = new List<SelectListItem>();
+            foreach (var item in categoryList)
+            {
+                var selec = new SelectListItem();
+                selec.Value = item.CategoryId.ToString();
+                selec.Text = item.Name;
+                categories.Add(selec);
+            }
+            var models = new List<SelectListItem>();
+            foreach (var item in modelList)
+            {
+                var selec = new SelectListItem();
+                selec.Value = item.ModelId.ToString();
+                selec.Text = item.ModelName;
+                models.Add(selec);
+            }
             return View(productVM);
         }
 

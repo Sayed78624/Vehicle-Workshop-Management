@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VehicleWorkShop.Migrations
 {
-    public partial class Vehicle : Migration
+    public partial class vehicle : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,6 +69,19 @@ namespace VehicleWorkShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PaymentTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PaymentTypeName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -95,6 +108,19 @@ namespace VehicleWorkShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Stores",
+                columns: table => new
+                {
+                    StoreId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stores", x => x.StoreId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Suppliers",
                 columns: table => new
                 {
@@ -108,6 +134,20 @@ namespace VehicleWorkShop.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Suppliers", x => x.SupplierId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transfers",
+                columns: table => new
+                {
+                    Tran_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsApprove = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transfers", x => x.Tran_Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,6 +168,19 @@ namespace VehicleWorkShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "VehicleModels",
+                columns: table => new
+                {
+                    ModelId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ModelName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VehicleModels", x => x.ModelId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "WorkShops",
                 columns: table => new
                 {
@@ -140,28 +193,6 @@ namespace VehicleWorkShop.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WorkShops", x => x.WorkShopId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PartNo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.ProductId);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,7 +214,7 @@ namespace VehicleWorkShop.Migrations
                         column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -279,45 +310,70 @@ namespace VehicleWorkShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ledgers",
+                name: "Products",
                 columns: table => new
                 {
-                    LedgerId = table.Column<int>(type: "int", nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PartNo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    InventoryTypeId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    StockTypeId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    ModelId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ledgers", x => x.LedgerId);
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
                     table.ForeignKey(
-                        name: "FK_Ledgers_InventoryTypes_InventoryTypeId",
-                        column: x => x.InventoryTypeId,
-                        principalTable: "InventoryTypes",
-                        principalColumn: "InventoryTypeId",
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Ledgers_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ProductId",
+                        name: "FK_Products_VehicleModels_ModelId",
+                        column: x => x.ModelId,
+                        principalTable: "VehicleModels",
+                        principalColumn: "ModelId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    PaymentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SaleId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    PaymentTypeId = table.Column<int>(type: "int", nullable: false),
+                    AccNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BankName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Time = table.Column<TimeSpan>(type: "time", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
                     table.ForeignKey(
-                        name: "FK_Ledgers_StockTypes_StockTypeId",
-                        column: x => x.StockTypeId,
-                        principalTable: "StockTypes",
-                        principalColumn: "StockTypeId",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Payments_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Ledgers_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Payments_PaymentTypes_PaymentTypeId",
+                        column: x => x.PaymentTypeId,
+                        principalTable: "PaymentTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Payments_Sales_SaleId",
+                        column: x => x.SaleId,
+                        principalTable: "Sales",
+                        principalColumn: "SaleId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -344,17 +400,65 @@ namespace VehicleWorkShop.Migrations
                         principalColumn: "DamageId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DamageDetails_Ledgers_StoreId",
-                        column: x => x.StoreId,
-                        principalTable: "Ledgers",
-                        principalColumn: "LedgerId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_DamageDetails_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DamageDetails_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
+                        principalColumn: "StoreId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ledgers",
+                columns: table => new
+                {
+                    LedgerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    InventoryTypeId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    StockTypeId = table.Column<int>(type: "int", nullable: false),
+                    StoreId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ledgers", x => x.LedgerId);
+                    table.ForeignKey(
+                        name: "FK_Ledgers_InventoryTypes_InventoryTypeId",
+                        column: x => x.InventoryTypeId,
+                        principalTable: "InventoryTypes",
+                        principalColumn: "InventoryTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ledgers_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ledgers_StockTypes_StockTypeId",
+                        column: x => x.StockTypeId,
+                        principalTable: "StockTypes",
+                        principalColumn: "StockTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ledgers_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
+                        principalColumn: "StoreId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ledgers_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -369,17 +473,12 @@ namespace VehicleWorkShop.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Vat = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    StoreId = table.Column<int>(type: "int", nullable: false)
+                    StoreId = table.Column<int>(type: "int", nullable: false),
+                    ModelId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PurchasesDetails", x => x.PurchaseDetailId);
-                    table.ForeignKey(
-                        name: "FK_PurchasesDetails_Ledgers_StoreId",
-                        column: x => x.StoreId,
-                        principalTable: "Ledgers",
-                        principalColumn: "LedgerId",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PurchasesDetails_Products_ProductId",
                         column: x => x.ProductId,
@@ -391,6 +490,18 @@ namespace VehicleWorkShop.Migrations
                         column: x => x.PurchaseId,
                         principalTable: "Purchases",
                         principalColumn: "PurchaseId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PurchasesDetails_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
+                        principalColumn: "StoreId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PurchasesDetails_VehicleModels_ModelId",
+                        column: x => x.ModelId,
+                        principalTable: "VehicleModels",
+                        principalColumn: "ModelId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -406,17 +517,12 @@ namespace VehicleWorkShop.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Vat = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    StoreId = table.Column<int>(type: "int", nullable: false)
+                    StoreId = table.Column<int>(type: "int", nullable: false),
+                    PurchaseReturnId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PurchasesReturnDetails", x => x.PurchaseReturnDetailId);
-                    table.ForeignKey(
-                        name: "FK_PurchasesReturnDetails_Ledgers_StoreId",
-                        column: x => x.StoreId,
-                        principalTable: "Ledgers",
-                        principalColumn: "LedgerId",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PurchasesReturnDetails_Products_ProductId",
                         column: x => x.ProductId,
@@ -424,10 +530,21 @@ namespace VehicleWorkShop.Migrations
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_PurchasesReturnDetails_PurchaseReturns_PurchaseReturnId",
+                        column: x => x.PurchaseReturnId,
+                        principalTable: "PurchaseReturns",
+                        principalColumn: "PurchaseReturnId");
+                    table.ForeignKey(
                         name: "FK_PurchasesReturnDetails_Purchases_PurchaseId",
                         column: x => x.PurchaseId,
                         principalTable: "Purchases",
                         principalColumn: "PurchaseId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PurchasesReturnDetails_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
+                        principalColumn: "StoreId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -444,30 +561,18 @@ namespace VehicleWorkShop.Migrations
                     Vat = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StoreId = table.Column<int>(type: "int", nullable: false),
-                    WorkshopId = table.Column<int>(type: "int", nullable: false),
-                    BayId = table.Column<int>(type: "int", nullable: false),
-                    LevelId = table.Column<int>(type: "int", nullable: false),
-                    Vin = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    RegisterNo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    StartTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    EndTime = table.Column<TimeSpan>(type: "time", nullable: false)
+                    WorkShopId = table.Column<int>(type: "int", nullable: false),
+                    BayId = table.Column<int>(type: "int", nullable: true),
+                    LevelId = table.Column<int>(type: "int", nullable: true),
+                    Vin = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    RegisterNo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    StartTime = table.Column<TimeSpan>(type: "time", nullable: true),
+                    EndTime = table.Column<TimeSpan>(type: "time", nullable: true),
+                    ModelId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SalesDetails", x => x.SaleDetailsId);
-                    table.ForeignKey(
-                        name: "FK_SalesDetails_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SalesDetails_Ledgers_StoreId",
-                        column: x => x.StoreId,
-                        principalTable: "Ledgers",
-                        principalColumn: "LedgerId",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SalesDetails_Products_ProductId",
                         column: x => x.ProductId,
@@ -478,10 +583,23 @@ namespace VehicleWorkShop.Migrations
                         name: "FK_SalesDetails_Sales_SaleId",
                         column: x => x.SaleId,
                         principalTable: "Sales",
-                        principalColumn: "SaleId");
+                        principalColumn: "SaleId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SalesDetails_WorkShops_WorkshopId",
-                        column: x => x.WorkshopId,
+                        name: "FK_SalesDetails_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
+                        principalColumn: "StoreId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SalesDetails_VehicleModels_ModelId",
+                        column: x => x.ModelId,
+                        principalTable: "VehicleModels",
+                        principalColumn: "ModelId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SalesDetails_WorkShops_WorkShopId",
+                        column: x => x.WorkShopId,
                         principalTable: "WorkShops",
                         principalColumn: "WorkShopId",
                         onDelete: ReferentialAction.Cascade);
@@ -505,12 +623,6 @@ namespace VehicleWorkShop.Migrations
                 {
                     table.PrimaryKey("PK_SalesReturnDetails", x => x.SaleReturnDetailId);
                     table.ForeignKey(
-                        name: "FK_SalesReturnDetails_Ledgers_StoreId",
-                        column: x => x.StoreId,
-                        principalTable: "Ledgers",
-                        principalColumn: "LedgerId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_SalesReturnDetails_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
@@ -522,6 +634,12 @@ namespace VehicleWorkShop.Migrations
                         principalTable: "Sales",
                         principalColumn: "SaleId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SalesReturnDetails_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
+                        principalColumn: "StoreId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -532,18 +650,11 @@ namespace VehicleWorkShop.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     StoreId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    StockTypeId = table.Column<int>(type: "int", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stocks", x => x.StockId);
-                    table.ForeignKey(
-                        name: "FK_Stocks_Ledgers_StoreId",
-                        column: x => x.StoreId,
-                        principalTable: "Ledgers",
-                        principalColumn: "LedgerId",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Stocks_Products_ProductId",
                         column: x => x.ProductId,
@@ -551,10 +662,39 @@ namespace VehicleWorkShop.Migrations
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Stocks_StockTypes_StockTypeId",
-                        column: x => x.StockTypeId,
-                        principalTable: "StockTypes",
-                        principalColumn: "StockTypeId",
+                        name: "FK_Stocks_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
+                        principalColumn: "StoreId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TransferDetails",
+                columns: table => new
+                {
+                    DetailId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Tran_Id = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    SourceStore = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DestinationStore = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TransferDetails", x => x.DetailId);
+                    table.ForeignKey(
+                        name: "FK_TransferDetails_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TransferDetails_Transfers_Tran_Id",
+                        column: x => x.Tran_Id,
+                        principalTable: "Transfers",
+                        principalColumn: "Tran_Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -589,14 +729,39 @@ namespace VehicleWorkShop.Migrations
                 column: "StockTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Ledgers_StoreId",
+                table: "Ledgers",
+                column: "StoreId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ledgers_UserId",
                 table: "Ledgers",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Payments_CustomerId",
+                table: "Payments",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payments_PaymentTypeId",
+                table: "Payments",
+                column: "PaymentTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payments_SaleId",
+                table: "Payments",
+                column: "SaleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_ModelId",
+                table: "Products",
+                column: "ModelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PurchaseReturns_SupplierId",
@@ -607,6 +772,11 @@ namespace VehicleWorkShop.Migrations
                 name: "IX_Purchases_SupplierId",
                 table: "Purchases",
                 column: "SupplierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PurchasesDetails_ModelId",
+                table: "PurchasesDetails",
+                column: "ModelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PurchasesDetails_ProductId",
@@ -634,6 +804,11 @@ namespace VehicleWorkShop.Migrations
                 column: "PurchaseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PurchasesReturnDetails_PurchaseReturnId",
+                table: "PurchasesReturnDetails",
+                column: "PurchaseReturnId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PurchasesReturnDetails_StoreId",
                 table: "PurchasesReturnDetails",
                 column: "StoreId");
@@ -644,9 +819,9 @@ namespace VehicleWorkShop.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SalesDetails_CustomerId",
+                name: "IX_SalesDetails_ModelId",
                 table: "SalesDetails",
-                column: "CustomerId");
+                column: "ModelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesDetails_ProductId",
@@ -664,9 +839,9 @@ namespace VehicleWorkShop.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SalesDetails_WorkshopId",
+                name: "IX_SalesDetails_WorkShopId",
                 table: "SalesDetails",
-                column: "WorkshopId");
+                column: "WorkShopId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesReturnDetails_ProductId",
@@ -694,14 +869,19 @@ namespace VehicleWorkShop.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stocks_StockTypeId",
-                table: "Stocks",
-                column: "StockTypeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Stocks_StoreId",
                 table: "Stocks",
                 column: "StoreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TransferDetails_ProductId",
+                table: "TransferDetails",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TransferDetails_Tran_Id",
+                table: "TransferDetails",
+                column: "Tran_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_RoleId",
@@ -720,7 +900,10 @@ namespace VehicleWorkShop.Migrations
                 name: "DamageDetails");
 
             migrationBuilder.DropTable(
-                name: "PurchaseReturns");
+                name: "Ledgers");
+
+            migrationBuilder.DropTable(
+                name: "Payments");
 
             migrationBuilder.DropTable(
                 name: "PurchasesDetails");
@@ -741,10 +924,25 @@ namespace VehicleWorkShop.Migrations
                 name: "Stocks");
 
             migrationBuilder.DropTable(
+                name: "TransferDetails");
+
+            migrationBuilder.DropTable(
                 name: "UserRoles");
 
             migrationBuilder.DropTable(
                 name: "Damages");
+
+            migrationBuilder.DropTable(
+                name: "InventoryTypes");
+
+            migrationBuilder.DropTable(
+                name: "StockTypes");
+
+            migrationBuilder.DropTable(
+                name: "PaymentTypes");
+
+            migrationBuilder.DropTable(
+                name: "PurchaseReturns");
 
             migrationBuilder.DropTable(
                 name: "Purchases");
@@ -756,10 +954,19 @@ namespace VehicleWorkShop.Migrations
                 name: "Sales");
 
             migrationBuilder.DropTable(
-                name: "Ledgers");
+                name: "Stores");
+
+            migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Transfers");
 
             migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Suppliers");
@@ -768,19 +975,10 @@ namespace VehicleWorkShop.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "InventoryTypes");
-
-            migrationBuilder.DropTable(
-                name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "StockTypes");
-
-            migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "VehicleModels");
         }
     }
 }

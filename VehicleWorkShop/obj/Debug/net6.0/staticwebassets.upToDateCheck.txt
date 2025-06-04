@@ -1,6 +1,8 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\Images\0152d91c-d43b-4123-a77a-c7be7c7c0242_Screenshot (74).png
+wwwroot\Images\2d1f9901-c10c-4a73-b178-9a91ff9a76c3_Abu Sayed (1) (1).jpg
+wwwroot\Images\32fde908-12a3-4b4a-a801-570818d28649_Mominul.jpg
 wwwroot\Images\67605f90-3362-4cf5-99fe-09dd150a7c52_OIP (1).jpg
 wwwroot\Images\c73d2f9a-ef62-4f0a-82f8-fc91bb70872c_OIP.jpg
 wwwroot\js\site.js

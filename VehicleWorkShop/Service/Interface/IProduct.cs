@@ -9,5 +9,6 @@ namespace VehicleWorkShop.Service.Interface
         Task<IActionResult> Create(ProductVM productVM);
         Task<List<ProductVM>> GetAll();
         Task<IList<Product>> GetAllProducts();
+        Task<IActionResult> Delete(int id);
     }
 }

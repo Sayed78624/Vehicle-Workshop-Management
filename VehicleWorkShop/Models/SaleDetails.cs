@@ -18,24 +18,26 @@ namespace VehicleWorkShop.Models
         [ForeignKey("Store")]
         public int StoreId { get; set; }
         [ForeignKey("WorkShop")]
-        public int? WorkShopId { get; set; }
-        public int? BayId { get; set; }
-        public int? LevelId { get; set; }
+        public int WorkShopId { get; set; }
+        public int BayId { get; set; }
+        public int LevelId { get; set; }
         [StringLength(50)]
-        public string? Vin { get; set; }
+        public string Vin { get; set; }
         [StringLength(50)]
-        public string? RegisterNo { get; set; }
-        public TimeSpan? StartTime { get; set; }
-        public TimeSpan? EndTime { get; set; }
+        public string RegisterNo { get; set; }
+        [ForeignKey("Customer")]
+        public int CustomerId { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
         [ForeignKey("VehicleModel")]
         public int ModelId { get; set; }
 
         public virtual VehicleModel VehicleModel { get; set; }
-
         public virtual Sale Sale { get; set; }
         public virtual Product Product { get; set; }
         public virtual Store Store { get; set; }
         public virtual WorkShop WorkShop { get; set; }
+        public virtual Customer Customer { get; set; }
 
 
     }

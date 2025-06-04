@@ -38,7 +38,8 @@ namespace VehicleWorkShop.Service.Repository
                                   CategoryId = p.CategoryId,
                                   ModelId = p.ModelId,
                                   CategoryName = c.Name,
-                                  ModelName = m.ModelName
+                                  ModelName = m.ModelName,
+                                  ImageName = p.ImageName
                               }).ToListAsync();
 
             return list;
@@ -97,6 +98,26 @@ namespace VehicleWorkShop.Service.Repository
         public async Task<IList<Product>> GetAllProducts()
         {
             return await db.Products.ToListAsync();
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var products = db.Products.Where(p => p.ProductId == id).FirstOrDefault();
+            if(products != null)
+            {
+                if (!string.IsNullOrEmpty(products.ImageName) && products.ImageName != "default_image.png")
+                {
+                    var filePath = Path.Combine(en.WebRootPath, "Images", products.ImageName);
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                }
+                db.Products.Remove(products);
+                await db.SaveChangesAsync();
+                return new OkResult();
+            }
+            return new BadRequestResult();
         }
     }
 

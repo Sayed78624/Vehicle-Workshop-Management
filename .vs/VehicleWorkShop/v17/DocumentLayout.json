@@ -1,12 +1,122 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\VehicleWorkShop\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\views\\product\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\views\\product\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\service\\repository\\productrp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\service\\repository\\productrp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\viewmodels\\productvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\viewmodels\\productvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\service\\repository\\customerrp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\service\\repository\\customerrp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Product\\Delete.cshtml",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Views\\Product\\Delete.cshtml",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Product\\Delete.cshtml",
+              "RelativeToolTip": "VehicleWorkShop\\Views\\Product\\Delete.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAYwEYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-04T18:23:46.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Models\\Product.cs",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Models\\Product.cs",
+              "RelativeToolTip": "VehicleWorkShop\\Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T17:42:27.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProductVM.cs",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\ViewModels\\ProductVM.cs",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\ViewModels\\ProductVM.cs",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\ViewModels\\ProductVM.cs",
+              "RelativeToolTip": "VehicleWorkShop\\ViewModels\\ProductVM.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAABIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T17:36:55.744Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CustomerRP.cs",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Service\\Repository\\CustomerRP.cs",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Service\\Repository\\CustomerRP.cs",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Service\\Repository\\CustomerRP.cs",
+              "RelativeToolTip": "VehicleWorkShop\\Service\\Repository\\CustomerRP.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAwwDsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T17:09:03.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Controllers\\ProductController.cs",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "VehicleWorkShop\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAAFsAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T17:01:00.129Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductRP.cs",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Service\\Repository\\ProductRP.cs",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Service\\Repository\\ProductRP.cs",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Service\\Repository\\ProductRP.cs",
+              "RelativeToolTip": "VehicleWorkShop\\Service\\Repository\\ProductRP.cs",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAkwGcAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T16:22:21.505Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

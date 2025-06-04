@@ -89,6 +89,28 @@ namespace VehicleWorkShop.Controllers
             return View(productVM);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var allproducts = await product.GetAllProducts();
+            var productvm = allproducts.FirstOrDefault(a => a.ProductId == id);
+            if (productvm != null)
+            {
+                return View(productvm);
+            }
+            return NotFound();
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> ConfirmDelete(int id)
+        {
+            var result = await product.Delete(id);
+            if (result is OkResult)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return View(result);
+        }
 
     }
 

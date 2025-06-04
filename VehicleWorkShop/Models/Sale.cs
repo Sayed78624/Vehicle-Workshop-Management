@@ -15,7 +15,6 @@ namespace VehicleWorkShop.Models
         public bool IsApprove { get; set; }
 
         public virtual Customer Customer { get; set; }
-        public IList<SaleDetails> SaleDetails { get; set; }
 
     }
 }

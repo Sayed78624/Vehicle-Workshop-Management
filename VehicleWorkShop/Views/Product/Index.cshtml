@@ -1,44 +1,61 @@
 ﻿@model IEnumerable<VehicleWorkShop.ViewModels.ProductVM>
 
-@* Font Awesome CDN *@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+@{
+    ViewData["Title"] = "Product List";
+}
 
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="text-primary"><i class="fas fa-boxes"></i> Product List</h2>
+    <h2 class="mb-4"><i class="bi bi-box-seam"></i> Product List</h2>
+
+    <div class="mb-3">
         <a asp-action="Create" class="btn btn-success">
-            <i class="fas fa-plus-circle"></i> Add New Product
+            <i class="bi bi-plus-circle"></i> Add New Product
         </a>
     </div>
 
-    <table class="table table-hover table-bordered shadow-sm">
-        <thead class="thead-dark">
-            <tr class="table-primary">
-                <th><i class="fas fa-hashtag"></i> Product ID</th>
-                <th><i class="fas fa-tag"></i> Product Name</th>
-                <th><i class="fas fa-barcode"></i> Part No</th>
-                <th><i class="fas fa-align-left"></i> Description</th>
-                <th><i class="fas fa-dollar-sign"></i> Price</th>
-                <th><i class="fas fa-image"></i> Image</th>
-                <th><i class="fas fa-list"></i> Category</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark text-center">
                 <tr>
-                    <td>@item.ProductId</td>
-                    <td>@item.ProductName</td>
-                    <td>@item.PartNo</td>
-                    <td>@item.Description</td>
-                    <td>@item.Price.ToString("C")</td>
-                    <td>
-                        <img src="@Url.Content("~/Images/" + item.Image)" alt="Product Image"
-                             class="img-thumbnail" style="width: 60px; height: 60px;" />
-                    </td>
-                    <td>@item.CategoryId</td>
+                    <th>Product SL</th>
+                    <th>Product Name</th>
+                    <th>Part No</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Category</th>
+                    <th>Model</th>
+                    <th>Action</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductId</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.PartNo</td>
+                        <td>@item.Description</td>
+                        <td><span class="badge bg-primary">৳@item.Price.ToString("N2")</span></td>
+                        <td>
+                            <img src="@Url.Content("~/Images/" + item.ImageName)"
+                                 alt="Product Image"
+                                 class="img-thumbnail"
+                                 style="width: 50px; height: 50px;" />
+                        </td>
+                        <td>@item.CategoryName</td>
+                        <td>@item.ModelName</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-sm btn-warning me-1">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

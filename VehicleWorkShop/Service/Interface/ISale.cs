@@ -5,9 +5,11 @@ namespace VehicleWorkShop.Service.Interface
 {
     public interface ISale
     {
-        Task<IActionResult> Create(SaleVM saleVM);
         Task<List<SaleVM>> GetAll();
-        Task<IActionResult> Delete(int id);
+        Task<SaleVM> GetById(int id);
+        Task<SaleVM> CreateMaster(SaleVM saleVM);
+        Task<SaleDetailVM> CreateDetail(SaleDetailVM detail);
+        Task<SaleVM> Approve(SaleVM saleVM);
 
     }
 }

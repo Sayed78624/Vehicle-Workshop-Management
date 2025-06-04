@@ -1,210 +1,139 @@
 ﻿@model VehicleWorkShop.ViewModels.SaleVM
 
-@{
-    ViewData["Title"] = "Create Sale";
-}
+<div class="container mt-5 p-4 bg-light rounded shadow">
+    <div class="w-100">
+        <h3 class="mb-4 text-success text-center fw-bold">Sale Entry Form</h3>
+        <h6 class="text-danger text-center">@ViewBag.ErrorMessage</h6>
 
-<h2 class="text-center mb-4">
-    <i class="bi bi-cart-plus-fill text-primary"></i> Entry Sale
-</h2>
+        <form asp-action="Create">
+            <input asp-for="SaleId" type="hidden" />
 
-<form asp-action="Create" method="post">
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label asp-for="CustomerId" class="form-label">👤 Customer Name</label>
-            <select asp-for="CustomerId" class="form-select" asp-items="ViewBag.Customers">
-                <option value="">-- Select Customer --</option>
-            </select>
-            <span asp-validation-for="CustomerId" class="text-danger"></span>
-        </div>
-        <div class="col-md-6">
-            <label asp-for="Description" class="form-label">📝 Description</label>
-            <input asp-for="Description" class="form-control" />
-        </div>
-    </div>
-
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <label asp-for="GrandTotal" class="form-label">💰 Grand Total</label>
-            <input asp-for="GrandTotal" class="form-control" readonly />
-        </div>
-        <div class="col-md-6 d-flex align-items-center pt-2">
-            <div class="form-check mt-4">
-                <input class="form-check-input" asp-for="IsApprove" id="IsApprove" />
-                <label class="form-check-label" for="IsApprove">
-                    ✅ @Html.DisplayNameFor(model => model.IsApprove)
-                </label>
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Customer</label>
+                    @Html.DropDownListFor(model => model.CustomerId, Model.Customers, "Select Customer", new { @class = "form-select" })
+                    <span asp-validation-for="CustomerId" class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Description</label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger small"></span>
+                </div>
             </div>
-        </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Grand Total</label>
+                    <input asp-for="GrandTotal" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="table-responsive mb-4">
+                <table class="table table-bordered table-hover align-middle text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Product</th>
+                            <th>Model</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>VAT (%)</th>
+                            <th>Sub Total</th>
+                            <th>Store</th>
+                            <th>Workshop</th>
+                            <th>Bay</th>
+                            <th>Level</th>
+                            <th>VIN</th>
+                            <th>Reg. No</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailsTable">
+                        <tr>
+                            <td>@Html.DropDownListFor(model => model.ProductId, Model.Products, "Select Product", new { @class = "form-select" })</td>
+                            <td>@Html.DropDownListFor(model => model.ModelId, Model.Models, "Select Model", new { @class = "form-select" })</td>
+                            <td><input asp-for="Quantity" class="form-control" value="0" /></td>
+                            <td><input asp-for="Price" class="form-control" value="0" onchange="calculateItem()" /></td>
+                            <td><input asp-for="Vat" class="form-control" value="0" onchange="calculateItem()" /></td>
+                            <td><input asp-for="SubTotal" class="form-control" readonly /></td>
+                            <td>@Html.DropDownListFor(model => model.StoreId, Model.Stores, "Select Store", new { @class = "form-select" })</td>
+                            <td>@Html.DropDownListFor(model => model.WorkShopId, Model.WorkShopes, "Select Workshop", new { @class = "form-select" })</td>
+                            <td><input asp-for="BayId" class="form-control" /></td>
+                            <td><input asp-for="LevelId" class="form-control" /></td>
+                            <td><input asp-for="Vin" class="form-control" /></td>
+                            <td><input asp-for="RegisterNo" class="form-control" /></td>
+                            <td><input asp-for="StartTime" type="time" class="form-control" /></td>
+                            <td><input asp-for="EndTime" type="time" class="form-control" /></td>
+                            <td><button type="submit" class="btn btn-outline-success btn-sm">Add</button></td>
+                        </tr>
+
+                        @foreach (var item in Model.SaleDetails)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.ModelName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price</td>
+                                <td>@item.Vat</td>
+                                <td>@item.SubTotal</td>
+                                <td>@item.StoreName</td>
+                                <td>@item.WorkShopId</td>
+                                <td>@item.BayId</td>
+                                <td>@item.LevelId</td>
+                                <td>@item.Vin</td>
+                                <td>@item.RegisterNo</td>
+                                <td>@item.StartTime</td>
+                                <td>@item.EndTime</td>
+                                <td><a asp-action="RemoveDetail" asp-route-id="@item.SaleId" class="btn btn-danger btn-sm">Remove</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+                @if (Model.SaleId > 0)
+                {
+                    <button type="submit" class="btn btn-success px-5">Save Change</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-success px-5">Save</button>
+                }
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
     </div>
+</div>
 
-    <h4 class="mb-3">Sale Details</h4>
 
-    <button type="button" class="btn btn-success mb-2" id="addProductBtn">
-        <i class="bi bi-plus-circle"></i> Add Product
-    </button>
+<script>
+    function addRow() {
+        const table = document.getElementById("detailsTable");
+        const newRow = table.rows[0].cloneNode(true);
 
-    <table class="table" id="detailsTable">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>VAT</th>
-                <th>SubTotal</th>
-                <th>Store</th>
-                <th>Details</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="purchaseDetailsTableBody">
-            @for (var i = 0; i < Model.SaleDetailVMs.Count; i++)
-            {
-                <tr>
-                    <td>
-                        <select name="SaleDetailVMs[@i].ProductId" class="form-select">
-                            <option value="">-- Select Product --</option>
-                            @foreach (SelectListItem item in ViewBag.Products)
-                            {
-                                <option value="@item.Value" selected="@(item.Value == Model.SaleDetailVMs[i].ProductId.ToString())">@item.Text</option>
-                            }
-                        </select>
-                    </td>
-                    <td><input name="SaleDetailVMs[@i].Price" value="@Model.SaleDetailVMs[i].Price" class="form-control" /></td>
-                    <td><input name="SaleDetailVMs[@i].Quantity" value="@Model.SaleDetailVMs[i].Quantity" class="form-control" /></td>
-                    <td><input name="SaleDetailVMs[@i].Vat" value="@Model.SaleDetailVMs[i].Vat" class="form-control" /></td>
-                    <td><input name="SaleDetailVMs[@i].SubTotal" value="@Model.SaleDetailVMs[i].SubTotal" class="form-control" readonly /></td>
-                    <td>
-                        <select name="SaleDetailVMs[@i].StoreId" class="form-select">
-                            <option value="">-- Select Store --</option>
-                            @foreach (SelectListItem item in ViewBag.Stores)
-                            {
-                                <option value="@item.Value" selected="@(item.Value == Model.SaleDetailVMs[i].StoreId.ToString())">@item.Text</option>
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-outline-secondary btn-sm toggleDetailsBtn" data-index="@i">
-                            <i class="bi bi-three-dots"></i> More
-                        </button>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-sm removeRow">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-               
-                <tr class="detailsRow" id="detailsRow_@i" style="display:none;">
-                    <td colspan="8">
-                        <div class="row g-2 mb-2 text-muted fw-bold">
-                            <div class="col">Workshop</div>
-                            <div class="col">Bay</div>
-                            <div class="col">Level</div>
-                            <div class="col">VIN</div>
-                            <div class="col">Reg. No</div>
-                            <div class="col">Start</div>
-                            <div class="col">End</div>
-                        </div>
-                        <div class="row g-2">
-                            <div class="col"><input name="SaleDetailVMs[@i].WorkShopId" value="@Model.SaleDetailVMs[i].WorkShopId" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[@i].BayId" value="@Model.SaleDetailVMs[i].BayId" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[@i].LevelId" value="@Model.SaleDetailVMs[i].LevelId" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[@i].Vin" value="@Model.SaleDetailVMs[i].Vin" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[@i].RegisterNo" value="@Model.SaleDetailVMs[i].RegisterNo" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[@i].StartTime" type="time" value="@Model.SaleDetailVMs[i].StartTime" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[@i].EndTime" type="time" value="@Model.SaleDetailVMs[i].EndTime" class="form-control" /></div>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        newRow.querySelectorAll("input").forEach(input => {
+            input.value = input.classList.contains('qty') ? 1 : 0;
+            if (input.classList.contains('subtotal')) input.value = '';
+        });
 
-    <button type="submit" class="btn btn-primary">
-        <i class="bi bi-save"></i> Submit
-    </button>
-    <a asp-action="Index" class="btn btn-outline-secondary">
-        <i class="bi bi-arrow-left"></i> Back to List
-    </a>
-</form>
-
-@section Scripts {
-    <script>
-        var rowIndex = @Model.SaleDetailVMs.Count;
-
-        $('#addProductBtn').click(function () {
-            var newRow = `
-                <tr>
-                    <td>
-                        <select name="SaleDetailVMs[${rowIndex}].ProductId" class="form-select">
-                            <option value="">-- Select Product --</option>
-        @foreach (SelectListItem item in ViewBag.Products)
-        {
-            <text><option value="@item.Value">@item.Text</option></text>
+        table.appendChild(newRow);
+    }
+    function removeRow(button) {
+        const table = document.getElementById("detailsTable");
+        if (table.rows.length > 1) {
+            button.closest('tr').remove();
+            calculateTotal();
         }
-                        </select>
-                    </td>
-                    <td><input name="SaleDetailVMs[${rowIndex}].Price" class="form-control" /></td>
-                    <td><input name="SaleDetailVMs[${rowIndex}].Quantity" class="form-control" /></td>
-                    <td><input name="SaleDetailVMs[${rowIndex}].Vat" class="form-control" /></td>
-                    <td><input name="SaleDetailVMs[${rowIndex}].SubTotal" class="form-control" readonly /></td>
-                    <td>
-                        <select name="SaleDetailVMs[${rowIndex}].StoreId" class="form-select">
-                            <option value="">-- Select Store --</option>
-        @foreach (SelectListItem item in ViewBag.Stores)
-        {
-            <text><option value="@item.Value">@item.Text</option></text>
-        }
-                        </select>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-outline-secondary btn-sm toggleDetailsBtn" data-index="${rowIndex}">
-                            <i class="bi bi-three-dots"></i> More
-                        </button>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-sm removeRow">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr class="detailsRow" id="detailsRow_${rowIndex}" style="display:none;">
-                    <td colspan="8">
-                        <div class="row g-2 mb-2 text-muted fw-bold">
-                            <div class="col">Workshop</div>
-                            <div class="col">Bay</div>
-                            <div class="col">Level</div>
-                            <div class="col">VIN</div>
-                            <div class="col">Reg. No</div>
-                            <div class="col">Start</div>
-                            <div class="col">End</div>
-                        </div>
-                        <div class="row g-2">
-                            <div class="col"><input name="SaleDetailVMs[${rowIndex}].WorkShopId" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[${rowIndex}].BayId" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[${rowIndex}].LevelId" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[${rowIndex}].Vin" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[${rowIndex}].RegisterNo" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[${rowIndex}].StartTime" type="time" class="form-control" /></div>
-                            <div class="col"><input name="SaleDetailVMs[${rowIndex}].EndTime" type="time" class="form-control" /></div>
-                        </div>
-                    </td>
-                </tr>`;
-            $('#purchaseDetailsTableBody').append(newRow);
-            rowIndex++;
-        });
+    }
 
-        $(document).on('click', '.removeRow', function () {
-            var tr = $(this).closest('tr');
-            var nextTr = tr.next('.detailsRow');
-            if (nextTr.length) nextTr.remove();
-            tr.remove();
-        });
-
-        $(document).on('click', '.toggleDetailsBtn', function () {
-            var index = $(this).data('index');
-            $('#detailsRow_' + index).toggle();
-        });
-    </script>
-}
+    function calculateItem(){
+        var Quantity =  parseFloat(document.getElementById("Quantity").value);
+        var Price = parseFloat(document.getElementById("Price").value);
+        var Vat = parseFloat(document.getElementById("Vat").value);
+        var total = Quantity * Price;
+        var vated = total * (Vat / 100)
+        document.getElementById("SubTotal").value = total + vated;
+    }
+</script>

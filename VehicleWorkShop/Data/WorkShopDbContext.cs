@@ -60,13 +60,13 @@ namespace VehicleWorkShop.Data
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<SaleDetails>()
                 .HasOne(sd => sd.Sale)
-                .WithMany(s => s.SaleDetails)
+                .WithMany()
                  .HasForeignKey(sd => sd.SaleId)
              .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<SaleDetails>()
                 .HasOne(sd => sd.Sale)
-                .WithMany(s => s.SaleDetails)
+                .WithMany()
                 .HasForeignKey(sd => sd.SaleId)
                 .OnDelete(DeleteBehavior.Restrict); 
 

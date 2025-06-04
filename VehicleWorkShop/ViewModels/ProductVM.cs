@@ -12,7 +12,7 @@ namespace VehicleWorkShop.ViewModels
         public string ProductName { get; set; }
         public string PartNo { get; set; }
         public string? Description { get; set; }
-
+        public string? ImageName { get; set; }
         public IFormFile Image { get; set; }
 
         public decimal Price { get; set; }

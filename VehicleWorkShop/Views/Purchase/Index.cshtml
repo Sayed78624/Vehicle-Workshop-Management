@@ -18,6 +18,7 @@
                         <th scope="col">Approved</th>
                         <th scope="col">Action</th>
                         <th scope="col">Approve Purchase</th>
+                        <th scope="col">Generate Invoice</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,10 +30,15 @@
                             <td>@item.Description</td>
                             <td>@item.IsApprove</td>
                             <td>
-                                <a asp-action="Create" asp-route-id="@item.PurchaseId">Show Details</a>
+                                <a asp-action="Create" asp-route-id="@item.PurchaseId" class="btn btn-primary btn-sm">Show Details</a>
                             </td>
                             <td>
-                                <a asp-action="Approve" asp-route-id="@item.PurchaseId" onclick="return confirm('Are you sure to update.')">Approve </a>
+                                <a asp-action="Approve" asp-route-id="@item.PurchaseId" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure to update.')">Approve </a>
+                            </td>
+                            <td>
+                                <a asp-action="Invoice" asp-route-id="@item.PurchaseId" class="btn btn-primary btn-sm">
+                                   View Invoice
+                                </a>
                             </td>
                         </tr>
                     }

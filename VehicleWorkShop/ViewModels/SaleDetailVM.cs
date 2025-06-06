@@ -26,5 +26,6 @@ namespace VehicleWorkShop.ViewModels
         public string StoreName { get; set; } = string.Empty;
         public string ProductName { get; set; } = string.Empty;
         public string ModelName { get; set; } = string.Empty;
+        public string WorkShopName { get; set; } = string.Empty;
     }
 }

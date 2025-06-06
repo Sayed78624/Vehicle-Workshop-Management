@@ -228,5 +228,56 @@ namespace VehicleWorkShop.Service.Repository
                 return saleVM;
             }
         }
+
+        public async Task<SaleInvoice> GetInvoice(int id)
+        {
+            var alldata = await db.Sales
+                .Include(s => s.Customer)
+                .Include(s => s.SaleDetails)
+                    .ThenInclude(d => d.Product)
+                .Include(s => s.SaleDetails)
+                    .ThenInclude(d => d.VehicleModel)
+                .Include(s => s.SaleDetails)
+                    .ThenInclude(d => d.Store)
+                .Include(s => s.SaleDetails)
+                    .ThenInclude(d => d.WorkShop)
+                .FirstOrDefaultAsync(s => s.SaleId == id);
+
+            if (alldata != null)
+            {
+                var invoice = new SaleInvoice
+                {
+                    InvoiceId = alldata.SaleId,
+                    CustomerName = alldata.Customer.Name,
+                    Mobile = alldata.Customer.Mobile,
+                    Address = alldata.Customer.Address ,
+                    Email = alldata.Customer.Email ,
+                    GrandTotal = alldata.SaleDetails.Sum(s => s.SubTotal),
+                    Details = alldata.SaleDetails.Select(s => new SaleDetailVM
+                    {
+                        SaleDetailsId = s.SaleDetailsId,
+                        ProductName = s.Product.ProductName,
+                        ModelName = s.VehicleModel.ModelName ,
+                        StoreName = s.Store.Name,
+                        WorkShopName = s.WorkShop.WorkShopName,
+                        Price = s.Price,
+                        Quantity = s.Quantity,
+                        Vat = s.Vat,
+                        SubTotal = s.SubTotal,
+                        BayId = s.BayId,
+                        LevelId = s.LevelId,
+                        Vin = s.Vin,
+                        RegisterNo = s.RegisterNo,
+                        StartTime = s.StartTime,
+                        EndTime = s.EndTime
+                    }).ToList()
+                };
+
+                return invoice;
+            }
+
+            return null;
+        }
+
     }
 }

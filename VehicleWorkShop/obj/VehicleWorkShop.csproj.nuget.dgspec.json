@@ -86,6 +86,10 @@
               "target": "Package",
               "version": "[6.0.18, )"
             },
+            "Rotativa.AspNetCore": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
             "System.CodeDom": {
               "target": "Package",
               "version": "[8.0.0, )"

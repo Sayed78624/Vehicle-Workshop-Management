@@ -1,0 +1,142 @@
+﻿@model VehicleWorkShop.ViewModels.PurchaseInvoice
+@{
+
+    @if (ViewData["From"]?.ToString() == "pdf")
+    {
+        Layout = null;
+    }
+    ViewData["Title"] = "Purchase Invoice";
+}
+
+@if (Model == null)
+{
+    <p>Model is null!</p>
+    return;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .invoice-box {
+            background: #fff;
+            padding: 40px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        .invoice-header h2 {
+            color: #0d6efd;
+            font-weight: 700;
+        }
+
+        .table thead th {
+            background-color: #e9ecef;
+        }
+
+        .text-small {
+            font-size: 0.9rem;
+        }
+
+        .footer-note {
+            margin-top: 50px;
+            font-style: italic;
+        }
+        @@media print {
+            .no-print
+
+        {
+            display: none;
+        }
+
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container invoice-box">
+        <div class="row mb-4 invoice-header">
+            <div class="col-md-6">
+                <h2>Vehicle Workshop</h2>
+                <p class="text-small"><strong>Invoice Date:</strong> @(Model.PurchaseDate.ToString("dd MMM yyyy"))</p>
+                <p class="text-small"><strong>Invoice ID:</strong> #@Model.InvoiceId</p>
+            </div>
+            <div class="col-md-6 text-end">
+                <h5>Invoice To</h5>
+                <p class="text-small"><strong>Supplier:</strong> @(Model.SupplierName ?? "N/A")</p>
+                <p>Manager: @Model.ManagerName</p>
+                <p>Mobile: @Model.Mobile</p>
+                <p>Address: @Model.Address</p>
+                <p class="text-small"><strong>Description:</strong> Purchase Invoice</p>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle text-center">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Product</th>
+                        <th>Model</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>VAT (%)</th>
+                        <th>Sub Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Details != null)
+                    {
+                    
+                        foreach (var item in Model.Details)
+                        {
+                            <tr>
+                                <td>@item.PurchaseDetailId</td>
+                                <td>@item.ProductName</td>
+                                <td>@item.ModelName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price.ToString("0.00")</td>
+                                <td>@item.Vat.ToString("0.00")</td>
+                                <td>@item.SubTotal.ToString("0.00")</td>
+                            </tr>
+                       
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="7">No details available.</td></tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="6" class="text-end">Grand Total</th>
+                        <th>@Model.GrandTotal.ToString("0.00")</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="footer-note">
+            <p><strong>Note:</strong> Thank you for doing business with us!</p>
+        </div>
+
+        @if (ViewData["From"]?.ToString() != "pdf")
+        {
+            <div class="text-center mt-4 no-print">
+                <button onclick="window.print()" class="btn btn-dark">🖨️ Print Invoice</button>
+                <a asp-action="DownloadInvoice" asp-route-id="@Model.InvoiceId" class="btn btn-primary ms-2">⬇️ Download PDF</a>
+                <a asp-action="Index" class="btn btn-primary ms-2">Back To List</a>
+            </div>
+        }
+    </div>
+</body>
+</html>

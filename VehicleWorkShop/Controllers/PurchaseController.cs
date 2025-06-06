@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using VehicleWorkShop.Data;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Rotativa.AspNetCore;
 using VehicleWorkShop.Models;
 using VehicleWorkShop.Service.Interface;
-using VehicleWorkShop.Service.Repository;
 using VehicleWorkShop.ViewModels;
 
 namespace VehicleWorkShop.Controllers
@@ -245,6 +245,43 @@ namespace VehicleWorkShop.Controllers
             var datalist = await _purchase.GetAll();
             return View(datalist);
         }
+
+        public async Task<IActionResult> Invoice(int id)
+        {
+            var invoice = await _purchase.GetInvoice(id);
+            if (invoice == null)
+            {
+                return NotFound();
+            }
+            return View(invoice);
+        }
+
+        public async Task<IActionResult> DownloadInvoice(int id)
+        {
+            var invoice = await _purchase.GetInvoice(id);
+
+            if (invoice == null)
+                return NotFound();
+
+            var viewData = new ViewDataDictionary<PurchaseInvoice>(
+                new EmptyModelMetadataProvider(), new ModelStateDictionary())
+            {
+                Model = invoice  
+            };
+
+            viewData["From"] = "pdf";  
+
+            var pdfView = new ViewAsPdf("~/Views/Purchase/Invoice.cshtml", invoice)
+            {
+                FileName = $"PurchaseInvoice_{id}.pdf",
+                PageSize = Rotativa.AspNetCore.Options.Size.A4,
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+                ViewData = viewData 
+            };
+
+            return pdfView;
+        }
+
 
     }
 }

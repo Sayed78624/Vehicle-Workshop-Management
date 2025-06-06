@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wS+ISEjKClEnkyAC8gEqbUCXxmIBDUHvbc1CPJUnwHY=",
+  "Hash": "5xrDqMJfnlUpLvNnaZL75+b9fUCiCu7irAsqjmD3fvk=",
   "Source": "VehicleWorkShop",
   "BasePath": "_content/VehicleWorkShop",
   "Mode": "Default",
@@ -164,6 +164,27 @@
       "OriginalItemSpec": "wwwroot\\Images\\32fde908-12a3-4b4a-a801-570818d28649_Mominul.jpg"
     },
     {
+      "Identity": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\39084107-6858-451c-9ffd-f80fdb8f100b_OIP.jpg",
+      "SourceId": "VehicleWorkShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\",
+      "BasePath": "_content/VehicleWorkShop",
+      "RelativePath": "Images/39084107-6858-451c-9ffd-f80fdb8f100b_OIP#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "t1h7szwe05",
+      "Integrity": "EdoEBVmVVdpsQSczNFQPfuY/suuP0Xjc+lLRoOSRDN4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\39084107-6858-451c-9ffd-f80fdb8f100b_OIP.jpg"
+    },
+    {
       "Identity": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\67605f90-3362-4cf5-99fe-09dd150a7c52_OIP (1).jpg",
       "SourceId": "VehicleWorkShop",
       "SourceType": "Discovered",
@@ -185,6 +206,27 @@
       "OriginalItemSpec": "wwwroot\\Images\\67605f90-3362-4cf5-99fe-09dd150a7c52_OIP (1).jpg"
     },
     {
+      "Identity": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\67d91fe3-5a7a-40d6-8534-26dd2f893bfd_OIP (1).jpg",
+      "SourceId": "VehicleWorkShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\",
+      "BasePath": "_content/VehicleWorkShop",
+      "RelativePath": "Images/67d91fe3-5a7a-40d6-8534-26dd2f893bfd_OIP (1)#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "u662u4p164",
+      "Integrity": "KjZ2lTxEpxPy/61bsrfKZvPZ3GzMQHtOa96wWNWzPTY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\67d91fe3-5a7a-40d6-8534-26dd2f893bfd_OIP (1).jpg"
+    },
+    {
       "Identity": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\c73d2f9a-ef62-4f0a-82f8-fc91bb70872c_OIP.jpg",
       "SourceId": "VehicleWorkShop",
       "SourceType": "Discovered",
@@ -204,6 +246,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\c73d2f9a-ef62-4f0a-82f8-fc91bb70872c_OIP.jpg"
+    },
+    {
+      "Identity": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\f4f8d789-64be-49a9-867e-f2dff4f4d166_OIP.jpg",
+      "SourceId": "VehicleWorkShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\",
+      "BasePath": "_content/VehicleWorkShop",
+      "RelativePath": "Images/f4f8d789-64be-49a9-867e-f2dff4f4d166_OIP#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "t1h7szwe05",
+      "Integrity": "EdoEBVmVVdpsQSczNFQPfuY/suuP0Xjc+lLRoOSRDN4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\f4f8d789-64be-49a9-867e-f2dff4f4d166_OIP.jpg"
     },
     {
       "Identity": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\js\\site.js",
@@ -1422,6 +1485,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\PurchaseInvoice\\wkhtmltopdf.exe",
+      "SourceId": "VehicleWorkShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\",
+      "BasePath": "_content/VehicleWorkShop",
+      "RelativePath": "PurchaseInvoice/wkhtmltopdf#[.{fingerprint}]?.exe",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "jhzul28502",
+      "Integrity": "2bPSyBSW6Lulzfa832+D48S2LRVHoQhrw4xqa/GryGk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PurchaseInvoice\\wkhtmltopdf.exe"
     }
   ],
   "Endpoints": [
@@ -1836,6 +1920,88 @@
       ]
     },
     {
+      "Route": "Images/39084107-6858-451c-9ffd-f80fdb8f100b_OIP.jpg",
+      "AssetFile": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\39084107-6858-451c-9ffd-f80fdb8f100b_OIP.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3800"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EdoEBVmVVdpsQSczNFQPfuY/suuP0Xjc+lLRoOSRDN4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 06 Jun 2025 17:12:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-EdoEBVmVVdpsQSczNFQPfuY/suuP0Xjc+lLRoOSRDN4="
+        }
+      ]
+    },
+    {
+      "Route": "Images/39084107-6858-451c-9ffd-f80fdb8f100b_OIP.t1h7szwe05.jpg",
+      "AssetFile": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\39084107-6858-451c-9ffd-f80fdb8f100b_OIP.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3800"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EdoEBVmVVdpsQSczNFQPfuY/suuP0Xjc+lLRoOSRDN4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 06 Jun 2025 17:12:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "t1h7szwe05"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/39084107-6858-451c-9ffd-f80fdb8f100b_OIP.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-EdoEBVmVVdpsQSczNFQPfuY/suuP0Xjc+lLRoOSRDN4="
+        }
+      ]
+    },
+    {
       "Route": "Images/67605f90-3362-4cf5-99fe-09dd150a7c52_OIP (1).jpg",
       "AssetFile": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\67605f90-3362-4cf5-99fe-09dd150a7c52_OIP (1).jpg",
       "Selectors": [],
@@ -1918,6 +2084,88 @@
       ]
     },
     {
+      "Route": "Images/67d91fe3-5a7a-40d6-8534-26dd2f893bfd_OIP (1).jpg",
+      "AssetFile": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\67d91fe3-5a7a-40d6-8534-26dd2f893bfd_OIP (1).jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3371"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"KjZ2lTxEpxPy/61bsrfKZvPZ3GzMQHtOa96wWNWzPTY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 06 Jun 2025 17:12:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-KjZ2lTxEpxPy/61bsrfKZvPZ3GzMQHtOa96wWNWzPTY="
+        }
+      ]
+    },
+    {
+      "Route": "Images/67d91fe3-5a7a-40d6-8534-26dd2f893bfd_OIP (1).u662u4p164.jpg",
+      "AssetFile": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\67d91fe3-5a7a-40d6-8534-26dd2f893bfd_OIP (1).jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3371"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"KjZ2lTxEpxPy/61bsrfKZvPZ3GzMQHtOa96wWNWzPTY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 06 Jun 2025 17:12:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "u662u4p164"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/67d91fe3-5a7a-40d6-8534-26dd2f893bfd_OIP (1).jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-KjZ2lTxEpxPy/61bsrfKZvPZ3GzMQHtOa96wWNWzPTY="
+        }
+      ]
+    },
+    {
       "Route": "Images/c73d2f9a-ef62-4f0a-82f8-fc91bb70872c_OIP.jpg",
       "AssetFile": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\c73d2f9a-ef62-4f0a-82f8-fc91bb70872c_OIP.jpg",
       "Selectors": [],
@@ -1992,6 +2240,88 @@
         {
           "Name": "label",
           "Value": "Images/c73d2f9a-ef62-4f0a-82f8-fc91bb70872c_OIP.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-EdoEBVmVVdpsQSczNFQPfuY/suuP0Xjc+lLRoOSRDN4="
+        }
+      ]
+    },
+    {
+      "Route": "Images/f4f8d789-64be-49a9-867e-f2dff4f4d166_OIP.jpg",
+      "AssetFile": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\f4f8d789-64be-49a9-867e-f2dff4f4d166_OIP.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3800"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EdoEBVmVVdpsQSczNFQPfuY/suuP0Xjc+lLRoOSRDN4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 06 Jun 2025 10:56:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-EdoEBVmVVdpsQSczNFQPfuY/suuP0Xjc+lLRoOSRDN4="
+        }
+      ]
+    },
+    {
+      "Route": "Images/f4f8d789-64be-49a9-867e-f2dff4f4d166_OIP.t1h7szwe05.jpg",
+      "AssetFile": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\Images\\f4f8d789-64be-49a9-867e-f2dff4f4d166_OIP.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3800"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"EdoEBVmVVdpsQSczNFQPfuY/suuP0Xjc+lLRoOSRDN4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 06 Jun 2025 10:56:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "t1h7szwe05"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/f4f8d789-64be-49a9-867e-f2dff4f4d166_OIP.jpg"
         },
         {
           "Name": "integrity",
@@ -6752,6 +7082,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-aBc/n/nO9esvq0e80G57lEYLonvE5dKKUgoozaiVfLM="
+        }
+      ]
+    },
+    {
+      "Route": "PurchaseInvoice/wkhtmltopdf.exe",
+      "AssetFile": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\PurchaseInvoice\\wkhtmltopdf.exe",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30235648"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.microsoft.portable-executable"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2bPSyBSW6Lulzfa832+D48S2LRVHoQhrw4xqa/GryGk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 10 Jun 2020 20:03:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2bPSyBSW6Lulzfa832+D48S2LRVHoQhrw4xqa/GryGk="
+        }
+      ]
+    },
+    {
+      "Route": "PurchaseInvoice/wkhtmltopdf.jhzul28502.exe",
+      "AssetFile": "D:\\VehicleWorkShop\\VehicleWorkShop\\wwwroot\\PurchaseInvoice\\wkhtmltopdf.exe",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30235648"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/vnd.microsoft.portable-executable"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2bPSyBSW6Lulzfa832+D48S2LRVHoQhrw4xqa/GryGk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 10 Jun 2020 20:03:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jhzul28502"
+        },
+        {
+          "Name": "label",
+          "Value": "PurchaseInvoice/wkhtmltopdf.exe"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2bPSyBSW6Lulzfa832+D48S2LRVHoQhrw4xqa/GryGk="
         }
       ]
     },

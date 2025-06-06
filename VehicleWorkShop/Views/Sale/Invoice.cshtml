@@ -1,0 +1,86 @@
+﻿@model VehicleWorkShop.ViewModels.SaleInvoice
+
+@{
+    ViewData["Title"] = "Sale Invoice";
+}
+
+<div class="container mt-5 bg-white p-5 shadow rounded border">
+    <div class="d-flex justify-content-between mb-4">
+        <div>
+            <h4 class="fw-bold text-primary">Sale Invoice</h4>
+            <small class="text-muted">Generated on: @DateTime.Now.ToString("dd MMM yyyy")</small>
+        </div>
+        <div class="text-end">
+            <p class="mb-1"><strong>Invoice No:</strong> @Model.InvoiceId</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h5 class="fw-bold text-secondary mb-3">Customer Details</h5>
+            <p class="mb-1"><strong>Name:</strong> @Model.CustomerName</p>
+            <p class="mb-1"><strong>Mobile:</strong> @Model.Mobile</p>
+            <p class="mb-1"><strong>Email:</strong> @Model.Email</p>
+            <p class="mb-1"><strong>Address:</strong> @Model.Address</p>
+        </div>
+    </div>
+
+    <div class="table-responsive mb-4">
+        <table class="table table-sm table-bordered text-center align-middle">
+            <thead class="bg-light">
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Model</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>VAT (%)</th>
+                    <th>Sub Total</th>
+                    <th>Store</th>
+                    <th>Workshop</th>
+                    <th>Bay</th>
+                    <th>Level</th>
+                    <th>VIN</th>
+                    <th>Reg. No</th>
+                    <th>Start</th>
+                    <th>End</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Details.Count; i++)
+                {
+                    var item = Model.Details[i];
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.ModelName</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price.ToString("0.00")</td>
+                        <td>@item.Vat.ToString("0.00")</td>
+                        <td>@item.SubTotal.ToString("0.00")</td>
+                        <td>@item.StoreName</td>
+                        <td>@item.WorkShopName</td>
+                        <td>@item.BayId</td>
+                        <td>@item.LevelId</td>
+                        <td>@item.Vin</td>
+                        <td>@item.RegisterNo</td>
+                        <td>@item.StartTime.ToString(@"hh\:mm")</td>
+                        <td>@item.EndTime.ToString(@"hh\:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6 text-end">
+            <h4 class="fw-bold text-success">Grand Total: ৳ @Model.GrandTotal.ToString("0.00")</h4>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <a asp-action="Index" class="btn btn-outline-secondary me-2">Back to List</a>
+        <button onclick="window.print()" class="btn btn-outline-primary">Print Invoice</button>
+    </div>
+</div>

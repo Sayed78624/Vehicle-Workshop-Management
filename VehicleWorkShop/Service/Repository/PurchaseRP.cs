@@ -235,6 +235,37 @@ namespace VehicleWorkShop.Service.Repository
             }
         }
 
+        public async Task<PurchaseInvoice> GetInvoice(int id)
+        {
+            var data = await db.Purchases.Include(s => s.Supplier).Include(
+                p => p.PurchaseDetails).ThenInclude(p => p.Product).ThenInclude(
+                v => v.VehicleModel).FirstOrDefaultAsync(
+                i => i.PurchaseId == id);
+            if (data == null) return null;
+
+            var pinvoice = new PurchaseInvoice
+            {
+                InvoiceId = data.PurchaseId,
+                PurchaseDate = DateTime.Now,
+                SupplierName = data.Supplier.SupplierName,
+                ManagerName = data.Supplier.Manager,
+                Mobile = data.Supplier.Mobile,
+                Address = data.Supplier.Address,
+                GrandTotal = data.PurchaseDetails.Sum(s => s.SubTotal),
+                Details = data.PurchaseDetails.Select(a => new PurchaseDetailVM
+                {
+                    PurchaseDetailId = a.PurchaseDetailId,
+                    ProductName = a.Product.ProductName,
+                    Quantity = a.Quantity,
+                    ModelName = a.VehicleModel.ModelName,
+                    Price = a.Price,
+                    Vat = a.Vat,
+                    SubTotal = a.SubTotal,
+
+                }).ToList(),
+            };
+            return pinvoice;
+        }
     }
 }
 

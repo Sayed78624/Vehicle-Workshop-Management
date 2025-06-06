@@ -257,5 +257,12 @@ namespace VehicleWorkShop.Controllers
             }
         }
 
+        public async Task<IActionResult> Invoice(int id)
+        {
+            var invoice = await _sale.GetInvoice(id);
+            if(invoice == null) return NotFound();
+            return View(invoice);
+        }
+
     }
 }

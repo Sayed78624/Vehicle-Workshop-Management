@@ -12,10 +12,14 @@ namespace VehicleWorkShop.Models
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
         public int Quantity { get; set; }
-        public string SourceStore { get; set; }
-        public string DestinationStore { get; set; }
+        [ForeignKey(nameof(Store))]
+        public int SourceStoreId { get; set; }
+        [ForeignKey(nameof(Store))]
+        public int DestinationStoreId { get; set; }
 
         public virtual Product Product { get; set; }
         public virtual Transfer Transfer { get; set; }
+        public virtual Store SourceStore { get; set; }    
+        public virtual Store DestinationStore { get; set; }
     }
 }

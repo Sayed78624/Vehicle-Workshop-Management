@@ -60,15 +60,10 @@ namespace VehicleWorkShop.Data
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<SaleDetails>()
                 .HasOne(sd => sd.Sale)
-                .WithMany()
+                .WithMany(s => s.SaleDetails)
                  .HasForeignKey(sd => sd.SaleId)
              .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<SaleDetails>()
-                .HasOne(sd => sd.Sale)
-                .WithMany()
-                .HasForeignKey(sd => sd.SaleId)
-                .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<SalesReturnDetail>()
                  .HasOne(s => s.Product)
@@ -102,15 +97,15 @@ namespace VehicleWorkShop.Data
                 .HasForeignKey(s => s.CustomerId)
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<TransferDetail>()
-                .HasOne(p => p.Transfer)
-                .WithMany(t => t.TransferDetails)
-                 .HasForeignKey(p => p.Tran_Id)
-                .OnDelete(DeleteBehavior.Restrict);
+                  .HasOne(td => td.SourceStore)
+                  .WithMany()
+                  .HasForeignKey(td => td.SourceStoreId)
+                  .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<TransferDetail>()
-                .HasOne(p => p.Product)
+                .HasOne(td => td.DestinationStore)
                 .WithMany()
-                .HasForeignKey(p => p.ProductId)
+                .HasForeignKey(td => td.DestinationStoreId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

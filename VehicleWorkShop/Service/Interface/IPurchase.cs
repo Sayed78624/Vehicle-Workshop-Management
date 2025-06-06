@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VehicleWorkShop.Models;
 using VehicleWorkShop.ViewModels;
 
 namespace VehicleWorkShop.Service.Interface
@@ -13,5 +12,6 @@ namespace VehicleWorkShop.Service.Interface
         Task<PurchaseDetailVM> CreateDetail(PurchaseDetailVM detail);
         Task<PurchaseVM> Approve(PurchaseVM purchaseVM);
         Task<PurchaseDetailVM> RemoveDetail(int id);
+        Task<PurchaseInvoice> GetInvoice(int id);
     }
 }

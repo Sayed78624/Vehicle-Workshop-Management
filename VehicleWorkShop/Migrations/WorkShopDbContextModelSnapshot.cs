@@ -765,9 +765,8 @@ namespace VehicleWorkShop.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DetailId"), 1L, 1);
 
-                    b.Property<string>("DestinationStore")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DestinationStoreId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -775,16 +774,19 @@ namespace VehicleWorkShop.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("SourceStore")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SourceStoreId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Tran_Id")
                         .HasColumnType("int");
 
                     b.HasKey("DetailId");
 
+                    b.HasIndex("DestinationStoreId");
+
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("SourceStoreId");
 
                     b.HasIndex("Tran_Id");
 
@@ -1120,7 +1122,7 @@ namespace VehicleWorkShop.Migrations
                         .IsRequired();
 
                     b.HasOne("VehicleWorkShop.Models.Sale", "Sale")
-                        .WithMany()
+                        .WithMany("SaleDetails")
                         .HasForeignKey("SaleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1209,19 +1211,35 @@ namespace VehicleWorkShop.Migrations
 
             modelBuilder.Entity("VehicleWorkShop.Models.TransferDetail", b =>
                 {
+                    b.HasOne("VehicleWorkShop.Models.Store", "DestinationStore")
+                        .WithMany()
+                        .HasForeignKey("DestinationStoreId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("VehicleWorkShop.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VehicleWorkShop.Models.Store", "SourceStore")
+                        .WithMany()
+                        .HasForeignKey("SourceStoreId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("VehicleWorkShop.Models.Transfer", "Transfer")
                         .WithMany("TransferDetails")
                         .HasForeignKey("Tran_Id")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("DestinationStore");
+
                     b.Navigation("Product");
+
+                    b.Navigation("SourceStore");
 
                     b.Navigation("Transfer");
                 });
@@ -1258,6 +1276,11 @@ namespace VehicleWorkShop.Migrations
             modelBuilder.Entity("VehicleWorkShop.Models.PurchaseReturn", b =>
                 {
                     b.Navigation("PurchaseReturnDetails");
+                });
+
+            modelBuilder.Entity("VehicleWorkShop.Models.Sale", b =>
+                {
+                    b.Navigation("SaleDetails");
                 });
 
             modelBuilder.Entity("VehicleWorkShop.Models.Transfer", b =>

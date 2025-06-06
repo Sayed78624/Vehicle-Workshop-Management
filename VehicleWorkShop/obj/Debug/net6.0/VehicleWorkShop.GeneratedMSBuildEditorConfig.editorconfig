@@ -104,6 +104,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVyY2hhc2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/VehicleWorkShop/VehicleWorkShop/Views/Purchase/Invoice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVyY2hhc2VcSW52b2ljZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/VehicleWorkShop/VehicleWorkShop/Views/Role/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -126,6 +130,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/VehicleWorkShop/VehicleWorkShop/Views/Sale/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/VehicleWorkShop/VehicleWorkShop/Views/Sale/Invoice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZVxJbnZvaWNlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/VehicleWorkShop/VehicleWorkShop/Views/Shared/Error.cshtml]

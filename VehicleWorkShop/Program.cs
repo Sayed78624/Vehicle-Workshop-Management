@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 using VehicleWorkShop.Data;
 using VehicleWorkShop.Service.Interface;
 using VehicleWorkShop.Service.Repository;
 using VehicleWorkShop.Utilities;
-using VehicleWorkShop.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +40,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+
+RotativaConfiguration.Setup(app.Environment.WebRootPath, "PurchaseInvoice"); 
 app.UseRouting();
 
 app.UseAuthorization();

@@ -19,11 +19,13 @@ namespace VehicleWorkShop.Controllers
             this.vehicleModel = vehicleModel;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchTerm)
         {
-            var productList = await product.GetAll();
+            var productList = await product.GetAll(searchTerm);
+            ViewBag.CurrentFilter = searchTerm; 
             return View(productList);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -112,6 +114,76 @@ namespace VehicleWorkShop.Controllers
             return View(result);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+
+            var products = await product.GetById(id);
+            if(products == null) return NotFound();
+
+            var categoryList = await category.GetAllCategories() ?? new List<Category>();
+            var modelList = await vehicleModel.GetAllModels() ?? new List<VehicleModel>();
+
+            var categories = new List<SelectListItem>();
+            foreach (var item in categoryList)
+            {
+                var selec = new SelectListItem();
+                selec.Value = item.CategoryId.ToString();
+                selec.Text = item.Name;
+                categories.Add(selec);
+            }
+            var models = new List<SelectListItem>();
+            foreach (var item in modelList)
+            {
+                var selec = new SelectListItem();
+                selec.Value = item.ModelId.ToString();
+                selec.Text = item.ModelName;
+                models.Add(selec);
+            }
+            var productvm = new ProductVM
+            {
+                ProductId = products.ProductId,
+                ProductName = products.ProductName,
+                Price = products.Price,
+                PartNo = products.PartNo,
+                Description = products.Description,
+                CategoryId = products.CategoryId,
+                ModelId = products.ModelId,
+                ImageName = products.ImageName,
+                Categories = categories,
+                VehicleModel = models
+            };
+            return View(productvm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProductVM productVM)
+        {
+            if (ModelState.IsValid)
+            {
+                await product.Update(productVM);
+                return RedirectToAction("Index");
+            }
+            var categoryList = await category.GetAllCategories() ?? new List<Category>();
+            var modelList = await vehicleModel.GetAllModels() ?? new List<VehicleModel>();
+
+            var categories = new List<SelectListItem>();
+            foreach (var item in categoryList)
+            {
+                var selec = new SelectListItem();
+                selec.Value = item.CategoryId.ToString();
+                selec.Text = item.Name;
+                categories.Add(selec);
+            }
+            var models = new List<SelectListItem>();
+            foreach (var item in modelList)
+            {
+                var selec = new SelectListItem();
+                selec.Value = item.ModelId.ToString();
+                selec.Text = item.ModelName;
+                models.Add(selec);
+            }
+            return View(productVM); 
+        }
     }
 
 }

@@ -108,6 +108,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\39084107-6858-451c-9ffd-f80fdb8f100b_OIP.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\48f192d9-9e24-4b9c-9d5d-1226e8f8fb4e_Akash.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>VehicleWorkShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/VehicleWorkShop</BasePath>
+      <RelativePath>Images/48f192d9-9e24-4b9c-9d5d-1226e8f8fb4e_Akash.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>7nhb1s87sc</Fingerprint>
+      <Integrity>7QBMps/dS6CvK4fsGkTHy9hfhppxRF0FMPLSPxEuQAA=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\48f192d9-9e24-4b9c-9d5d-1226e8f8fb4e_Akash.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\67605f90-3362-4cf5-99fe-09dd150a7c52_OIP (1).jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>VehicleWorkShop</SourceId>
@@ -143,6 +161,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\67d91fe3-5a7a-40d6-8534-26dd2f893bfd_OIP (1).jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\a10304d2-6b62-4c96-b843-5da87639df8c_LiverConcert.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>VehicleWorkShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/VehicleWorkShop</BasePath>
+      <RelativePath>Images/a10304d2-6b62-4c96-b843-5da87639df8c_LiverConcert.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>rn2u6rpwx8</Fingerprint>
+      <Integrity>CfV/UJjBZj3EqjhauC+HtYUHUBHUVhCjts91gxOH72s=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\a10304d2-6b62-4c96-b843-5da87639df8c_LiverConcert.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\c73d2f9a-ef62-4f0a-82f8-fc91bb70872c_OIP.jpg'))">
       <SourceType>Package</SourceType>

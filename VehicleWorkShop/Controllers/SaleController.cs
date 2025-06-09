@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Rotativa.AspNetCore;
+using Rotativa.AspNetCore.Options;
 using VehicleWorkShop.Models;
 using VehicleWorkShop.Service.Interface;
 using VehicleWorkShop.Service.Repository;
@@ -260,9 +264,34 @@ namespace VehicleWorkShop.Controllers
         public async Task<IActionResult> Invoice(int id)
         {
             var invoice = await _sale.GetInvoice(id);
-            if(invoice == null) return NotFound();
+            if (invoice == null) return NotFound();
+
+            ViewData["From"] = "web";
             return View(invoice);
         }
+
+        public async Task<IActionResult> DownloadInvoice(int id)
+        {
+            var invoice = await _sale.GetInvoice(id);
+            if (invoice == null) return NotFound();
+
+            var viewdata = new ViewDataDictionary<SaleInvoice>(
+                new EmptyModelMetadataProvider(),
+                new ModelStateDictionary())
+            {
+                Model = invoice
+            };
+            viewdata["From"] = "pdf";
+
+            return new ViewAsPdf("Invoice", invoice)
+            {
+                FileName = $"Sale_Invoice_{id}.pdf",
+                ViewData = viewdata,
+                PageSize = Size.A4,
+                PageOrientation = Orientation.Portrait
+            };
+        }
+
 
     }
 }

@@ -22,6 +22,12 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-start">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AllStoreReport">AllStoreReport</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="WorkShop" asp-action="Index">WorkShop</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -51,16 +57,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Sale" asp-action="Index">Sale</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Transfer" asp-action="Index">Transfer</a>
+                        </li>
 
-                        @* <li class="nav-item dropdown"> *@
-                        @*     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> *@
-                        @*         Purchase *@
-                        @*     </a> *@
-                        @*     <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> *@
-                        @*         <li><a class="dropdown-item" href="/Purchase">Purchase List</a></li> *@
-                        @*         <li><a class="dropdown-item" href="/Purchase/Create">Create Purchase</a></li> *@
-                        @*     </ul> *@
-                        @* </li> *@
+                  
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="managementDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                Users Management

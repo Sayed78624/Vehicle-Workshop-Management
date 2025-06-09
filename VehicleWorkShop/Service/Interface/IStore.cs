@@ -9,5 +9,6 @@ namespace VehicleWorkShop.Service.Interface
         Task<IActionResult> Create(StoreVM storeVM);
         Task<List<StoreVM>> GetAll();
         Task<IList<Store>> GetAllStores();
+        Task<List<StoreProductReportVM>> GetProductReport();
     }
 }

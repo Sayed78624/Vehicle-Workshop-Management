@@ -26,6 +26,7 @@ builder.Services.AddTransient<IStore, StoreRP>();
 builder.Services.AddTransient<ICustomer, CustomerRP>();
 builder.Services.AddTransient<ISale, SaleRP>();
 builder.Services.AddTransient<IVehicleModel, VehicleModelRP>();
+builder.Services.AddTransient<ITransfer, TransferRP>();
 
 var app = builder.Build();
 

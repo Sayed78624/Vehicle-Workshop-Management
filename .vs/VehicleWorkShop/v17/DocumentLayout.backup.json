@@ -3,32 +3,32 @@
   "WorkspaceRootPath": "D:\\VehicleWorkShop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\views\\sale\\invoice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\views\\sale\\invoice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\views\\sale\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\views\\sale\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\controllers\\purchasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\controllers\\purchasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\controllers\\salecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\controllers\\salecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\views\\transfer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\views\\transfer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\service\\repository\\salerp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\service\\repository\\salerp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\controllers\\transfercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\controllers\\transfercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\viewmodels\\saledetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\viewmodels\\saledetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\views\\transfer\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\views\\transfer\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\viewmodels\\saleinvoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\viewmodels\\saleinvoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\service\\repository\\transferrp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\service\\repository\\transferrp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,97 +38,97 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "VehicleWorkShop\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAD8AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-09T14:42:38.787Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Sale\\Index.cshtml",
-              "RelativeDocumentMoniker": "VehicleWorkShop\\Views\\Sale\\Index.cshtml",
-              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Sale\\Index.cshtml",
-              "RelativeToolTip": "VehicleWorkShop\\Views\\Sale\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAABuAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Users\\Index.cshtml",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Views\\Users\\Index.cshtml",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Users\\Index.cshtml",
+              "RelativeToolTip": "VehicleWorkShop\\Views\\Users\\Index.cshtml",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-06T17:19:55.346Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Invoice.cshtml",
-              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Sale\\Invoice.cshtml",
-              "RelativeDocumentMoniker": "VehicleWorkShop\\Views\\Sale\\Invoice.cshtml",
-              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Sale\\Invoice.cshtml*",
-              "RelativeToolTip": "VehicleWorkShop\\Views\\Sale\\Invoice.cshtml*",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAAADMAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-06T15:46:56.258Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SaleDetailVM.cs",
-              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\ViewModels\\SaleDetailVM.cs",
-              "RelativeDocumentMoniker": "VehicleWorkShop\\ViewModels\\SaleDetailVM.cs",
-              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\ViewModels\\SaleDetailVM.cs",
-              "RelativeToolTip": "VehicleWorkShop\\ViewModels\\SaleDetailVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T11:35:48.049Z",
+              "WhenOpened": "2025-06-09T14:42:14.391Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PurchaseController.cs",
-              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\PurchaseController.cs",
-              "RelativeDocumentMoniker": "VehicleWorkShop\\Controllers\\PurchaseController.cs",
-              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\PurchaseController.cs",
-              "RelativeToolTip": "VehicleWorkShop\\Controllers\\PurchaseController.cs",
-              "ViewState": "AgIAAOQAAAAAAAAAAAAcwPIAAAArAAAAAAAAAA==",
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "VehicleWorkShop\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T11:16:46.648Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SaleRP.cs",
-              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Service\\Repository\\SaleRP.cs",
-              "RelativeDocumentMoniker": "VehicleWorkShop\\Service\\Repository\\SaleRP.cs",
-              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Service\\Repository\\SaleRP.cs",
-              "RelativeToolTip": "VehicleWorkShop\\Service\\Repository\\SaleRP.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAgwOgAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T03:30:07.857Z",
+              "WhenOpened": "2025-06-09T14:41:51.547Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "SaleController.cs",
-              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\SaleController.cs",
-              "RelativeDocumentMoniker": "VehicleWorkShop\\Controllers\\SaleController.cs",
-              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\SaleController.cs",
-              "RelativeToolTip": "VehicleWorkShop\\Controllers\\SaleController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABsAAAAqAAAAAAAAAA==",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Transfer\\Index.cshtml",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Views\\Transfer\\Index.cshtml",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Transfer\\Index.cshtml",
+              "RelativeToolTip": "VehicleWorkShop\\Views\\Transfer\\Index.cshtml",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAAAIEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-09T14:32:04.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Transfer\\Create.cshtml",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Views\\Transfer\\Create.cshtml",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Transfer\\Create.cshtml",
+              "RelativeToolTip": "VehicleWorkShop\\Views\\Transfer\\Create.cshtml",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAADgAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-09T14:29:16.067Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TransferController.cs",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\TransferController.cs",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Controllers\\TransferController.cs",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\TransferController.cs",
+              "RelativeToolTip": "VehicleWorkShop\\Controllers\\TransferController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA5wF0AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T03:30:07.891Z",
+              "WhenOpened": "2025-06-09T14:24:54.883Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "SaleInvoice.cs",
-              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\ViewModels\\SaleInvoice.cs",
-              "RelativeDocumentMoniker": "VehicleWorkShop\\ViewModels\\SaleInvoice.cs",
-              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\ViewModels\\SaleInvoice.cs",
-              "RelativeToolTip": "VehicleWorkShop\\ViewModels\\SaleInvoice.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAvAAAAAAAAAA==",
+              "Title": "TransferRP.cs",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Service\\Repository\\TransferRP.cs",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Service\\Repository\\TransferRP.cs",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Service\\Repository\\TransferRP.cs",
+              "RelativeToolTip": "VehicleWorkShop\\Service\\Repository\\TransferRP.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T10:26:17.714Z",
+              "WhenOpened": "2025-06-09T14:24:45.606Z",
               "EditorCaption": ""
             }
           ]

@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<VehicleWorkShop.ViewModels.ProductVM>
-
 @{
     ViewData["Title"] = "Product List";
 }
@@ -7,17 +6,34 @@
 <div class="container mt-4">
     <h2 class="mb-4"><i class="bi bi-box-seam"></i> Product List</h2>
 
-    <div class="mb-3">
-        <a asp-action="Create" class="btn btn-success">
-            <i class="bi bi-plus-circle"></i> Add New Product
-        </a>
-    </div>
+    <!-- 🔍 Search Form -->
+    <form asp-action="Index" method="get" class="row g-2 mb-4">
+        <div class="col-md-4">
+            <input type="text" name="searchTerm" value="@ViewBag.CurrentFilter" class="form-control" placeholder="Search by name, part no, category or model..." />
+        </div>
+        <div class="col-md-auto">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-search"></i> Search
+            </button>
+        </div>
+        <div class="col-md-auto">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-clockwise"></i> Reset
+            </a>
+        </div>
+        <div class="col text-end">
+            <a asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Add New Product
+            </a>
+        </div>
+    </form>
 
+    <!-- ✅ Product Table -->
     <div class="table-responsive">
         <table class="table table-bordered table-hover align-middle">
             <thead class="table-dark text-center">
                 <tr>
-                    <th>Product SL</th>
+                    <th>SL</th>
                     <th>Product Name</th>
                     <th>Part No</th>
                     <th>Description</th>
@@ -29,30 +45,38 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @if (Model != null && Model.Any())
+                {
+                    int i = 1;
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@i</td>
+                            <td>@item.ProductName</td>
+                            <td>@item.PartNo</td>
+                            <td>@item.Description</td>
+                            <td><span class="badge bg-primary">৳@item.Price.ToString("N2")</span></td>
+                            <td>
+                                <img src="@Url.Content("~/Images/" + item.ImageName)" alt="Product Image" class="img-thumbnail" style="width: 50px; height: 50px;" />
+                            </td>
+                            <td>@item.CategoryName</td>
+                            <td>@item.ModelName</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-sm btn-warning me-1">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td>@item.ProductId</td>
-                        <td>@item.ProductName</td>
-                        <td>@item.PartNo</td>
-                        <td>@item.Description</td>
-                        <td><span class="badge bg-primary">৳@item.Price.ToString("N2")</span></td>
-                        <td>
-                            <img src="@Url.Content("~/Images/" + item.ImageName)"
-                                 alt="Product Image"
-                                 class="img-thumbnail"
-                                 style="width: 50px; height: 50px;" />
-                        </td>
-                        <td>@item.CategoryName</td>
-                        <td>@item.ModelName</td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-sm btn-warning me-1">
-                                <i class="bi bi-pencil-square"></i> Edit
-                            </a>
-                            <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-sm btn-danger">
-                                <i class="bi bi-trash"></i> Delete
-                            </a>
-                        </td>
+                        <td colspan="9" class="text-center text-muted">No products found.</td>
                     </tr>
                 }
             </tbody>

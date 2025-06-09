@@ -1,0 +1,74 @@
+﻿@model VehicleWorkShop.ViewModels.TransferVM
+
+@{
+
+    ViewData["Title"] = "Create Transfer";
+}
+
+<h2>Create Transfer</h2>
+
+<form asp-action="Create" method="post">
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+
+    @* <div class="form-group form-check"> *@
+    @*     <input asp-for="IsApprove" class="form-check-input" /> *@
+    @*     <label asp-for="IsApprove" class="form-check-label"></label> *@
+    @* </div> *@
+
+    <h4>Transfer Details</h4>
+
+    <table class="table" id="detailsTable">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Source Store</th>
+                <th>Destination Store</th>
+                <th> Action</th>
+            </tr>
+        </thead>
+        <tbody id="detailstable">
+            @for (int i = 0; i < Model.Details.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DropDownList($"Details[{i}].ProductId", Model.Products, "Select", new { @class = "form-control" })
+                    </td>
+                    <td>
+                        <input asp-for="Details[@i].Quantity" class="form-control" min="1" />
+                    </td>
+                    <td>
+                        @Html.DropDownList($"Details[{i}].SourceStoreId", Model.SourceStores, "Select", new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.DropDownList($"Details[{i}].DestinationStoreId", Model.DestinationStores, "Select", new { @class = "form-control" })
+                    </td>
+                    <td>
+                        <button type="button" onclick="RemoveRow(this)">Remove</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" formaction="/Transfer/AddMore" class="btn btn-secondary">Add Row</button>
+
+    <button type="submit" class="btn btn-primary">Save Transfer</button>
+</form>
+
+<script>
+    function RemoveRow(button)
+    {
+        const id =document.getElementById("detailstable");
+        if(id.rows.length>1)
+        {
+            button.closest('tr').remove();
+        }
+        else{
+            alert("There must be at least one detail.");
+        }
+    }
+</script>

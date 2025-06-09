@@ -47,7 +47,31 @@ namespace VehicleWorkShop.Service.Repository
         {
            return await db.Stores.ToListAsync();
         }
+
+        public async Task<List<StoreProductReportVM>> GetProductReport()
+        {
+            var report = await (from s in db.Stores
+                                select new StoreProductReportVM
+                                {
+                                    StoreId = s.StoreId,
+                                    StoreName = s.Name,
+                                    Products = (from st in db.Stocks
+                                                join p in db.Products on st.ProductId equals p.ProductId
+                                                where st.StoreId == s.StoreId
+                                                select new ProductStockVM
+                                                {
+                                                    ProductId = p.ProductId,
+                                                    ProductName = p.ProductName,
+                                                    PartsNo = p.PartNo,
+                                                    Quantity = st.Quantity
+                                                }).ToList()
+                                }).ToListAsync();
+
+            return report;
+        }
+
+
     }
-    
-    }
+
+}
 

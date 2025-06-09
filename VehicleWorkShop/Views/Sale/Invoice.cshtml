@@ -1,33 +1,40 @@
 ﻿@model VehicleWorkShop.ViewModels.SaleInvoice
 
 @{
+    if (ViewData["From"]?.ToString() == "pdf")
+    {
+        Layout = null;
+    }
     ViewData["Title"] = "Sale Invoice";
 }
 
-<div class="container mt-5 bg-white p-5 shadow rounded border">
-    <div class="d-flex justify-content-between mb-4">
+<div class="container bg-white p-5 rounded shadow-sm mt-4 border border-1" style="font-family: 'Segoe UI', sans-serif; font-size: 14px;">
+   @* Header  *@
+    <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
         <div>
-            <h4 class="fw-bold text-primary">Sale Invoice</h4>
+            <h3 class="fw-bold text-primary mb-0">Sale Invoice</h3>
             <small class="text-muted">Generated on: @DateTime.Now.ToString("dd MMM yyyy")</small>
         </div>
         <div class="text-end">
-            <p class="mb-1"><strong>Invoice No:</strong> @Model.InvoiceId</p>
+            <h5 class="mb-0">Invoice No: <span class="text-dark">@Model.InvoiceId</span></h5>
         </div>
     </div>
 
+     @* Customer Info  *@
     <div class="row mb-4">
         <div class="col-md-6">
-            <h5 class="fw-bold text-secondary mb-3">Customer Details</h5>
-            <p class="mb-1"><strong>Name:</strong> @Model.CustomerName</p>
-            <p class="mb-1"><strong>Mobile:</strong> @Model.Mobile</p>
-            <p class="mb-1"><strong>Email:</strong> @Model.Email</p>
-            <p class="mb-1"><strong>Address:</strong> @Model.Address</p>
+            <h5 class="fw-semibold text-secondary border-bottom pb-1 mb-3">Customer Details</h5>
+            <p><strong>Name:</strong> @Model.CustomerName</p>
+            <p><strong>Mobile:</strong> @Model.Mobile</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Address:</strong> @Model.Address</p>
         </div>
     </div>
 
+     @* Product Table *@
     <div class="table-responsive mb-4">
-        <table class="table table-sm table-bordered text-center align-middle">
-            <thead class="bg-light">
+        <table class="table table-bordered table-sm align-middle text-center">
+            <thead class="table-light text-dark small">
                 <tr>
                     <th>#</th>
                     <th>Product</th>
@@ -46,7 +53,7 @@
                     <th>End</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="small">
                 @for (int i = 0; i < Model.Details.Count; i++)
                 {
                     var item = Model.Details[i];
@@ -72,15 +79,22 @@
         </table>
     </div>
 
-    <div class="row">
-
-        <div class="col-md-6 text-end">
-            <h4 class="fw-bold text-success">Grand Total: ৳ @Model.GrandTotal.ToString("0.00")</h4>
+    @* Total  *@
+    <div class="row justify-content-end mb-4">
+        <div class="col-md-4">
+            <div class="border p-3 rounded bg-light">
+                <h5 class="fw-bold text-end">Grand Total: <span class="text-success">৳ @Model.GrandTotal.ToString("0.00")</span></h5>
+            </div>
         </div>
     </div>
 
-    <div class="text-center mt-5">
-        <a asp-action="Index" class="btn btn-outline-secondary me-2">Back to List</a>
-        <button onclick="window.print()" class="btn btn-outline-primary">Print Invoice</button>
-    </div>
+  @* Footer Buttons *@
+    @if (ViewData["From"]?.ToString() != "pdf")
+    {
+        <div class="text-center mt-5">
+            <button onclick="window.print()" class="btn btn-outline-dark me-2">🖨️ Print</button>
+            <a asp-action="DownloadInvoice" asp-route-id="@Model.InvoiceId" class="btn btn-primary me-2">⬇️ Download PDF</a>
+            <a asp-action="Index" class="btn btn-secondary">⬅️ Back to List</a>
+        </div>
+    }
 </div>

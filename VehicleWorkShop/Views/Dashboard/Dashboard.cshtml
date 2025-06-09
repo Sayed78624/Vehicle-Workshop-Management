@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2 class="mb-4">Dashboard Summary</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3 text-center bg-light">
+            <h5>Total Products</h5>
+            <h3 class="counter text-primary" data-target="@ViewBag.TotalProducts">0</h3>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3 text-center bg-light">
+            <h5>Total Stores</h5>
+            <h3 class="counter text-success" data-target="@ViewBag.TotalStores">0</h3>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3 text-center bg-light">
+            <h5>Total Stock Qty</h5>
+            <h3 class="counter text-warning" data-target="@ViewBag.TotalStock">0</h3>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3 text-center bg-light">
+            <h5>Total Transfers</h5>
+            <h3 class="counter text-info" data-target="@ViewBag.TotalTransfers">0</h3>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3 text-center bg-light">
+            <h5>Approved Transfers</h5>
+            <h3 class="counter text-success" data-target="@ViewBag.ApprovedTransfers">0</h3>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3 text-center bg-light">
+            <h5>Today's Transfers</h5>
+            <h3 class="counter text-danger" data-target="@ViewBag.TodayTransfers">0</h3>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card shadow-sm p-3 text-center bg-light">
+            <h5>Today's Purchase</h5>
+            <h3 class="counter text-primary" data-target="@ViewBag.TotalPurchase">0</h3>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm p-3 text-center bg-light">
+            <h5>Today's Sale</h5>
+            <h3 class="counter text-success" data-target="@ViewBag.TodaySales">0</h3>
+        </div>
+    </div>
+</div>
+
+<script>
+    const counters = document.querySelectorAll('.counter');
+
+    counters.forEach(counter => {
+        counter.innerText = '0';
+
+        const updateCounter = () => {
+            const target = +counter.getAttribute('data-target');
+            const current = +counter.innerText;
+
+         
+            const increment = Math.max(target / 400, 1);
+
+            if (current < target) {
+                counter.innerText = Math.ceil(current + increment);
+                setTimeout(updateCounter, 60); 
+            } else {
+                counter.innerText = target;
+            }
+        };
+
+        updateCounter();
+    });
+</script>
+

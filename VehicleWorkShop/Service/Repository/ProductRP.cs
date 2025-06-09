@@ -8,6 +8,7 @@ using VehicleWorkShop.Models;
 using VehicleWorkShop.Service.Interface;
 using VehicleWorkShop.Utilities;
 using VehicleWorkShop.ViewModels;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace VehicleWorkShop.Service.Repository
 {
@@ -23,29 +24,38 @@ namespace VehicleWorkShop.Service.Repository
             this.en = en;
         }
 
-        public async Task<List<ProductVM>> GetAll()
+        public async Task<List<ProductVM>> GetAll(string? searchTerm = null)
         {
-            var list = await (from p in db.Products
-                              join c in db.Categories on p.CategoryId equals c.CategoryId
-                              join m in db.VehicleModels on p.ModelId equals m.ModelId
-                              select new ProductVM
-                              {
-                                  ProductId = p.ProductId,
-                                  ProductName = p.ProductName,
-                                  PartNo = p.PartNo,
-                                  Description = p.Description,
-                                  Price = p.Price,
-                                  CategoryId = p.CategoryId,
-                                  ModelId = p.ModelId,
-                                  CategoryName = c.Name,
-                                  ModelName = m.ModelName,
-                                  ImageName = p.ImageName
-                              }).ToListAsync();
+            var query = from p in db.Products
+                        join c in db.Categories on p.CategoryId equals c.CategoryId
+                        join m in db.VehicleModels on p.ModelId equals m.ModelId
+                        select new ProductVM
+                        {
+                            ProductId = p.ProductId,
+                            ProductName = p.ProductName,
+                            PartNo = p.PartNo,
+                            Description = p.Description,
+                            Price = p.Price,
+                            CategoryId = p.CategoryId,
+                            ModelId = p.ModelId,
+                            CategoryName = c.Name,
+                            ModelName = m.ModelName,
+                            ImageName = p.ImageName
+                        };
 
-            return list;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                searchTerm = searchTerm.ToLower();
+                query = query.Where(p =>
+                    p.ProductName.ToLower().Contains(searchTerm) ||
+                    p.PartNo.ToLower().Contains(searchTerm) ||
+                    p.CategoryName.ToLower().Contains(searchTerm) ||
+                    p.ModelName.ToLower().Contains(searchTerm)
+                );
+            }
+
+            return await query.ToListAsync();
         }
-
-
 
 
 
@@ -118,6 +128,49 @@ namespace VehicleWorkShop.Service.Repository
                 return new OkResult();
             }
             return new BadRequestResult();
+        }
+
+        public async Task<IActionResult> Update(ProductVM productVM)
+        {
+            var productlist =await db.Products.FirstOrDefaultAsync(
+                i => i.ProductId == productVM.ProductId);
+            if (productlist != null)
+            {
+                productlist.ProductId = productVM.ProductId;
+                productlist.ProductName = productVM.ProductName;
+                productlist.PartNo = productVM.PartNo;
+                productlist.Description = productVM.Description;
+                productlist.Price = productVM.Price;
+                productlist.CategoryId = productVM.CategoryId;
+                productlist.ModelId = productVM.ModelId;
+                if (productVM.Image != null)
+                {
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + productVM.Image.FileName;
+                    var filePath = Path.Combine(en.WebRootPath, "Images", uniqueFileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await productVM.Image.CopyToAsync(stream);
+                    }
+
+                    productlist.ImageName = uniqueFileName;
+                }
+                else
+                {
+                    productlist.ImageName = "default_image.png";
+                }
+            }
+            db.Products.Update(productlist);
+            db.SaveChanges();
+            return new OkResult();
+        } 
+
+        public async Task<ProductVM> GetById(int id)
+        {
+            var pids = await db.Products.Where(i => i.ProductId == id).FirstOrDefaultAsync();
+            var data = mapper.Map<ProductVM>(pids);
+            return data;
+          
         }
     }
 

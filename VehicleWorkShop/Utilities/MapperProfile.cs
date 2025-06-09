@@ -26,6 +26,13 @@ namespace VehicleWorkShop.Utilities
             CreateMap<SaleDetails, SaleDetailVM>().ReverseMap();
 
             CreateMap<VehicleModel, VehicleModelVM>().ReverseMap();
+            CreateMap<Transfer, TransferVM>()
+             .ForMember(dest => dest.Details, opt => opt.MapFrom(src => src.TransferDetails));
+            CreateMap<TransferDetail, TransferDetailVM>()
+                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product != null ? src.Product.ProductName : string.Empty))
+                .ForMember(dest => dest.SourceStoreName, opt => opt.MapFrom(src => src.SourceStore != null ? src.SourceStore.Name : string.Empty))
+                .ForMember(dest => dest.DestinationStoreName, opt => opt.MapFrom(src => src.DestinationStore != null ? src.DestinationStore.Name : string.Empty));
+
 
 
         }

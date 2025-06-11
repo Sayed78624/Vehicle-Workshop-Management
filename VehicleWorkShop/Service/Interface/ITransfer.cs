@@ -10,5 +10,6 @@ namespace VehicleWorkShop.Service.Interface
         Task<IActionResult> Delete(int id);
         Task<TransferVM> Approve(TransferVM transferVM);
         Task<TransferVM> GetId(int id);
+        Task<TransferInvoiceVM> GetInvoice(int id);
     }
 }

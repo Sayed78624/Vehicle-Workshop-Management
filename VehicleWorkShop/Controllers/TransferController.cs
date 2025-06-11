@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NuGet.Protocol.Core.Types;
+using Rotativa.AspNetCore;
 using VehicleWorkShop.Models;
 using VehicleWorkShop.Service.Interface;
 using VehicleWorkShop.ViewModels;
@@ -168,6 +171,35 @@ namespace VehicleWorkShop.Controllers
             return View("Create", transferVM);
         }
 
+        public async Task<IActionResult> Invoice(int id)
+        {
+            var invoice = await transfer.GetInvoice(id);
+            if (invoice == null) return NotFound();
+            return View(invoice);
+        }
 
+        public async Task<IActionResult>DownloadInvoice(int id)
+        {
+            var invoice =await transfer.GetInvoice(id);
+            if (invoice == null) return NotFound();
+
+            var viewData = new ViewDataDictionary<TransferInvoiceVM>(
+                         new EmptyModelMetadataProvider(), new ModelStateDictionary())
+            {
+                Model = invoice
+            };
+
+            viewData["From"] = "pdf";
+
+            var pdfView = new ViewAsPdf("Invoice", invoice)
+            {
+                FileName = $"Transfer_Invoice_{id}.pdf",
+                PageSize = Rotativa.AspNetCore.Options.Size.A4,
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+                ViewData = viewData
+            };
+
+            return pdfView;
+        }
     }
 }

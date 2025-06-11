@@ -1,0 +1,68 @@
+﻿@model VehicleWorkShop.ViewModels.PurchaseVM
+@{
+    ViewData["Title"] = "Approve Purchase";
+}
+
+<h2 class="text-primary">Approve Purchase</h2>
+
+         @* Success / Error Alert Messages  *@
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle me-1"></i>@TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-x-circle me-1"></i>@TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+         @* Purchase Summary  *@
+<div class="mb-3">
+    <h5><strong>Supplier:</strong> @Model.SupplierName</h5>
+    <h6><strong>Description:</strong> @Model.Description</h6>
+    <h6><strong>Grand Total:</strong> @Model.GrandTotal.ToString("C")</h6>
+</div>
+
+            @* Purchase Details Table  *@
+<h5 class="mt-4">Purchase Details</h5>
+<table class="table table-bordered table-striped">
+    <thead class="table-light">
+        <tr>
+            <th>Product</th>
+            <th>Model</th>
+            <th>Store</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>VAT</th>
+            <th>SubTotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.PurchaseDetails)
+        {
+            <tr>
+                <td>@detail.ProductName</td>
+                <td>@detail.ModelName</td>
+                <td>@detail.StoreName</td>
+                <td>@detail.Quantity</td>
+                <td>@detail.Price</td>
+                <td>@detail.Vat</td>
+                <td>@detail.SubTotal</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+         @* Approval Button Form  *@
+<form asp-action="ConfirmApprove" method="post">
+    <input type="hidden" name="id" value="@Model.PurchaseId" />
+    <button type="submit" class="btn btn-success mt-3">
+        <i class="bi bi-check2-circle me-1"></i>Approve Purchase
+    </button>
+    <a asp-action="Index" class="btn btn-secondary mt-3 ms-2">Back to List</a>
+</form>

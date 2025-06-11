@@ -1,0 +1,52 @@
+﻿@model VehicleWorkShop.ViewModels.TransferInvoiceVM
+
+@{
+
+	@if (ViewData["From"]?.ToString() == "pdf")
+	{
+		Layout = null;
+	}
+	ViewData["Title"] = "Transfer Invoice";
+}
+<div>
+	<div>
+		<h5>Invoice No:@Model.InvoiceId</h5>
+	</div>
+	<div>
+		<p>Descrption: @Model.Description</p>
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Product SL</th>
+					<th>Product Name</th>
+					<th>Quantity</th>
+					<th>Source Store</th>
+					<th>Destination Store</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach(var item in Model.Details)
+				{
+					<tr>
+						<td>@item.ProductId</td>
+						<td>@item.ProductName</td>
+						<td>@item.Quantity</td>
+						<td>@item.SourceStoreName</td>
+						<td>@item.DestinationStoreName</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	@if (ViewData["From"]?.ToString() != "pdf")
+	{
+		<div class="text-center mt-4 no-print">
+			<button onclick="window.print()" class="btn btn-dark">🖨️ Print Invoice</button>
+			<a asp-action="DownloadInvoice" asp-route-id="@Model.InvoiceId" class="btn btn-primary ms-2">⬇️ Download PDF</a>
+			<a asp-action="Index" class="btn btn-primary ms-2">Back To List</a>
+		</div>
+	}
+</div>
+

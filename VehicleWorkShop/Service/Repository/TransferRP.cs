@@ -95,78 +95,93 @@ namespace VehicleWorkShop.Service.Repository
             }
         }
 
-        public async Task<TransferVM> Approve(TransferVM transferVM)
+        public async Task<TransferVM> Approve(TransferVM modelVM)
         {
             try
             {
-                foreach (var detail in transferVM.Details)
+                #region Transfer
+                foreach (var detail in modelVM.Details)
                 {
-                    //  Source Store Stock 
-                    var sourceStock = await db.Stocks
-                        .FirstOrDefaultAsync(s => s.ProductId == detail.ProductId && s.StoreId == detail.SourceStoreId);
+                    #region Issue (from source-store)
+                    Ledger ledger1 = new Ledger();
+                    ledger1.Quantity = detail.Quantity;
+                    ledger1.InventoryTypeId = 3; // transfer
+                    ledger1.StockTypeId = 1; // issue
+                    ledger1.StoreId = detail.SourceStoreId;
+                    ledger1.ProductId = detail.ProductId;
+                    //ledger1.UserId = Login UserID
+                    db.Ledgers.Add(ledger1);
+                    await db.SaveChangesAsync();
 
-                    if (sourceStock != null && sourceStock.Quantity >= detail.Quantity)
+                    var oStock1 = (from x in db.Stocks
+                                   where x.ProductId == detail.ProductId && x.StoreId == detail.SourceStoreId
+                                   select x).FirstOrDefault();
+                    if (oStock1 != null)
                     {
-                        sourceStock.Quantity -= detail.Quantity;
-                        db.Stocks.Update(sourceStock);
+                        oStock1.ProductId = detail.ProductId;
+                        oStock1.Quantity -= detail.Quantity;
+                        oStock1.StoreId = detail.SourceStoreId;
+                        db.SaveChanges();
                     }
                     else
                     {
-                        
-                        throw new Exception("Insufficient stock in source store.");
+                        Stock stock1 = new Stock();
+                        stock1.ProductId = detail.ProductId;
+                        stock1.Quantity = detail.Quantity;
+                        stock1.StoreId = detail.SourceStoreId;
+                        db.Add(stock1);
+                        db.SaveChanges();
                     }
+                    #endregion
+                    #region Receive (from source-store)
+                    Ledger ledger2 = new Ledger();
+                    ledger2.Quantity = detail.Quantity;
+                    ledger2.InventoryTypeId = 3; // transfer
+                    ledger2.StockTypeId = 2; // receive
+                    ledger2.StoreId = detail.SourceStoreId;
+                    ledger2.ProductId = detail.ProductId;
+                    //ledger2.UserId = Login UserID
+                    db.Ledgers.Add(ledger2);
+                    await db.SaveChangesAsync();
 
-                    //  Destination Store Stock ব
-                    var destStock = await db.Stocks
-                        .FirstOrDefaultAsync(s => s.ProductId == detail.ProductId && s.StoreId == detail.DestinationStoreId);
-
-                    if (destStock != null)
+                    var oStock2 = (from x in db.Stocks
+                                   where x.ProductId == detail.ProductId && x.StoreId == detail.DestinationStoreId
+                                   select x).FirstOrDefault();
+                    if (oStock2 != null)
                     {
-                        destStock.Quantity += detail.Quantity;
-                        db.Stocks.Update(destStock);
+                        oStock2.ProductId = detail.ProductId;
+                        oStock2.Quantity += detail.Quantity;
+                        oStock2.StoreId = detail.SourceStoreId;
+                        db.SaveChanges();
                     }
                     else
                     {
-                        var newStock = new Stock
-                        {
-                            ProductId = detail.ProductId,
-                            StoreId = detail.DestinationStoreId,
-                            Quantity = detail.Quantity
-                        };
-                        await db.Stocks.AddAsync(newStock);
+                        Stock stock2 = new Stock();
+                        stock2.ProductId = detail.ProductId;
+                        stock2.Quantity = detail.Quantity;
+                        stock2.StoreId = detail.SourceStoreId;
+                        db.Add(stock2);
+                        db.SaveChanges();
                     }
-
-                    //  Ledger Entry 
-                    var ledger = new Ledger
+                    #endregion
+                    #region Approve
+                    var model = (from x in db.Transfers
+                                 where x.Tran_Id == modelVM.Tran_Id
+                                 select x).FirstOrDefault();
+                    if (model != null)
                     {
-                        ProductId = detail.ProductId,
-                        Quantity = detail.Quantity,
-                        InventoryTypeId = 3, // Transfer
-                        StockTypeId = 3, // Movement
-                        StoreId = detail.DestinationStoreId,
-                       
-                        Price = 0 // Optional if applicable
-                    };
-                    await db.Ledgers.AddAsync(ledger);
+                        model.IsApprove = true;
+                        db.SaveChanges();
+                    }
+                    #endregion
                 }
-
-                // Update IsApprove
-                var transfer = await db.Transfers.FirstOrDefaultAsync(t => t.Tran_Id == transferVM.Tran_Id);
-                if (transfer != null)
-                {
-                    transfer.IsApprove = true;
-                    db.Transfers.Update(transfer);
-                }
-
-                await db.SaveChangesAsync();
-
-                return transferVM;
+                #endregion
+                return modelVM;
             }
             catch (Exception ex)
             {
-                var error = ex.InnerException?.Message ?? ex.Message;
-                Console.WriteLine("Approve Error: " + error);
-                throw;
+                var ErrorMessage = ex.Message;
+                return modelVM;
             }
         }
 
@@ -213,6 +228,29 @@ namespace VehicleWorkShop.Service.Repository
             return oTransfer;
         }
 
-
+        public async Task<TransferInvoiceVM> GetInvoice(int id)
+        {
+            var data =await db.Transfers.Include(d => d.TransferDetails).FirstOrDefaultAsync(i => i.Tran_Id == id);
+            if (data == null) return null;
+            var invoice = new TransferInvoiceVM
+            {
+                InvoiceId = data.Tran_Id,
+                Description = data.Description,
+                Details = await (from d in db.TransferDetails
+                                 join p in db.Products on d.ProductId equals p.ProductId
+                                 join s1 in db.Stores on d.SourceStoreId equals s1.StoreId
+                                 join s2 in db.Stores on d.DestinationStoreId equals s2.StoreId
+                                 where d.Tran_Id == id
+                                 select new TransferDetailVM
+                                 {
+                                     ProductId = d.ProductId,
+                                     ProductName = p.ProductName,
+                                     Quantity = d.Quantity,
+                                     SourceStoreName = s1.Name,
+                                     DestinationStoreName = s2.Name
+                                 }).ToListAsync(),
+            };
+            return invoice;
+        }
     }
 }

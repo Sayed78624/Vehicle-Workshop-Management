@@ -12,7 +12,7 @@ using VehicleWorkShop.Data;
 namespace VehicleWorkShop.Migrations
 {
     [DbContext(typeof(WorkShopDbContext))]
-    [Migration("20250606162740_workshop")]
+    [Migration("20250610033751_workshop")]
     partial class workshop
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

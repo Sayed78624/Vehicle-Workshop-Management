@@ -33,8 +33,19 @@
                                 <a asp-action="Create" asp-route-id="@item.PurchaseId" class="btn btn-primary btn-sm">Show Details</a>
                             </td>
                             <td>
-                                <a asp-action="Approve" asp-route-id="@item.PurchaseId" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure to update.')">Approve </a>
+                                @if (!item.IsApprove)
+                                {
+                                    <a asp-action="Approve" asp-route-id="@item.PurchaseId" class="btn btn-primary btn-sm"
+                                       onclick="return confirm('Are you sure to approve this?')">
+                                        Approve
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Already Approved</span>
+                                }
                             </td>
+
                             <td>
                                 <a asp-action="Invoice" asp-route-id="@item.PurchaseId" class="btn btn-primary btn-sm">
                                    View Invoice
@@ -45,30 +56,30 @@
                 </tbody>
             </table>
 
-            <div id="details1" class="collapse">
-                <table class="table table-sm table-bordered text-center mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>VAT (%)</th>
-                            <th>Sub Total</th>
-                            <th>Store Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Engine Oil</td>
-                            <td>2</td>
-                            <td>400</td>
-                            <td>5</td>
-                            <td>840</td>
-                            <td>Main Store</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            @* <div id="details1" class="collapse"> *@
+            @*     <table class="table table-sm table-bordered text-center mb-0"> *@
+            @*         <thead class="table-light"> *@
+            @*             <tr> *@
+            @*                 <th>Product Name</th> *@
+            @*                 <th>Quantity</th> *@
+            @*                 <th>Price</th> *@
+            @*                 <th>VAT (%)</th> *@
+            @*                 <th>Sub Total</th> *@
+            @*                 <th>Store Name</th> *@
+            @*             </tr> *@
+            @*         </thead> *@
+            @*         <tbody> *@
+            @*             <tr> *@
+            @*                 <td>Engine Oil</td> *@
+            @*                 <td>2</td> *@
+            @*                 <td>400</td> *@
+            @*                 <td>5</td> *@
+            @*                 <td>840</td> *@
+            @*                 <td>Main Store</td> *@
+            @*             </tr> *@
+            @*         </tbody> *@
+            @*     </table> *@
+            @* </div> *@
 
         </div>
     </div>

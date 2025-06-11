@@ -1,6 +1,15 @@
 ﻿@using VehicleWorkShop.ViewModels
 @model WorkShopVM
 
+@{
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div id="errorAlert" class="alert alert-danger text-center fw-bold mt-3">@errorMessage</div>
+}
+
 <form asp-action="Create" method="post" onsubmit="return ValidateForm()">
     <div class="container mt-4">
         <div class="card shadow rounded-4">
@@ -59,3 +68,20 @@
         </div>
     </div>
 </form>
+
+@section Scripts {
+    <script>
+        // Auto hide after 4 seconds
+        setTimeout(function () {
+            var success = document.getElementById("successAlert");
+            if (success) {
+                success.style.display = "none";
+            }
+
+            var error = document.getElementById("errorAlert");
+            if (error) {
+                error.style.display = "none";
+            }
+        }, 4000); // 4000 milliseconds = 4 seconds
+    </script>
+}

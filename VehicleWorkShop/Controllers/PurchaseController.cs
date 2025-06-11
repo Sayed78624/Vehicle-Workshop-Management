@@ -28,29 +28,41 @@ namespace VehicleWorkShop.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Approve(int? id)
+       
+        public async Task<IActionResult> Approve(int id)
+        {
+            var purchase = await _purchase.GetById(id);
+            if (purchase == null)
+            {
+                return NotFound();
+            }
+
+            return View(purchase); 
+        }
+
+
+        [HttpPost]
+    
+        public async Task<IActionResult> ConfirmApprove(int id)
         {
             try
             {
-
-                var purchaseVM = new PurchaseVM();
-                if (id != null)
+                var purchase = await _purchase.GetById(id);
+                if (purchase != null)
                 {
-                    var purchase = await _purchase.GetById((int)id);
-                    if (purchase != null)
-                    {
-                        purchaseVM = purchase;
-                        await _purchase.Approve(purchaseVM);
-                    }
+                    await _purchase.Approve(purchase);
                 }
 
+                TempData["Success"] = "Purchase approved successfully.";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                return Content($"Error: {ex.Message}");
+                TempData["Error"] = "Approval failed: " + ex.Message;
+                return RedirectToAction("Index");
             }
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Create(int? id)

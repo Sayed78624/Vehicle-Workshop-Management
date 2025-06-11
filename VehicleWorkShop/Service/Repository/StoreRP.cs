@@ -50,25 +50,43 @@ namespace VehicleWorkShop.Service.Repository
 
         public async Task<List<StoreProductReportVM>> GetProductReport()
         {
-            var report = await (from s in db.Stores
-                                select new StoreProductReportVM
-                                {
-                                    StoreId = s.StoreId,
-                                    StoreName = s.Name,
-                                    Products = (from st in db.Stocks
-                                                join p in db.Products on st.ProductId equals p.ProductId
-                                                where st.StoreId == s.StoreId
-                                                select new ProductStockVM
-                                                {
-                                                    ProductId = p.ProductId,
-                                                    ProductName = p.ProductName,
-                                                    PartsNo = p.PartNo,
-                                                    Quantity = st.Quantity
-                                                }).ToList()
-                                }).ToListAsync();
+            var report = await db.Stocks
+                .Where(x => x.Quantity > 0)
+                .GroupBy(x => new { x.StoreId, x.ProductId })
+                .Select(g => new
+                {
+                    StoreId = g.Key.StoreId,
+                    ProductId = g.Key.ProductId,
+                    Quantity = g.Sum(x => x.Quantity)
+                })
+                .Join(db.Stores, s => s.StoreId, store => store.StoreId, (s, store) => new { s, store })
+                .Join(db.Products, sp => sp.s.ProductId, product => product.ProductId, (sp, product) => new
+                {
+                    sp.s.StoreId,
+                    sp.store.Name,
+                    product.ProductId,
+                    product.ProductName,
+                    product.PartNo,
+                    sp.s.Quantity
+                })
+                .GroupBy(x => new { x.StoreId, x.Name })
+                .Select(g => new StoreProductReportVM
+                {
+                    StoreId = g.Key.StoreId,
+                    StoreName = g.Key.Name,
+                    Products = g.Select(p => new ProductStockVM
+                    {
+                        ProductId = p.ProductId,
+                        ProductName = p.ProductName,
+                        PartsNo = p.PartNo,
+                        Quantity = p.Quantity
+                    }).ToList()
+                })
+                .ToListAsync();
 
             return report;
         }
+
 
 
     }

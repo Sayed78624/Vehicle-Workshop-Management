@@ -26,13 +26,18 @@ namespace VehicleWorkShop.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(WorkShopVM workshopvm)
         {
-            if (ModelState.IsValid)  
+            if (ModelState.IsValid)
             {
-                var result = await workShop.Create(workshopvm);  
+                var result = await workShop.Create(workshopvm);
+                TempData["SuccessMessage"] = "Workshop created successfully!";
                 return RedirectToAction("Index");
             }
+
+            TempData["ErrorMessage"] = "Failed to create workshop!";
             return View(workshopvm);
         }
+
+
         public async Task<IActionResult> Delete(int id)
         {
             var allSuppliers = await workShop.WorkShopList();

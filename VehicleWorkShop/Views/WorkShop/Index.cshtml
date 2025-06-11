@@ -1,5 +1,15 @@
 ﻿@model IEnumerable<VehicleWorkShop.ViewModels.WorkShopVM>
 
+@{
+    var successMessage = TempData["SuccessMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div id="successAlert" class="alert alert-success">@successMessage</div>
+}
+
+
 <div class="col-12 text-end mb-3">
     <a asp-action="Create" asp-controller="WorkShop" class="btn btn-success">
         <i class="bi bi-plus-circle me-1"></i> Create New
@@ -49,3 +59,20 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        // Auto hide after 4 seconds
+        setTimeout(function () {
+            var success = document.getElementById("successAlert");
+            if (success) {
+                success.style.display = "none";
+            }
+
+            var error = document.getElementById("errorAlert");
+            if (error) {
+                error.style.display = "none";
+            }
+        }, 4000); // 4000 milliseconds = 4 seconds
+    </script>
+}

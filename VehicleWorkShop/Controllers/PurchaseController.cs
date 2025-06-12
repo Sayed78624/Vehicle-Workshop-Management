@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Rotativa.AspNetCore;
+using Rotativa.AspNetCore.Options;
 using VehicleWorkShop.Models;
 using VehicleWorkShop.Service.Interface;
 using VehicleWorkShop.ViewModels;
@@ -281,15 +282,17 @@ namespace VehicleWorkShop.Controllers
                 Model = invoice  
             };
 
-            viewData["From"] = "pdf";  
+            viewData["From"] = "pdf";
 
             var pdfView = new ViewAsPdf("~/Views/Purchase/Invoice.cshtml", invoice)
             {
                 FileName = $"PurchaseInvoice_{id}.pdf",
-                PageSize = Rotativa.AspNetCore.Options.Size.A4,
-                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
-                ViewData = viewData 
+                PageSize = Size.A4,
+                PageOrientation = Orientation.Portrait,
+                ViewData = viewData,
+                PageMargins = new Margins(10, 10, 10, 10) 
             };
+
 
             return pdfView;
         }

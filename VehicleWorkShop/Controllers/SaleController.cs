@@ -288,7 +288,9 @@ namespace VehicleWorkShop.Controllers
                 FileName = $"Sale_Invoice_{id}.pdf",
                 ViewData = viewdata,
                 PageSize = Size.A4,
-                PageOrientation = Orientation.Portrait
+                PageOrientation = Orientation.Portrait,
+                CustomSwitches = "--disable-smart-shrinking"
+
             };
         }
 

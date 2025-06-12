@@ -1,269 +1,185 @@
-﻿@model VehicleWorkShop.ViewModels.PurchaseInvoice
+﻿@model VehicleWorkShop.ViewModels.SaleInvoice
+
 @{
-    if (ViewData["From"]?.ToString() == "pdf")
-    {
-        Layout = null;
-    }
-    ViewData["Title"] = "Purchase Invoice";
-
-    if (Model == null)
-    {
-        <p>Purchase invoice is not here......</p>
-        return;
-    }
+    bool isPdf = ViewData["From"]?.ToString() == "pdf";
+    Layout = isPdf ? null : "_Layout";
+    ViewData["Title"] = "Sale Invoice";
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>@ViewData["Title"]</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-        body {
-            background: #f8f9fa;
-            padding: 20px;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
 
-        .invoice {
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            max-width: 900px;
-            margin: auto;
-            color: #000;
-        }
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 14px;
+        color: #212529;
+    }
 
-       
-        .invoice-header {
-            border-bottom: 2px solid #dee2e6;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            display: block;
-            overflow: hidden;
-        }
+    .invoice-container {
+        padding: 30px 40px;
+        max-width: 900px;
+        margin: 20px auto;
+        border: 1px solid #dee2e6;
+        background: #fff;
+        border-radius: @(isPdf ? "0" : "12px");
+        box-shadow: @(isPdf ? "none" : "0 0 15px rgba(0,0,0,0.1)");
+    }
 
-            .invoice-header > .left,
-            .invoice-header > .right {
-                display: block;
-            }
+    .invoice-header, .invoice-footer {
+        border-bottom: 2px solid #dee2e6;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
 
-            .invoice-header > .left {
-                float: left;
-                max-width: 60%;
-                text-align: left;
-            }
+    .invoice-footer {
+        border-top: 2px solid #dee2e6;
+        border-bottom: none;
+        margin-top: 30px;
+        padding-top: 15px;
+    }
 
-            .invoice-header > .right {
-                float: right;
-                max-width: 35%;
-                text-align: right;
-            }
+    .invoice-table th {
+        background-color: #343a40;
+        color: #fff;
+        vertical-align: middle;
+    }
 
-        
-            .invoice-header::after {
-                content: "";
-                display: table;
-                clear: both;
-            }
+    .invoice-table td, .invoice-table th {
+        vertical-align: middle !important;
+    }
 
-     
-        .supplier-info {
-            margin-bottom: 30px;
-            overflow: hidden;
-        }
+    .totals-box {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+</style>
 
-            .supplier-info > .left,
-            .supplier-info > .right {
-                display: block;
-                float: left;
-            }
-
-            .supplier-info > .left {
-                width: 48%;
-                text-align: left;
-            }
-
-            .supplier-info > .right {
-                width: 48%;
-                text-align: left;
-                margin-left: 4%;
-            }
-
-            .supplier-info::after {
-                content: "";
-                display: table;
-                clear: both;
-            }
-
-       
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-        }
-
-        thead th {
-            background-color: #343a40;
-            color: #fff;
-            padding: 8px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-
-        tbody td {
-            padding: 8px;
-            border: 1px solid #ddd;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-            tbody td.text-left {
-                text-align: left;
-            }
-
-        tfoot th,
-        tfoot td {
-            padding: 10px 8px;
-            border: 1px solid #ddd;
-            text-align: right;
-            font-weight: bold;
-        }
-
-        tfoot th {
-            text-align: right;
-        }
-
-        
-        .invoice-footer {
-            border-top: 2px solid #dee2e6;
-            margin-top: 60px;
-            padding-top: 10px;
-            font-size: 0.9rem;
-            color: #6c757d;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-            .invoice-footer > div {
-                flex: 1;
-                text-align: center;
-            }
-
-   
-        @@media print {
-            .no-print
-
-        {
-            display: none;
-        }
-
-        }
-    </style>
-</head>
-<body>
-    <div class="invoice">
-      
-        <div class="invoice-header">
-            <div class="left">
-                <h2 style="margin-bottom:5px;">Vehicle Workshop</h2>
-                <p style="margin:0;">Your Company Address Here</p>
-                <p style="margin:0;">Phone: +880 1234 567890</p>
-                <p style="margin:0;">Email: info@vehicleworkshop.com</p>
-            </div>
-            <div class="right">
-                <h3 style="color:#0d6efd; margin-bottom:5px;">INVOICE</h3>
-                <p style="margin:0;"><strong>Invoice ID:</strong> #@Model.InvoiceId</p>
-                <p style="margin:0;"><strong>Date:</strong> @Model.PurchaseDate.ToString("dd MMM yyyy")</p>
-            </div>
+<div class="invoice-container">
+    <!-- Header -->
+    <div class="invoice-header d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="text-primary fw-bold mb-1">@Model.WorkshopName</h2>
+            <p class="mb-0 text-muted">123 Garage Road, Dhaka, Bangladesh</p>
+            <p class="mb-0 text-muted">Phone: +880 1234 567890</p>
+            <p class="mb-0 text-muted">Email: info@autocare.com</p>
         </div>
-
-      
-        <div class="supplier-info">
-            <div class="left">
-                <h5 style="margin-bottom:8px;">Invoice To:</h5>
-                <p style="margin:2px 0;"><strong>Supplier:</strong> @(Model.SupplierName ?? "N/A")</p>
-                <p style="margin:2px 0;"><strong>Manager:</strong> @Model.ManagerName</p>
-                <p style="margin:2px 0;"><strong>Mobile:</strong> @Model.Mobile</p>
-                <p style="margin:2px 0;"><strong>Address:</strong> @Model.Address</p>
-            </div>
-          
+        <div class="text-end">
+            <h4 class="text-dark fw-semibold">INVOICE</h4>
+            <p class="mb-1"><strong>Invoice No:</strong> @Model.InvoiceId</p>
+            <p class="mb-1"><strong>Date:</strong> @DateTime.Now.ToString("dd MMM yyyy")</p>
         </div>
+    </div>
 
-       
-        <table>
+    <!-- Customer Info -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h5 class="fw-semibold text-secondary border-bottom pb-1 mb-3">Customer Info</h5>
+            <p><strong>Name:</strong> @Model.CustomerName</p>
+            <p><strong>Mobile:</strong> @Model.Mobile</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Address:</strong> @Model.Address</p>
+        </div>
+    </div>
+
+    <!-- Product Table -->
+    <div class="table-responsive mb-4">
+        <table class="table table-bordered table-sm invoice-table text-center align-middle">
             <thead>
                 <tr>
-                    <th>SL</th>
+                    <th>#</th>
                     <th>Product</th>
                     <th>Model</th>
-                    <th>Quantity</th>
+                    <th>Qty</th>
                     <th>Price (৳)</th>
                     <th>VAT (%)</th>
                     <th>Sub Total (৳)</th>
+                    <th>Store</th>
+                    <th>Workshop</th>
+                    <th>Bay</th>
+                    <th>Level</th>
+                    <th>VIN</th>
+                    <th>Reg. No</th>
+                    <th>Start</th>
+                    <th>End</th>
                 </tr>
             </thead>
             <tbody>
-                @if (Model.Details != null && Model.Details.Any())
+                @for (int i = 0; i < Model.Details.Count; i++)
                 {
-                    var sl = 1;
-                    foreach (var item in Model.Details)
-                    {
-                        <tr>
-                            <td>@sl</td>
-                            <td class="text-left">@item.ProductName</td>
-                            <td class="text-left">@item.ModelName</td>
-                            <td>@item.Quantity</td>
-                            <td>@item.Price.ToString("0.00")</td>
-                            <td>@item.Vat.ToString("0.00")</td>
-                            <td>@item.SubTotal.ToString("0.00")</td>
-                        </tr>
-                        sl++;
-                    }
-                }
-                else
-                {
+                    var item = Model.Details[i];
                     <tr>
-                        <td colspan="7" style="text-align:center;">No details available.</td>
+                        <td>@(i + 1)</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.ModelName</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price.ToString("0.00")</td>
+                        <td>@item.Vat.ToString("0.00")</td>
+                        <td>@item.SubTotal.ToString("0.00")</td>
+                        <td>@item.StoreName</td>
+                        <td>@item.WorkShopName</td>
+                        <td>@item.BayId</td>
+                        <td>@item.LevelId</td>
+                        <td>@item.Vin</td>
+                        <td>@item.RegisterNo</td>
+                        <td>@item.StartTime.ToString(@"hh\:mm")</td>
+                        <td>@item.EndTime.ToString(@"hh\:mm")</td>
                     </tr>
                 }
             </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="6" style="text-align:right;">Grand Total (৳)</th>
-                    <th>@Model.GrandTotal.ToString("0.00")</th>
-                </tr>
-            </tfoot>
         </table>
-
-       
-        <div>
-            <h6>Notes:</h6>
-            <p>Thank you for doing business with Vehicle Workshop.</p>
-        </div>
-
-      
-        <div class="invoice-footer">
-            <div>
-                <p>_________________________</p>
-                <p><strong>Authorized Signature</strong></p>
-            </div>
-            <div>
-                <p>_________________________</p>
-                <p><strong>Supplier Signature</strong></p>
-            </div>
-        </div>
-
-        @if (ViewData["From"]?.ToString() != "pdf")
-        {
-            <div style="text-align:center; margin-top:30px;" class="no-print">
-                <button onclick="window.print()" style="margin-right:10px; padding:8px 15px; font-size:1rem;">🖨️ Print Invoice</button>
-                <a asp-action="DownloadInvoice" asp-route-id="@Model.InvoiceId" style="margin-right:10px; padding:8px 15px; font-size:1rem; background:#0d6efd; color:#fff; text-decoration:none; border-radius:4px;">⬇️ Download PDF</a>
-                <a asp-action="Index" style="padding:8px 15px; font-size:1rem; background:#6c757d; color:#fff; text-decoration:none; border-radius:4px;">Back To List</a>
-            </div>
-        }
     </div>
-</body>
-</html>
+
+    <!-- Totals -->
+    <div class="row justify-content-end mb-4">
+        <div class="col-md-4">
+            <div class="totals-box text-end">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Subtotal</span>
+                    <span>৳ @Model.Details.Sum(x => x.SubTotal).ToString("0.00")</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>VAT Total</span>
+                    <span>৳ @Model.Details.Sum(x => x.Vat).ToString("0.00")</span>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between">
+                    <strong>Grand Total</strong>
+                    <strong class="text-success">৳ @Model.GrandTotal.ToString("0.00")</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="mb-4">
+        <strong>Notes:</strong>
+        <p class="text-muted">
+            Please verify all products and services. This invoice is computer generated and does not require physical signature.
+        </p>
+    </div>
+
+    <!-- Signature Section -->
+    <!-- Signature Section -->
+    <table class="signature-table" style="width:100%; margin-top: 50px;">
+        <tr>
+            <td style="width: 30%; text-align: center;">
+                <div style="border-top: 1px solid #000; width: 60%; margin: 0 auto 5px auto;"></div>
+                <span style="font-weight: bold;">Authorized Signature</span>
+            </td>
+            <td style="width: 30%; text-align: center;">
+                <div style="border-top: 1px solid #000; width: 60%; margin: 0 auto 5px auto;"></div>
+                <span style="font-weight: bold;">Customer Signature</span>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Buttons -->
+    @if (!isPdf)
+    {
+        <div class="text-center mt-5">
+            <button onclick="window.print()" class="btn btn-outline-dark me-2">🖨️ Print</button>
+            <a asp-action="DownloadInvoice" asp-route-id="@Model.InvoiceId" class="btn btn-primary me-2">⬇️ Download PDF</a>
+            <a asp-action="Index" class="btn btn-secondary">⬅️ Back to List</a>
+        </div>
+    }
+</div>

@@ -252,6 +252,7 @@ namespace VehicleWorkShop.Service.Repository
                     Mobile = alldata.Customer.Mobile,
                     Address = alldata.Customer.Address ,
                     Email = alldata.Customer.Email ,
+                    WorkshopName = alldata.SaleDetails.FirstOrDefault()?.WorkShop?.WorkShopName,
                     GrandTotal = alldata.SaleDetails.Sum(s => s.SubTotal),
                     Details = alldata.SaleDetails.Select(s => new SaleDetailVM
                     {

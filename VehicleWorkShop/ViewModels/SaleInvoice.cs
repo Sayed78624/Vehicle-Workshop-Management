@@ -8,6 +8,7 @@
         public string Address { get; set; }
         public string Email { get; set; }
         public decimal GrandTotal { get; set; }
+        public string WorkshopName { get; set; }
         public List<SaleDetailVM> Details { get; set; }
     }
 }

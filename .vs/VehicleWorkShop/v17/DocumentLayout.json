@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "D:\\VehicleWorkShop\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\views\\sale\\invoice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\views\\sale\\invoice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\controllers\\salecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\controllers\\salecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\views\\purchase\\invoice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\views\\purchase\\invoice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\controllers\\purchasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\controllers\\purchasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|d:\\vehicleworkshop\\vehicleworkshop\\service\\repository\\salerp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8694724F-C3F4-47F7-ACF1-C135D602F832}|VehicleWorkShop\\VehicleWorkShop.csproj|solutionrelative:vehicleworkshop\\service\\repository\\salerp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,27 +30,54 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PurchaseController.cs",
-              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\PurchaseController.cs",
-              "RelativeDocumentMoniker": "VehicleWorkShop\\Controllers\\PurchaseController.cs",
-              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\PurchaseController.cs",
-              "RelativeToolTip": "VehicleWorkShop\\Controllers\\PurchaseController.cs",
-              "ViewState": "AgIAAAMBAAAAAAAAAAAAwCsBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-11T16:01:46.27Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Invoice.cshtml",
               "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Purchase\\Invoice.cshtml",
               "RelativeDocumentMoniker": "VehicleWorkShop\\Views\\Purchase\\Invoice.cshtml",
               "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Purchase\\Invoice.cshtml",
               "RelativeToolTip": "VehicleWorkShop\\Views\\Purchase\\Invoice.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKQAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-11T15:53:20.897Z",
+              "WhenOpened": "2025-06-12T08:49:02.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Invoice.cshtml",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Sale\\Invoice.cshtml",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Views\\Sale\\Invoice.cshtml",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Views\\Sale\\Invoice.cshtml",
+              "RelativeToolTip": "VehicleWorkShop\\Views\\Sale\\Invoice.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE4AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-12T07:13:25.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SaleRP.cs",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Service\\Repository\\SaleRP.cs",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Service\\Repository\\SaleRP.cs",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Service\\Repository\\SaleRP.cs",
+              "RelativeToolTip": "VehicleWorkShop\\Service\\Repository\\SaleRP.cs",
+              "ViewState": "AgIAAPsAAAAAAAAAAAAuwP4AAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-12T07:13:07.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SaleController.cs",
+              "DocumentMoniker": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\SaleController.cs",
+              "RelativeDocumentMoniker": "VehicleWorkShop\\Controllers\\SaleController.cs",
+              "ToolTip": "D:\\VehicleWorkShop\\VehicleWorkShop\\Controllers\\SaleController.cs",
+              "RelativeToolTip": "VehicleWorkShop\\Controllers\\SaleController.cs",
+              "ViewState": "AgIAABABAAAAAAAAAAAuwCQBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-12T07:12:56.026Z",
               "EditorCaption": ""
             }
           ]

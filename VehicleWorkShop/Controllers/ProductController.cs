@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using VehicleWorkShop.Models;
 using VehicleWorkShop.Service.Interface;
+using VehicleWorkShop.Service.Repository;
 using VehicleWorkShop.ViewModels;
 
 namespace VehicleWorkShop.Controllers
@@ -19,11 +20,23 @@ namespace VehicleWorkShop.Controllers
             this.vehicleModel = vehicleModel;
         }
 
-        public async Task<IActionResult> Index(string? searchTerm)
+        public async Task<IActionResult> Index(string searchTerm = "", int page = 1)
         {
-            var productList = await product.GetAll(searchTerm);
-            ViewBag.CurrentFilter = searchTerm; 
-            return View(productList);
+            int pageSize = 7;
+            var data = await product.GetAll();
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                data = data.Where(c => c.ProductName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            int totalItems = data.Count();
+            var pagedData = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.SearchTerm = searchTerm;
+
+            return View(pagedData);
         }
 
 

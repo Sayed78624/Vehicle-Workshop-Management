@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VehicleWorkShop.Models;
 using VehicleWorkShop.Service.Interface;
 using VehicleWorkShop.ViewModels;
 
@@ -11,11 +12,25 @@ namespace VehicleWorkShop.Controllers
         {
             this.customer = customer;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm = "", int page = 1)
         {
-            var allCustomers =await customer.GetAll();
-            return View(allCustomers);
+            int pageSize = 7;
+            var data =await customer.GetAll();
+            if(!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                data = data.Where(c => c.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            int totalItems = data.Count();
+            var pagedData = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.SearchTerm = searchTerm;
+
+            return View(pagedData);
         }
+       
         [HttpGet]
         public  IActionResult Create()
         {

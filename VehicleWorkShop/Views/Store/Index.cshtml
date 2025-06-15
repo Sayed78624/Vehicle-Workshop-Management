@@ -5,6 +5,12 @@
         <i class="bi bi-tags-fill me-3" style="font-size: 36px;"></i>
         <h1 class="mb-0" style="font-size: 36px;">Store List</h1>
     </div>
+    @* Search box  *@
+    <form method="get" class="mb-3 d-flex" role="search">
+        <input type="text" name="searchTerm" class="form-control me-2" placeholder="Search by Supplier or Description"
+               value="@ViewBag.SearchTerm" />
+        <button type="submit" class="btn btn-success">Search</button>
+    </form>
 
     <a asp-action="Create" class="btn btn-outline-success rounded-pill mb-3">
         <i class="bi bi-plus-circle me-1"></i> Create Store
@@ -40,4 +46,26 @@
             }
         </tbody>
     </table>
+
+
+    @* Pagination  *@
+    <nav aria-label="Page navigation" class="mt-3">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { searchTerm = ViewBag.SearchTerm, page = ViewBag.CurrentPage - 1 })" tabindex="-1">Previous</a>
+            </li>
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { searchTerm = ViewBag.SearchTerm, page = i })">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { searchTerm = ViewBag.SearchTerm, page = ViewBag.CurrentPage + 1 })">Next</a>
+            </li>
+        </ul>
+    </nav>
+
 </div>

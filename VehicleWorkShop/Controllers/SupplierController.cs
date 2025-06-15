@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using VehicleWorkShop.Models;
 using VehicleWorkShop.Service.Interface;
+using VehicleWorkShop.Service.Repository;
 using VehicleWorkShop.ViewModels;
 
 namespace VehicleWorkShop.Controllers
@@ -18,10 +19,23 @@ namespace VehicleWorkShop.Controllers
             this.mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm = "", int page = 1)
         {
-            var list = await supplier.GetAll();
-            return View(list);
+            int pageSize = 7;
+            var data = await supplier.GetAll();
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                data = data.Where(c => c.SupplierName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            int totalItems = data.Count();
+            var pagedData = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.SearchTerm = searchTerm;
+
+            return View(pagedData);
         }
         [HttpGet]
         public IActionResult Create()

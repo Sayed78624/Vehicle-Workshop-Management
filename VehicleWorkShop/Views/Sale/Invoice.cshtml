@@ -5,173 +5,303 @@
     if (isPdf) { Layout = null; }
 }
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        margin: 20px;
-        background: white;
-        color: #212529;
-    }
-
-    .header-table, .signature-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
-
-        .header-table td {
-            padding: 5px 10px;
-            vertical-align: top;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+            background-color: white;
         }
 
-        .signature-table td {
-            text-align: center;
-            padding: 40px 20px 10px 20px;
-            border-top: 1px solid black;
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        }
+
+        .header-table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        .company-name {
+            color: #2c3e50;
+            font-size: 24px;
             font-weight: bold;
+            margin-bottom: 5px;
         }
 
-    .products-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 5px;
-    }
-
-        .products-table th, .products-table td {
-            border: 1px solid #ccc;
-            padding: 6px 8px;
-            text-align: center;
+        .invoice-title {
+            color: #3498db;
+            font-size: 22px;
+            margin-bottom: 10px;
+            text-align: right;
         }
 
-        .products-table th {
-            background-color: #f5f5f5;
-        }
-
-    .service-details {
-        background: #f0f0f0;
-        border-left: 4px solid #007bff;
-        padding: 10px 15px;
-        margin-bottom: 20px;
-        font-size: 13px;
-        color: #333;
-    }
-
-        .service-details strong {
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            min-width: 80px;
             display: inline-block;
-            width: 85px;
         }
 
-    .totals {
-        float: right;
-        width: 300px;
-        margin-top: 20px;
-        font-weight: bold;
-    }
+        .customer-section {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
 
-    .buttons {
-        text-align: center;
-        margin-top: 30px;
-    }
-</style>
+        .section-title {
+            color: #3498db;
+            margin: 25px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
 
-<div>
-  
-    <table class="header-table">
-        <tr>
-            <td style="width: 60%;">
-                <h2>@Model.WorkshopName</h2>
-                <p>123 Garage Road, Dhaka</p>
-                <p>Phone: +880 1234 567890</p>
-                <p>Email: info@autocare.com</p>
-            </td>
-            <td style="text-align: right;">
-                <h3>INVOICE</h3>
-                <p><strong>Invoice No:</strong> @Model.InvoiceId</p>
-                <p><strong>Date:</strong> @DateTime.Now.ToString("dd MMM yyyy")</p>
-            </td>
-        </tr>
-    </table>
-    <hr />
-    <h4>Customer Info</h4>
-    <p><strong>Name:</strong> @Model.CustomerName</p>
-    <p><strong>Mobile:</strong> @Model.Mobile</p>
-    <p><strong>Email:</strong> @Model.Email</p>
-    <p><strong>Address:</strong> @Model.Address</p>
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
 
- 
-    <h4 style="margin-top:25px;">🛒 Store Products</h4>
-    <table class="products-table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Product</th>
-                <th>Model</th>
-                <th>Qty</th>
-                <th>Price (৳)</th>
-                <th>VAT (%)</th>
-                <th>Subtotal (৳)</th>
-                <th>Store</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (int i = 0; i < Model.Details.Count; i++)
-            {
-                var item = Model.Details[i];
-                <tr>
-                    <td>@(i + 1)</td>
-                    <td>@item.ProductName</td>
-                    <td>@item.ModelName</td>
-                    <td>@item.Quantity</td>
-                    <td>@item.Price.ToString("0.00")</td>
-                    <td>@item.Vat.ToString("0.00")</td>
-                    <td>@item.SubTotal.ToString("0.00")</td>
-                    <td>@item.StoreName</td>
-                </tr>
-
-
-                <tr>
-                    <td colspan="8">
-                        <div class="service-details">
-                            <strong>Workshop:</strong> @item.WorkShopName &nbsp; | &nbsp;
-                            <strong>Bay:</strong> @item.BayId &nbsp; | &nbsp;
-                            <strong>Level:</strong> @item.LevelId <br />
-                            <strong>VIN:</strong> @item.Vin &nbsp; | &nbsp;
-                            <strong>Reg. No:</strong> @item.RegisterNo <br />
-                            <strong>Start:</strong> @item.StartTime.ToString(@"hh\:mm") &nbsp; | &nbsp;
-                            <strong>End:</strong> @item.EndTime.ToString(@"hh\:mm")
-                        </div>
-                    </td>
-                </tr>
+            .products-table th {
+                background-color: #3498db;
+                color: white;
+                padding: 10px;
+                text-align: left;
             }
-        </tbody>
-    </table>
 
-    <div class="totals">
-        <div>Subtotal: ৳ @Model.Details.Sum(x => x.SubTotal).ToString("0.00")</div>
-        <div>VAT Total: ৳ @Model.Details.Sum(x => x.Vat).ToString("0.00")</div>
-        <div style="border-top: 1px solid #ddd; margin-top: 5px;">
+            .products-table td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .products-table tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+        .service-details {
+            background-color: #f0f8ff;
+            padding: 12px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+            font-size: 13px;
+        }
+
+        .service-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 5px;
+        }
+
+        .service-item {
+            flex: 1;
+            min-width: 200px;
+            margin-right: 15px;
+        }
+
+            .service-item strong {
+                color: #2c3e50;
+                min-width: 70px;
+                display: inline-block;
+            }
+
+        .grand-total-box {
+            float: right;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-align: right;
+        }
+
+        .signature-table {
+            width: 100%;
+            margin-top: 50px;
+            border-collapse: collapse;
+        }
+
+            .signature-table td {
+                width: 50%;
+                text-align: center;
+                padding-top: 40px;
+            }
+
+        .signature-line {
+            border-top: 1px solid #333;
+            width: 200px;
+            margin: 0 auto 5px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        @@media print {
+            .no-print {
+                display: none;
+            }
+
+            body {
+                padding: 0;
+                background: none;
+            }
+
+            .invoice-container {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+       
+        <table class="header-table">
+            <tr>
+                <td style="width: 60%; vertical-align: top;">
+                    <div class="company-name">@Model.WorkshopName</div>
+                    <p>123 Garage Road, Dhaka</p>
+                    <p>Phone: +880 1234 567890</p>
+                    <p>Email: info@autocare.com</p>
+                </td>
+                <td style="width: 40%; text-align: right; vertical-align: top;">
+                    <div class="invoice-title">SALES INVOICE</div>
+                    <p><span class="info-label">Invoice No:</span> INV-@Model.InvoiceId.ToString("D5")</p>
+                    <p><span class="info-label">Date:</span> @DateTime.Now.ToString("dd MMMM yyyy")</p>
+                </td>
+            </tr>
+        </table>
+
+        
+        <div class="customer-section">
+            <h4 class="section-title">Customer Information</h4>
+            <p><span class="info-label">Name:</span> @Model.CustomerName</p>
+            <p><span class="info-label">Mobile:</span> @Model.Mobile</p>
+            <p><span class="info-label">Email:</span> @Model.Email</p>
+            <p><span class="info-label">Address:</span> @Model.Address</p>
+        </div>
+
+       
+        <h4 class="section-title">Products & Services</h4>
+        <table class="products-table">
+            <thead>
+                <tr>
+                    <th style="width:5%">#</th>
+                    <th style="width:20%">Product</th>
+                    <th style="width:15%">Model</th>
+                    <th style="width:8%">Qty</th>
+                    <th style="width:12%">Price (৳)</th>
+                    <th style="width:10%">VAT (%)</th>
+                    <th style="width:15%">Total (৳)</th>
+                    <th style="width:15%">Store</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Details.Count; i++)
+                {
+                    var item = Model.Details[i];
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.ModelName</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price.ToString("0.00")</td>
+                        <td>@item.Vat.ToString("0.00")</td>
+                        <td>@item.SubTotal.ToString("0.00")</td>
+                        <td>@item.StoreName</td>
+                    </tr>
+                    <tr>
+                        <td colspan="8">
+                            <table style="width:100%; border:none; background-color:#f0f8ff; border-left:4px solid #3498db; padding:8px 12px; font-size:13px;">
+                                <tr>
+                                    <td style="padding:4px 8px; border:none;"><strong>Workshop:</strong> @item.WorkShopName</td>
+                                    <td style="padding:4px 8px; border:none;"><strong>Bay:</strong> @item.BayId</td>
+                                    <td style="padding:4px 8px; border:none;"><strong>Level:</strong> @item.LevelId</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:4px 8px; border:none;"><strong>VIN:</strong> @item.Vin</td>
+                                    <td style="padding:4px 8px; border:none;"><strong>Reg. No:</strong> @item.RegisterNo</td>
+                                    <td style="padding:4px 8px; border:none;"><strong>Time:</strong> @item.StartTime.ToString(@"hh\:mm")-@item.EndTime.ToString(@"hh\:mm")</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="grand-total-box">
             Grand Total: ৳ @Model.GrandTotal.ToString("0.00")
         </div>
+
+        <div style="clear: both;"></div>
+
+      
+        <table class="signature-table">
+            <tr>
+                <td>
+                    <div class="signature-line"></div>
+                    <p>Authorized Signature</p>
+                </td>
+                <td>
+                    <div class="signature-line"></div>
+                    <p>Customer Signature</p>
+                </td>
+            </tr>
+        </table>
+
+        @if (!isPdf)
+        {
+            <div class="buttons no-print">
+                <button onclick="window.print()" class="btn btn-primary">
+                    <i class="fas fa-print"></i> Print Invoice
+                </button>
+                <a asp-action="DownloadInvoice" asp-route-id="@Model.InvoiceId" class="btn btn-primary">
+                    <i class="fas fa-file-pdf"></i> Download PDF
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        }
     </div>
-
-    <div style="clear: both;"></div>
-
-
-    <table class="signature-table">
-        <tr>
-            <td>Authorized Signature</td>
-            <td>Customer Signature</td>
-        </tr>
-    </table>
-
-  
-    @if (!isPdf)
-    {
-        <div class="buttons">
-            <button onclick="window.print()" class="btn btn-outline-dark me-2">🖨️ Print</button>
-            <a asp-action="DownloadInvoice" asp-route-id="@Model.InvoiceId" class="btn btn-primary me-2">⬇️ Download PDF</a>
-            <a asp-action="Index" class="btn btn-secondary">⬅️ Back to List</a>
-        </div>
-    }
-</div>
+</body>
+</html>

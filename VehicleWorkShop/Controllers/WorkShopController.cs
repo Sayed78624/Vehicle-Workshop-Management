@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VehicleWorkShop.Models;
 using VehicleWorkShop.Service.Interface;
+using VehicleWorkShop.Service.Repository;
 using VehicleWorkShop.ViewModels;
 
 namespace VehicleWorkShop.Controllers
@@ -12,10 +13,23 @@ namespace VehicleWorkShop.Controllers
         {
             this.workShop = workShop;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm = "", int page = 1)
         {
-            var list =await workShop.WorkShopList();
-            return View(list);
+            int pageSize = 7;
+            var data = await workShop.WorkShopList();
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                data = data.Where(c => c.WorkShopName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+            int totalItems = data.Count();
+            var pagedData = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.SearchTerm = searchTerm;
+
+            return View(pagedData);
         }
         [HttpGet]
         public IActionResult Create()
@@ -36,7 +50,6 @@ namespace VehicleWorkShop.Controllers
             TempData["ErrorMessage"] = "Failed to create workshop!";
             return View(workshopvm);
         }
-
 
         public async Task<IActionResult> Delete(int id)
         {

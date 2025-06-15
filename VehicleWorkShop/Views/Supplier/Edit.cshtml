@@ -13,9 +13,7 @@
             <div class="mb-3">
                 <label asp-for="SupplierName" class="form-label">Supplier Name <span class="text-danger">*</span></label>
                 <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="bi bi-person-lines-fill"></i>
-                    </span>
+                    <span class="input-group-text"><i class="bi bi-person-lines-fill"></i></span>
                     <input asp-for="SupplierName" class="form-control" />
                 </div>
                 <span asp-validation-for="SupplierName" class="text-danger"></span>
@@ -24,9 +22,7 @@
             <div class="mb-3">
                 <label asp-for="Mobile" class="form-label">Mobile <span class="text-danger">*</span></label>
                 <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="bi bi-phone-fill"></i>
-                    </span>
+                    <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
                     <input asp-for="Mobile" class="form-control" />
                 </div>
                 <span asp-validation-for="Mobile" class="text-danger"></span>
@@ -35,9 +31,7 @@
             <div class="mb-3">
                 <label asp-for="Address" class="form-label">Address</label>
                 <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="bi bi-geo-alt-fill"></i>
-                    </span>
+                    <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
                     <input asp-for="Address" class="form-control" />
                 </div>
                 <span asp-validation-for="Address" class="text-danger"></span>
@@ -46,10 +40,8 @@
             <div class="mb-3">
                 <label asp-for="Manager" class="form-label">Manager <span class="text-danger">*</span></label>
                 <div class="input-group">
-                    <span class="input-group-text">
-                        <i class="bi bi-person-badge-fill"></i>
-                    </span>
-                    <textarea asp-for="Manager" class="form-control" rows="3"></textarea>
+                    <span class="input-group-text"><i class="bi bi-person-badge-fill"></i></span>
+                    <input asp-for="Manager" class="form-control" />
                 </div>
                 <span asp-validation-for="Manager" class="text-danger"></span>
             </div>
@@ -63,8 +55,7 @@
                     </button>
                 </div>
                 <div class="col-md-3">
-                    <a class="btn btn-secondary w-100" asp-action="Index"
-                       asp-route-pg="@TempData.Peek("CurrentPage")" style="font-size: 18px;">
+                    <a class="btn btn-secondary w-100" asp-action="Index" asp-route-pg="@TempData.Peek("CurrentPage")" style="font-size: 18px;">
                         <i class="bi bi-arrow-left-circle"></i> Back To List
                     </a>
                 </div>
@@ -72,3 +63,6 @@
         </div>
     </div>
 </form>
+
+
+

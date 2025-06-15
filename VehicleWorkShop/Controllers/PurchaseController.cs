@@ -28,8 +28,7 @@ namespace VehicleWorkShop.Controllers
             _vehicleModel = vehicleModel;
         }
 
-        [HttpGet]
-       
+        [HttpGet]     
         public async Task<IActionResult> Approve(int id)
         {
             var purchase = await _purchase.GetById(id);
@@ -42,8 +41,7 @@ namespace VehicleWorkShop.Controllers
         }
 
 
-        [HttpPost]
-    
+        [HttpPost]  
         public async Task<IActionResult> ConfirmApprove(int id)
         {
             try

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<VehicleWorkShop.ViewModels.PaymentTypeVM>
+
+@{
+    ViewData["Title"] = "Payment Types List";
+}
+
+<div class="container mt-0">
+    <div class="card shadow-lg rounded-3">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Payment Types</h4>
+            <a asp-action="Create" class="btn btn-success">
+                ➕ Create New
+            </a>
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table table-bordered table-striped mb-0 text-center align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 10%;">SL</th>
+                        <th>Payment Type Name</th>
+                        <th style="width: 25%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        int sl = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@sl</td>
+                                <td>@item.PaymentTypeName</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning me-1">
+                                        ✏️ Edit
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this payment type?');">
+                                        🗑️ Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            sl++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" class="text-muted">No payment types found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -2,87 +2,210 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<h2 class="mb-4">Dashboard Summary</h2>
+         @* Chart.js CDN  *@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="card shadow-sm p-3 text-center bg-light">
-            <h5>Total Products</h5>
-            <h3 class="counter text-primary" data-target="@ViewBag.TotalProducts">0</h3>
+<div class="container mt-0">
+    <div class="row">
+
+             @* Purchase Overview  *@
+        <div class="col-md-3 mb-4">
+            <div class="card text-center p-2 shadow-sm" style="height:130px; width:180px; background: linear-gradient(145deg, #e0f7fa, #ffffff); border-left: 5px solid #198754;">
+                <h6 class="mt-1 text-dark">Purchase Overview</h6>
+                <div style="width:70px; height:70px; margin:0 auto;">
+                    <canvas id="purchasechart"></canvas>
+                </div>
+                <small class="text-muted">@ViewBag.ApprovedPurchase / @ViewBag.TotalPurchase</small>
+            </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card shadow-sm p-3 text-center bg-light">
-            <h5>Total Stores</h5>
-            <h3 class="counter text-success" data-target="@ViewBag.TotalStores">0</h3>
+
+             @* Sales Overview  *@
+        <div class="col-md-3 mb-0">
+            <div class="card text-center p-2 shadow-sm" style="height:130px; width:180px; background: linear-gradient(145deg, #f8f9fa, #ffffff); border-left: 5px solid #0d6efd;">
+                <h6 class="mt-1 text-dark">Sales Overview</h6>
+                <div style="width:70px; height:70px; margin:0 auto;">
+                    <canvas id="salesChart"></canvas>
+                </div>
+                <small class="text-muted">@ViewBag.ApprovedSales / @ViewBag.TotalSales</small>
+            </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card shadow-sm p-3 text-center bg-light">
-            <h5>Total Stock Qty</h5>
-            <h3 class="counter text-warning" data-target="@ViewBag.TotalStock">0</h3>
+
+
+        @* Transfer Overview  *@
+        <div class="col-md-3 mb-4">
+            <div class="card text-center p-2 shadow-sm" style="height:130px; width:180px; background: linear-gradient(145deg, #fff3cd, #ffffff); border-left: 5px solid #ffc107;">
+                <h6 class="mt-0 text-dark">Transfers Overview</h6>
+                <div style="width:70px; height:70px; margin:0 auto;">
+                    <canvas id="transferChart"></canvas>
+                </div>
+                <small class="text-muted">@ViewBag.ApprovedTransfers / @ViewBag.TotalTransfers</small>
+            </div>
         </div>
+
     </div>
 </div>
 
-<div class="row mt-3">
-    <div class="col-md-4">
-        <div class="card shadow-sm p-3 text-center bg-light">
-            <h5>Total Transfers</h5>
-            <h3 class="counter text-info" data-target="@ViewBag.TotalTransfers">0</h3>
-        </div>
+@* <div class="container mt-4"> *@
+@*     <h5 class="mb-3 text-center">Model Wise Product Count</h5> *@
+@*     <div class="card shadow-sm p-4"> *@
+@*         <canvas id="modelProductChart" height="150"></canvas> *@
+@*     </div> *@
+@* </div> *@
+
+<div class="card mt-1">
+    <div class="card-header bg-info text-dark text-center">
+         Low Stock Chart
     </div>
-    <div class="col-md-4">
-        <div class="card shadow-sm p-3 text-center bg-light">
-            <h5>Approved Transfers</h5>
-            <h3 class="counter text-success" data-target="@ViewBag.ApprovedTransfers">0</h3>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card shadow-sm p-3 text-center bg-light">
-            <h5>Today's Transfers</h5>
-            <h3 class="counter text-danger" data-target="@ViewBag.TodayTransfers">0</h3>
-        </div>
+    <div class="card-body">
+        <canvas id="lowStockChart" width="400" height="200"></canvas>
     </div>
 </div>
 
-<div class="row mt-3">
-    <div class="col-md-6">
-        <div class="card shadow-sm p-3 text-center bg-light">
-            <h5>Today's Purchase</h5>
-            <h3 class="counter text-primary" data-target="@ViewBag.TotalPurchase">0</h3>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card shadow-sm p-3 text-center bg-light">
-            <h5>Today's Sale</h5>
-            <h3 class="counter text-success" data-target="@ViewBag.TodaySales">0</h3>
-        </div>
-    </div>
-</div>
 
 <script>
-    const counters = document.querySelectorAll('.counter');
-
-    counters.forEach(counter => {
-        counter.innerText = '0';
-
-        const updateCounter = () => {
-            const target = +counter.getAttribute('data-target');
-            const current = +counter.innerText;
-
-         
-            const increment = Math.max(target / 400, 1);
-
-            if (current < target) {
-                counter.innerText = Math.ceil(current + increment);
-                setTimeout(updateCounter, 60); 
-            } else {
-                counter.innerText = target;
+    // Purchase Chart
+    const ctx = document.getElementById('purchasechart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Approved', 'Pending'],
+            datasets: [{
+                data: [@ViewBag.ApprovedPurchase, @ViewBag.TotalPurchase - @ViewBag.ApprovedPurchase],
+                backgroundColor: ['#198754', '#ffc107']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: true }
             }
-        };
-
-        updateCounter();
+        }
     });
+
+    // Sales Chart
+
+    const ctx1 = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: ['Approved', 'Pending'],
+            datasets: [{
+                data:  [@ViewBag.ApprovedSales, @ViewBag.TotalSales - @ViewBag.ApprovedSales],
+                backgroundColor: ['#198754', '#f8d7da']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: {display: false},
+                tooltip: {enabled: true}
+            }
+        }
+    });
+    // Transfer Chart
+    const ctx2 = document.getElementById('transferChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Approved', 'Pending'],
+            datasets: [{
+                data: [@ViewBag.ApprovedTransfers, @ViewBag.TotalTransfers - @ViewBag.ApprovedTransfers],
+                backgroundColor: ['#198754', '#ffc107']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '70%',
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: true }
+            }
+        }
+    });
+
+    // Product chart
+    //  const modelNames = @Html.Raw(Json.Serialize(ViewBag.ModelNames));
+    // const productCounts = @Html.Raw(Json.Serialize(ViewBag.ProductCounts));
+
+    //     const ctxBar = document.getElementById('modelProductChart').getContext('2d');
+    // new Chart(ctxBar, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: modelNames,
+    //         datasets: [{
+    //             label: 'Product Count',
+    //             data: productCounts,
+    //             backgroundColor: '#0d6efd',
+    //             borderRadius: 5
+    //         }]
+    //     },
+    //     options: {
+    //         responsive: true,
+    //         plugins: {
+    //             legend: { display: false },
+    //             tooltip: { enabled: true }
+    //         },
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true,
+    //                 ticks: { stepSize: 1 }
+    //             }
+    //         }
+    //     }
+    // });
+    const rawData = @Html.Raw(ViewBag.LowStockChart);
+    const labels = rawData.map(item => item.ProductName);
+    const data = rawData.map(item => item.Quantity);
+
+    const ctx3 = document.getElementById('lowStockChart').getContext('2d');
+    const lowStockChart = new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Available Quantity',
+                data: data,
+                backgroundColor: data.map(qty => qty == 0 ? 'red' : qty <= 2 ? 'orange' : 'blue'),
+                borderColor: 'black',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1 
+                    },
+                    title: {
+                        display: true,
+                        text: 'Quantity'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Product Name'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Low Stock Items'
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
 </script>
 

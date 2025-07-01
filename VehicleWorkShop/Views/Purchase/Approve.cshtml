@@ -3,66 +3,91 @@
     ViewData["Title"] = "Approve Purchase";
 }
 
-<h2 class="text-primary">Approve Purchase</h2>
+<div class="container mt-0">
 
-         @* Success / Error Alert Messages  *@
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="bi bi-check-circle me-1"></i>@TempData["Success"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <i class="bi bi-x-circle me-1"></i>@TempData["Error"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
+    <h2 class="text-primary mb-4"><i class="bi bi-check2-square me-2"></i>Approve Purchase</h2>
 
-         @* Purchase Summary  *@
-<div class="mb-3">
-    <h5><strong>Supplier:</strong> @Model.SupplierName</h5>
-    <h6><strong>Description:</strong> @Model.Description</h6>
-    <h6><strong>Grand Total:</strong> @Model.GrandTotal.ToString("C")</h6>
+    <!-- Success / Error Alert Messages -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-x-octagon-fill me-2"></i> @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Purchase Summary Card -->
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-body bg-light">
+            <h5 class="card-title text-dark"><strong>Purchase Summary</strong></h5>
+            <div class="row mt-0">
+                <div class="col-md-4 mb-2">
+                    <strong>Supplier:</strong> @Model.SupplierName
+                </div>
+                <div class="col-md-4 mb-2">
+                    <strong>Description:</strong> @Model.Description
+                </div>
+                <div class="col-md-4 mb-2">
+                    <strong>Grand Total:</strong> @Model.GrandTotal.ToString("C")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Details Table -->
+    <div class="card mb-3 shadow-sm border-0">
+        <div class="card-body">
+            <h5 class="card-title"><i class="bi bi-table me-2"></i>Purchase Details</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped align-middle">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Product</th>
+                            <th>Model</th>
+                            <th>Store</th>
+                            <th class="text-end">Quantity</th>
+                            <th class="text-end">Price</th>
+                            <th class="text-end">VAT</th>
+                            <th class="text-end">SubTotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var detail in Model.PurchaseDetails)
+                        {
+                            <tr>
+                                <td>@detail.ProductName</td>
+                                <td>@detail.ModelName</td>
+                                <td>@detail.StoreName</td>
+                                <td class="text-end">@detail.Quantity</td>
+                                <td class="text-end">@detail.Price.ToString("N2")</td>
+                                <td class="text-end">@detail.Vat.ToString("N2")</td>
+                                <td class="text-end">@detail.SubTotal.ToString("N2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Approve Button -->
+    <form asp-action="ConfirmApprove" method="post">
+        <input type="hidden" name="id" value="@Model.PurchaseId" />
+        <div class="d-flex justify-content-start mt-3">
+            <button type="submit" class="btn btn-success me-2">
+                <i class="bi bi-check2-circle me-1"></i>Approve Purchase
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left me-1"></i>Back to List
+            </a>
+        </div>
+    </form>
+
 </div>
-
-            @* Purchase Details Table  *@
-<h5 class="mt-4">Purchase Details</h5>
-<table class="table table-bordered table-striped">
-    <thead class="table-light">
-        <tr>
-            <th>Product</th>
-            <th>Model</th>
-            <th>Store</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>VAT</th>
-            <th>SubTotal</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var detail in Model.PurchaseDetails)
-        {
-            <tr>
-                <td>@detail.ProductName</td>
-                <td>@detail.ModelName</td>
-                <td>@detail.StoreName</td>
-                <td>@detail.Quantity</td>
-                <td>@detail.Price</td>
-                <td>@detail.Vat</td>
-                <td>@detail.SubTotal</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-         @* Approval Button Form  *@
-<form asp-action="ConfirmApprove" method="post">
-    <input type="hidden" name="id" value="@Model.PurchaseId" />
-    <button type="submit" class="btn btn-success mt-3">
-        <i class="bi bi-check2-circle me-1"></i>Approve Purchase
-    </button>
-    <a asp-action="Index" class="btn btn-secondary mt-3 ms-2">Back to List</a>
-</form>

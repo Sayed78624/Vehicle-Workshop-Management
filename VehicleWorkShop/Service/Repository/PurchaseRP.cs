@@ -26,7 +26,7 @@ namespace VehicleWorkShop.Service.Repository
                               {
                                   SupplierId = p.SupplierId,
                                   Description = p.Description,
-                                  GrandTotal = p.GrandTotal,
+                                  GrandTotal = db.PurchasesDetails.Where(d => d.PurchaseId == p.PurchaseId).Sum(s => s.SubTotal),
                                   SupplierName = s.SupplierName,
                                   PurchaseId = p.PurchaseId,
                                   IsApprove = p.IsApprove,

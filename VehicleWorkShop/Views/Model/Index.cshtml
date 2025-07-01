@@ -1,23 +1,30 @@
 ﻿@model IEnumerable<VehicleWorkShop.ViewModels.VehicleModelVM>
 
 
-<div class="container py-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="d-flex align-items-center">
-            <i class="bi bi-shield-lock-fill me-2 text-primary" style="font-size: 2rem;"></i>
-            <h2 class="mb-0 fw-bold">Vehicle Model List</h2>
+
+
+    <div class="row align-items-center mb-4 p-3 rounded bg-light shadow-sm">
+        <div class="col-lg-4 col-md-12 mb-2 mb-lg-0">
+            <h4 class="mb-0 text-success fw-bold">
+                <i class="mb-0 fw-bold me-1"></i> Vehicle Model List
+            </h4>
         </div>
-        <a asp-action="Create" class="btn btn-outline-primary rounded-pill">
-            <i class="bi bi-plus-circle me-1"></i> Create Model
-        </a>
+        <div class="col-lg-5 col-md-8">
+            <form method="get" role="search" class="d-flex">
+                <input type="text" name="searchTerm" class="form-control me-2 shadow-sm"
+                       placeholder="Search by Name" value="@ViewBag.SearchTerm" />
+                <button type="submit" class="btn btn-outline-success shadow-sm">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-4 text-end">
+            <a asp-action="Create" class="btn btn-primary shadow-sm w-100">
+                <i class="bi bi-person-plus-fill me-1"></i> New Model
+            </a>
+        </div>
     </div>
 
-    @* Search box  *@
-    <form method="get" class="mb-3 d-flex" role="search">
-        <input type="text" name="searchTerm" class="form-control me-2" placeholder="Search by Supplier or Description"
-               value="@ViewBag.SearchTerm" />
-        <button type="submit" class="btn btn-success">Search</button>
-    </form>
 
     <div class="card shadow-sm rounded-4 border-0">
         <div class="card-body p-0">
@@ -34,7 +41,7 @@
                     {
                         <tr>
                             <td class="text-center">@item.ModelId</td>
-                            <td>@item.ModelName</td>
+                            <td class="text-center">@item.ModelName</td>
                             <td class="text-center">
                                 <a asp-action="Edit" asp-route-id="@item.ModelId" class="btn btn-sm btn-outline-warning me-1" title="Edit">
                                     <i class="bi bi-pencil-square"></i>

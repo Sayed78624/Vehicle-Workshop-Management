@@ -11,5 +11,6 @@ namespace VehicleWorkShop.Service.Interface
         Task<SaleDetailVM> CreateDetail(SaleDetailVM detail);
         Task<SaleVM> Approve(SaleVM saleVM);
         Task<SaleInvoice> GetInvoice(int id);
+        Task<int> GetCustomerNameBySaleId(int id);
     }
 }

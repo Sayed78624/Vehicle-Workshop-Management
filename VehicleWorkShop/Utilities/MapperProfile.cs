@@ -33,6 +33,8 @@ namespace VehicleWorkShop.Utilities
                 .ForMember(dest => dest.SourceStoreName, opt => opt.MapFrom(src => src.SourceStore != null ? src.SourceStore.Name : string.Empty))
                 .ForMember(dest => dest.DestinationStoreName, opt => opt.MapFrom(src => src.DestinationStore != null ? src.DestinationStore.Name : string.Empty));
 
+            CreateMap<PaymentType, PaymentTypeVM>().ReverseMap();
+            CreateMap<Payment, PaymentVM>().ReverseMap();
 
 
         }

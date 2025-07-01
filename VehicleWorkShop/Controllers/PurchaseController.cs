@@ -32,6 +32,7 @@ namespace VehicleWorkShop.Controllers
         public async Task<IActionResult> Approve(int id)
         {
             var purchase = await _purchase.GetById(id);
+            
             if (purchase == null)
             {
                 return NotFound();
@@ -251,10 +252,26 @@ namespace VehicleWorkShop.Controllers
             return RedirectToAction("Create", new { id = 0 });
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm = "", int page = 1)
         {
-            var datalist = await _purchase.GetAll();
-            return View(datalist);
+            int pageSize = 7;
+
+            var data = await _purchase.GetAll();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                data = data.Where(x => x.SupplierName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            int totalItems = data.Count();
+            var pagedData = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.SearchTerm = searchTerm;
+
+            return View(pagedData);
         }
 
         public async Task<IActionResult> Invoice(int id)

@@ -162,6 +162,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\4facf6e1-985c-408b-8b4e-39d318494c06_OIP.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\671c9728-5ead-4e39-819f-d4fe04c0b296_download (3).jpeg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>VehicleWorkShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/VehicleWorkShop</BasePath>
+      <RelativePath>Images/671c9728-5ead-4e39-819f-d4fe04c0b296_download (3).jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>r4xqfnajfs</Fingerprint>
+      <Integrity>xUpDhoB8sNvBfpHiKMBU6KESItL7vHw0ATE8VrlGp4o=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\671c9728-5ead-4e39-819f-d4fe04c0b296_download (3).jpeg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\67605f90-3362-4cf5-99fe-09dd150a7c52_OIP (1).jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>VehicleWorkShop</SourceId>
@@ -216,6 +234,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\a10304d2-6b62-4c96-b843-5da87639df8c_LiverConcert.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\adf7f631-0682-4eaf-894f-be674a03e247_download (1).jpeg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>VehicleWorkShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/VehicleWorkShop</BasePath>
+      <RelativePath>Images/adf7f631-0682-4eaf-894f-be674a03e247_download (1).jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>5use4g0e61</Fingerprint>
+      <Integrity>gzIjZkliLuzINH5EHid63No0qgXyRP6fVoDT9t3Ecn0=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\adf7f631-0682-4eaf-894f-be674a03e247_download (1).jpeg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\c73d2f9a-ef62-4f0a-82f8-fc91bb70872c_OIP.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>VehicleWorkShop</SourceId>
@@ -234,6 +270,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\c73d2f9a-ef62-4f0a-82f8-fc91bb70872c_OIP.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\dbdc1de5-ba28-451b-9cc1-564398308f8b_download.jpeg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>VehicleWorkShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/VehicleWorkShop</BasePath>
+      <RelativePath>Images/dbdc1de5-ba28-451b-9cc1-564398308f8b_download.jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>fc9rko67p6</Fingerprint>
+      <Integrity>8YMNthvun024m/jsdljuARQbv0d6sfsYtu/jCe+O4/Y=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\dbdc1de5-ba28-451b-9cc1-564398308f8b_download.jpeg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\f4f8d789-64be-49a9-867e-f2dff4f4d166_OIP.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>VehicleWorkShop</SourceId>
@@ -251,6 +305,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\f4f8d789-64be-49a9-867e-f2dff4f4d166_OIP.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\fb21fd7d-80c8-455e-b2fb-2f9478f93a38_download (2).jpeg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>VehicleWorkShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/VehicleWorkShop</BasePath>
+      <RelativePath>Images/fb21fd7d-80c8-455e-b2fb-2f9478f93a38_download (2).jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>g7obgssbzw</Fingerprint>
+      <Integrity>tDCeSWFLfsuTz4GFeLA/2cBdfUfsYIZIBk78DnynTV0=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Images\fb21fd7d-80c8-455e-b2fb-2f9478f93a38_download (2).jpeg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))">
       <SourceType>Package</SourceType>

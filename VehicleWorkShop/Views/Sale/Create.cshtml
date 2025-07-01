@@ -1,139 +1,288 @@
 ﻿@model VehicleWorkShop.ViewModels.SaleVM
 
-<div class="container mt-5 p-4 bg-light rounded shadow">
-    <div class="w-100">
-        <h3 class="mb-4 text-success text-center fw-bold">Sale Entry Form</h3>
-        <h6 class="text-danger text-center">@ViewBag.ErrorMessage</h6>
+<div class="container mt-0">
+    <div class="invoice-desktop-wrapper">
+        @* Header of the page *@
+        <div class="invoice-header bg-success text-white p-2 d-flex justify-content-between align-items-center rounded-top">
+            <h4 class="mb-0">
+                <i class="fas fa-car me-2"></i>Sale Entry Form
+            </h4>
+            <button type="button" class="btn btn-light btn-sm" onclick="history.back()">
+                <i class="fas fa-arrow-left me-1"></i> Back
+            </button>
+        </div>
 
-        <form asp-action="Create">
-            <input asp-for="SaleId" type="hidden" />
 
-            <div class="row g-3 mb-3">
-                <div class="col-md-6">
-                    <label class="form-label fw-semibold">Customer</label>
-                    @Html.DropDownListFor(model => model.CustomerId, Model.Customers, "Select Customer", new { @class = "form-select" })
-                    <span asp-validation-for="CustomerId" class="text-danger small"></span>
+        @* Error Message  *@
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger alert-dismissible fade show m-3">
+                <i class="fas fa-exclamation-circle me-2"></i>@ViewBag.ErrorMessage
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+
+        <div class="invoice-body bg-white shadow-sm p-4 rounded-bottom">
+            <form asp-action="Create">
+                <input asp-for="SaleId" type="hidden" />
+
+                @* Customer part *@
+                <div class="mb-4">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Customer Name</label>
+                            @Html.DropDownListFor(model => model.CustomerId, Model.Customers, "Select Customer",
+                                     new { @class = "form-select" })
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Description</label>
+                            <input asp-for="Description" class="form-control" placeholder="Sale description" />
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label class="form-label fw-semibold">Description</label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger small"></span>
+
+                <!-- Items Section -->
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3 p-2 rounded" style="background-color: #198754;">
+                        <h5 class="text-white mb-0">
+                            <i class="fas fa-list-ol me-2"></i> Items/Services
+                        </h5>
+                        <button type="submit" class="btn btn-light btn-sm">
+                            <i class="fas fa-plus me-1"></i> Add
+                        </button>
+                    </div>
+
+                    @* Product Info  *@
+                    <div class="row gx-2 gy-2 align-items-end">
+                        <div class="col-md-3">
+                            <label class="form-label small fw-semibold">Product</label>
+                            @Html.DropDownListFor(model => model.ProductId, Model.Products, "Select Product", new { @class = "form-select form-select-sm" })
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small fw-semibold">Model</label>
+                            @Html.DropDownListFor(model => model.ModelId, Model.Models, "Select Model", new { @class = "form-select form-select-sm" })
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label small fw-semibold">Qty</label>
+                            <input asp-for="Quantity" class="form-control form-control-sm" value="1" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label small fw-semibold">Price</label>
+                            <input asp-for="Price" class="form-control form-control-sm" value="0" onchange="calculateItem()" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label small fw-semibold">VAT %</label>
+                            <input asp-for="Vat" class="form-control form-control-sm" value="0" onchange="calculateItem()" />
+                        </div>
+                    </div>
+
+                    @* Store & Workshop Info  *@
+                    <div class="row gx-2 gy-2 mt-2">
+                        <div class="col-md-3">
+                            <label class="form-label small fw-semibold">Sub Total</label>
+                            <input asp-for="SubTotal" class="form-control form-control-sm" readonly />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small fw-semibold">Store</label>
+                            @Html.DropDownListFor(model => model.StoreId, Model.Stores, "Store", new { @class = "form-select form-select-sm" })
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small fw-semibold">Workshop</label>
+                            @Html.DropDownListFor(model => model.WorkShopId, Model.WorkShopes, "Workshop", new { @class = "form-select form-select-sm" })
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small fw-semibold">Bay</label>
+                            <input asp-for="BayId" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+
+                    @* Vehicle Info  *@
+                    <div class="row gx-2 gy-2 mt-2 align-items-end">
+                        <div class="col-md-2">
+                            <label class="form-label small fw-semibold">Level</label>
+                            <input asp-for="LevelId" class="form-control form-control-sm" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small fw-semibold">VIN</label>
+                            <input asp-for="Vin" class="form-control form-control-sm" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small fw-semibold">Reg. No</label>
+                            <input asp-for="RegisterNo" class="form-control form-control-sm" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label small fw-semibold">Start Time</label>
+                            <input asp-for="StartTime" type="time" class="form-control form-control-sm" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label small fw-semibold">End Time</label>
+                            <input asp-for="EndTime" type="time" class="form-control form-control-sm" />
+                        </div>
+
+                    </div>
+
+                    @* Added Items  *@
+                    <div class="mt-3 mb-0">
+                        <h5 class="mb-3 text-white fw-semibold px-3 py-2 rounded" style="background-color: #198754;">
+                            <i class="fas fa-list-ol me-2"></i>Added Products/Services List
+                        </h5>
+
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle">
+                                <tbody>
+                                    @foreach (var item in Model.SaleDetails)
+                                    {
+                                        @* Product Row  *@
+                                        <tr class="bg-light">
+                                            <td class="text-start">
+                                                <span class="text-muted small">Product</span><br>
+                                                <strong>@item.ProductName</strong>
+                                            </td>
+                                            <td class="text-start">
+                                                <span class="text-muted small">Model</span><br>
+                                                <strong>@item.ModelName</strong>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted small">Qty</span><br>
+                                                <strong>@item.Quantity</strong>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted small">Price</span><br>
+                                                <strong>@item.Price.ToString("C")</strong>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted small">VAT</span><br>
+                                                <strong>@item.Vat%</strong>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted small">Subtotal</span><br>
+                                                <strong class="subtotal-class text-primary">@item.SubTotal.ToString("F2")</strong>
+                                            </td>
+
+                                        </tr>
+
+                                        @* Service Row *@
+                                        <tr class="bg-white">
+                                            <td class="text-start">
+                                                <span class="text-muted small">Store</span><br>
+                                                <strong>@item.StoreName</strong>
+                                            </td>
+                                            <td class="text-start">
+                                                <span class="text-muted small">Workshop</span><br>
+                                                <strong>@item.WorkShopId</strong>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted small">Bay</span><br>
+                                                <strong>@item.BayId</strong>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted small">Level</span><br>
+                                                <strong>@item.LevelId</strong>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted small">VIN</span><br>
+                                                <strong>@item.Vin</strong>
+                                            </td>
+                                            <td class="text-start">
+                                                <div class="d-flex flex-column gap-1">
+                                                    <div>
+                                                        <span class="text-muted small">Reg:</span>
+                                                        <strong> @item.RegisterNo</strong>
+                                                    </div>
+                                                    <div>
+                                                        <span class="text-muted small">Start:</span>
+                                                        <strong> @item.StartTime</strong>
+                                                    </div>
+                                                    <div>
+                                                        <span class="text-muted small">End:</span>
+                                                        <strong> @item.EndTime</strong>
+                                                    </div>
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-outline-danger mt-1 align-self-start"
+                                                            onclick="removeAddedRow(this)">
+                                                        <i class="fas fa-trash-alt me-1"></i> Remove
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label fw-semibold">Grand Total</label>
-                    <input asp-for="GrandTotal" class="form-control" readonly />
+                @* GrandTotal Part *@
+                <div class="mb-1">
+                    <div class="row justify-content-end">
+                        <div class="col-md-3">
+                            <div class="d-flex justify-content-between border-top pt-2">
+                                <span class="fw-bold">Grand Total:</span>
+                                <span class="fw-bold" id="grandTotalDisplay">0.00</span>
+                                <input asp-for="GrandTotal" id="GrandTotal" type="hidden" />
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="table-responsive mb-4">
-                <table class="table table-bordered table-hover align-middle text-center">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Product</th>
-                            <th>Model</th>
-                            <th>Qty</th>
-                            <th>Price</th>
-                            <th>VAT (%)</th>
-                            <th>Sub Total</th>
-                            <th>Store</th>
-                            <th>Workshop</th>
-                            <th>Bay</th>
-                            <th>Level</th>
-                            <th>VIN</th>
-                            <th>Reg. No</th>
-                            <th>Start</th>
-                            <th>End</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="detailsTable">
-                        <tr>
-                            <td>@Html.DropDownListFor(model => model.ProductId, Model.Products, "Select Product", new { @class = "form-select" })</td>
-                            <td>@Html.DropDownListFor(model => model.ModelId, Model.Models, "Select Model", new { @class = "form-select" })</td>
-                            <td><input asp-for="Quantity" class="form-control" value="0" /></td>
-                            <td><input asp-for="Price" class="form-control" value="0" onchange="calculateItem()" /></td>
-                            <td><input asp-for="Vat" class="form-control" value="0" onchange="calculateItem()" /></td>
-                            <td><input asp-for="SubTotal" class="form-control" readonly /></td>
-                            <td>@Html.DropDownListFor(model => model.StoreId, Model.Stores, "Select Store", new { @class = "form-select" })</td>
-                            <td>@Html.DropDownListFor(model => model.WorkShopId, Model.WorkShopes, "Select Workshop", new { @class = "form-select" })</td>
-                            <td><input asp-for="BayId" class="form-control" /></td>
-                            <td><input asp-for="LevelId" class="form-control" /></td>
-                            <td><input asp-for="Vin" class="form-control" /></td>
-                            <td><input asp-for="RegisterNo" class="form-control" /></td>
-                            <td><input asp-for="StartTime" type="time" class="form-control" /></td>
-                            <td><input asp-for="EndTime" type="time" class="form-control" /></td>
-                            <td><button type="submit" class="btn btn-outline-success btn-sm">Add</button></td>
-                        </tr>
-
-                        @foreach (var item in Model.SaleDetails)
-                        {
-                            <tr>
-                                <td>@item.ProductName</td>
-                                <td>@item.ModelName</td>
-                                <td>@item.Quantity</td>
-                                <td>@item.Price</td>
-                                <td>@item.Vat</td>
-                                <td>@item.SubTotal</td>
-                                <td>@item.StoreName</td>
-                                <td>@item.WorkShopId</td>
-                                <td>@item.BayId</td>
-                                <td>@item.LevelId</td>
-                                <td>@item.Vin</td>
-                                <td>@item.RegisterNo</td>
-                                <td>@item.StartTime</td>
-                                <td>@item.EndTime</td>
-                                <td><a asp-action="RemoveDetail" asp-route-id="@item.SaleId" class="btn btn-danger btn-sm">Remove</a></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center">
-                @if (Model.SaleId > 0)
-                {
-                    <button type="submit" class="btn btn-success px-5">Save Change</button>
-                }
-                else
-                {
-                    <button type="submit" class="btn btn-success px-5">Save</button>
-                }
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-            </div>
-        </form>
+                @* Buttons  *@
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                        <i class="fas fa-arrow-left me-2"></i> Back
+                    </a>
+                    <button type="submit" class="btn btn-success px-5">
+                        <i class="fas fa-save me-2"></i> @(Model.SaleId > 0 ? "Update" : "Save")
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-
 <script>
-    function addRow() {
-        const table = document.getElementById("detailsTable");
-        const newRow = table.rows[0].cloneNode(true);
+    function calculateItem() {
+        var quantity = parseFloat(document.getElementById("Quantity").value) || 0;
+        var price = parseFloat(document.getElementById("Price").value) || 0;
+        var vat = parseFloat(document.getElementById("Vat").value) || 0;
 
-        newRow.querySelectorAll("input").forEach(input => {
-            input.value = input.classList.contains('qty') ? 1 : 0;
-            if (input.classList.contains('subtotal')) input.value = '';
+        var subtotal = quantity * price;
+        var vatAmount = subtotal * (vat / 100);
+        var total = subtotal + vatAmount;
+
+        document.getElementById("SubTotal").value = total.toFixed(2);
+    }
+
+    function removeAddedRow(button) {
+        const detailRow = button.closest("tr"); // 2nd row
+        const productRow = detailRow.previousElementSibling; // 1st row
+        const dividerRow = detailRow.nextElementSibling; // 3rd row
+
+        if (productRow) productRow.remove();
+        detailRow.remove();
+        if (dividerRow) dividerRow.remove();
+
+        updateGrandTotal();
+    }
+
+    function updateGrandTotal() {
+        let grandTotal = 0;
+        const subTotalElements = document.querySelectorAll(".subtotal-class");
+
+        subTotalElements.forEach(item => {
+            const val = parseFloat(item.textContent) || 0;
+            grandTotal += val;
         });
 
-        table.appendChild(newRow);
-    }
-    function removeRow(button) {
-        const table = document.getElementById("detailsTable");
-        if (table.rows.length > 1) {
-            button.closest('tr').remove();
-            calculateTotal();
-        }
+        document.getElementById("grandTotalDisplay").textContent = grandTotal.toFixed(2);
+        document.getElementById("GrandTotal").value = grandTotal.toFixed(2); // hidden input
     }
 
-    function calculateItem(){
-        var Quantity =  parseFloat(document.getElementById("Quantity").value);
-        var Price = parseFloat(document.getElementById("Price").value);
-        var Vat = parseFloat(document.getElementById("Vat").value);
-        var total = Quantity * Price;
-        var vated = total * (Vat / 100)
-        document.getElementById("SubTotal").value = total + vated;
+    window.onload = function () {
+        updateGrandTotal();
     }
 </script>

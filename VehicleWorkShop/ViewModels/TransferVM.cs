@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using VehicleWorkShop.Models;
 
 
 namespace VehicleWorkShop.ViewModels
@@ -11,8 +12,7 @@ namespace VehicleWorkShop.ViewModels
         public string Description { get; set; }
         public bool IsApprove { get; set; }
 
-
-        public virtual IList<TransferDetailVM> Details { get; set; } = new List<TransferDetailVM>();
+        public virtual IList<TransferDetailVM> Details { get; set; }
         public List<SelectListItem> Products { get; set; } = new List<SelectListItem>();
         public List<SelectListItem> SourceStores { get; set; } = new List<SelectListItem>();
         public List<SelectListItem> DestinationStores { get; set; } = new List<SelectListItem>();

@@ -22,7 +22,7 @@ namespace VehicleWorkShop.Controllers
 
         public async Task<IActionResult> Index(string searchTerm = "", int page = 1)
         {
-            int pageSize = 7;
+            int pageSize = 5;
             var data = await product.GetAll();
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {

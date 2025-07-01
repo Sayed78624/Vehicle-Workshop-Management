@@ -26,7 +26,9 @@ namespace VehicleWorkShop.Service.Repository
                               {
                                   CustomerId = p.CustomerId,
                                   Description = p.Description,
-                                  GrandTotal = p.GrandTotal,
+                                  GrandTotal = db.SalesDetails
+                                          .Where(d => d.SaleId == p.SaleId)
+                                          .Sum(d => d.SubTotal),
                                   CustomerName = s.Name,
                                   SaleId = p.SaleId,
                                   IsApprove = p.IsApprove,
@@ -280,5 +282,12 @@ namespace VehicleWorkShop.Service.Repository
             return null;
         }
 
+        public async Task<int> GetCustomerNameBySaleId(int saleid)
+        {
+            return await db.Sales
+                 .Where(s => s.SaleId == saleid)
+                 .Select(s => s.CustomerId)
+                 .FirstOrDefaultAsync();
+        }
     }
 }

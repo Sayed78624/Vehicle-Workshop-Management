@@ -27,6 +27,8 @@ builder.Services.AddTransient<ICustomer, CustomerRP>();
 builder.Services.AddTransient<ISale, SaleRP>();
 builder.Services.AddTransient<IVehicleModel, VehicleModelRP>();
 builder.Services.AddTransient<ITransfer, TransferRP>();
+builder.Services.AddTransient<IPaymentType, PaymentTypeRP>();
+builder.Services.AddTransient<IPayment, PaymentRP>();
 
 var app = builder.Build();
 

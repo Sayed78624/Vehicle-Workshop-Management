@@ -1,0 +1,32 @@
+﻿@model VehicleWorkShop.ViewModels.PaymentTypeVM
+
+@{
+    ViewData["Title"] = "Create Payment Type";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg rounded-3">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Create Payment Type</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div class="mb-3">
+                            <label asp-for="PaymentTypeName" class="form-label"></label>
+                            <input asp-for="PaymentTypeName" class="form-control" placeholder="Enter payment type name" />
+                            <span asp-validation-for="PaymentTypeName" class="text-danger"></span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success"> Save</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary">↩ Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

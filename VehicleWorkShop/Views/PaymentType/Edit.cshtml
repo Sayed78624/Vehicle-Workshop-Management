@@ -1,0 +1,39 @@
+﻿@model VehicleWorkShop.ViewModels.PaymentTypeVM
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">Edit Payment Method</h3>
+                </div>
+                <div class="card-body bg-light">
+                    <form asp-action="Edit">
+                        <input asp-for="Id" hidden />
+
+                        <div class="mb-3">
+                            <label asp-for="PaymentTypeName" class="form-label fw-semibold">Type Name</label>
+                            <input asp-for="PaymentTypeName" class="form-control" placeholder="Enter Payment Type" />
+                            <span asp-validation-for="PaymentTypeName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="bi bi-save me-1"></i> Update
+                            </button>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <a asp-action="Index" class="btn btn-secondary w-100">
+                                    <i class="bi bi-arrow-left-circle me-2"></i>Back to List
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

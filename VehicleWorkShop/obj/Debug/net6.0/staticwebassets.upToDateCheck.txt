@@ -7,11 +7,15 @@ wwwroot\Images\32fde908-12a3-4b4a-a801-570818d28649_Mominul.jpg
 wwwroot\Images\39084107-6858-451c-9ffd-f80fdb8f100b_OIP.jpg
 wwwroot\Images\48f192d9-9e24-4b9c-9d5d-1226e8f8fb4e_Akash.jpg
 wwwroot\Images\4facf6e1-985c-408b-8b4e-39d318494c06_OIP.jpg
+wwwroot\Images\671c9728-5ead-4e39-819f-d4fe04c0b296_download (3).jpeg
 wwwroot\Images\67605f90-3362-4cf5-99fe-09dd150a7c52_OIP (1).jpg
 wwwroot\Images\67d91fe3-5a7a-40d6-8534-26dd2f893bfd_OIP (1).jpg
 wwwroot\Images\a10304d2-6b62-4c96-b843-5da87639df8c_LiverConcert.jpg
+wwwroot\Images\adf7f631-0682-4eaf-894f-be674a03e247_download (1).jpeg
 wwwroot\Images\c73d2f9a-ef62-4f0a-82f8-fc91bb70872c_OIP.jpg
+wwwroot\Images\dbdc1de5-ba28-451b-9cc1-564398308f8b_download.jpeg
 wwwroot\Images\f4f8d789-64be-49a9-867e-f2dff4f4d166_OIP.jpg
+wwwroot\Images\fb21fd7d-80c8-455e-b2fb-2f9478f93a38_download (2).jpeg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map

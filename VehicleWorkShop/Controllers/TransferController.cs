@@ -23,7 +23,7 @@ namespace VehicleWorkShop.Controllers
             this.store = store;
         }
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int? id)
         {
             try
             {
@@ -50,6 +50,7 @@ namespace VehicleWorkShop.Controllers
 
                 TransferVM transferVM = new TransferVM()
                 {
+                   
                     Products = products,
                     SourceStores = sstores,
                     DestinationStores = dstores,
@@ -94,11 +95,39 @@ namespace VehicleWorkShop.Controllers
             }).ToList();
             return View(transferVM);
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sourceSearch = "", string destinationSearch = "", int page = 1)
         {
-            var result = await transfer.GetAll(); 
-            return View(result);
+            int pageSize = 7;
+
+            var data = await transfer.GetAll(); 
+
+            if (!string.IsNullOrWhiteSpace(sourceSearch))
+            {
+                data = data.Where(t => t.Details.Any(d =>
+                    d.SourceStoreName.Contains(sourceSearch, StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
+            }
+
+            if (!string.IsNullOrWhiteSpace(destinationSearch))
+            {
+                data = data.Where(t => t.Details.Any(d =>
+                    d.DestinationStoreName.Contains(destinationSearch, StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
+            }
+
+            int totalItems = data.Count();
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+            var pagedData = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.SourceSearch = sourceSearch;
+            ViewBag.DestinationSearch = destinationSearch;
+
+            return View(pagedData);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)

@@ -1,0 +1,83 @@
+﻿@model VehicleWorkShop.ViewModels.PaymentVM
+
+@{
+    ViewData["Title"] = "Add Payment";
+}
+
+<div class="container mt-3">
+    <div class="card shadow-sm">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0"><i class="fas fa-credit-card me-2"></i> Add Payment</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post">
+                <input type="hidden" asp-for="SaleId" />
+                <input type="hidden" asp-for="CustomerId" />
+                @* <input type="hidden" asp-for="Time" value="@DateTime.Now.ToString("HH:mm")" /> *@
+
+                <div class="mb-3">
+                    <label asp-for="CustomerId" class="form-label">Customer</label>
+                    @Html.DropDownListFor(model => model.CustomerId, Model.Customers, "Select Customer", new { @class = "form-select", @disabled = "disabled" })
+                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PaymentTypeId" class="form-label">Payment Type</label>
+                    @Html.DropDownListFor(model => model.PaymentTypeId, Model.PaymentType, "Select Payment Type", new { @class = "form-select", id = "PaymentTypeId" })
+                    <span asp-validation-for="PaymentTypeId" class="text-danger"></span>
+                </div>
+
+                 <div class="mb-3"> 
+                     <label asp-for="Time" class="form-label">Payment Time</label> 
+                     <input asp-for="Time" type="time" class="form-control" /> 
+                     <span asp-validation-for="Time" class="text-danger"></span> 
+                 </div> 
+
+                <div id="bankFields">
+                    <div class="mb-3">
+                        <label asp-for="AccNo" class="form-label">Account No</label>
+                        <input asp-for="AccNo" class="form-control" />
+                        <span asp-validation-for="AccNo" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="BankName" class="form-label">Bank Name</label>
+                        <input asp-for="BankName" class="form-control" />
+                        <span asp-validation-for="BankName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <a asp-action="Index" asp-controller="Sale" class="btn btn-secondary btn-sm me-2">
+                        <i class="fas fa-arrow-left me-1"></i> Back
+                    </a>
+                    <button type="submit" class="btn btn-success btn-sm">
+                        <i class="fas fa-check-circle me-1"></i> Save Payment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function toggleBankFields() {
+                var selectedValue = $("#PaymentTypeId").val();
+                if (selectedValue === "1") { 
+                    $("#bankFields").hide();
+                } else {
+                    $("#bankFields").show();
+                }
+            }
+
+            toggleBankFields();
+
+            $("#PaymentTypeId").change(function () {
+                toggleBankFields();
+            });
+        });
+    </script>
+}

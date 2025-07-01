@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/VehicleWorkShop.styles.css" asp-append-version="true" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
 
     <style>
         body {
             display: flex;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden; 
+            overflow: hidden;
         }
 
         .sidebar {
@@ -24,8 +24,8 @@
             color: white;
             padding: 20px 15px;
             flex-shrink: 0;
-            height: 100vh; 
-            overflow-y: auto; 
+            height: 100vh;
+            overflow-y: auto;
         }
 
             .sidebar h5 {
@@ -67,12 +67,12 @@
             }
 
         .content {
-            flex: 1; 
+            flex: 1;
             display: flex;
             flex-direction: column;
-            height: 100vh; 
+            height: 100vh;
             background-color: #f8f9fa;
-            overflow: hidden; 
+            overflow: hidden;
         }
 
         .topbar {
@@ -94,19 +94,18 @@
 
         main.main {
             flex-grow: 1;
-            padding: 20px;
-            overflow-y: auto; 
+            padding: 5px;
+            overflow-y: auto;
         }
 
-        .footer {
-            height: 40px;
-            background-color: #e9ecef;
-            text-align: center;
-            padding: 10px 20px;
-            flex-shrink: 0;
-            font-size: 14px;
-            color: #333;
-        }
+        /* .footer { */
+        /*     height: 20px; */
+        /*     background-color: #e9ecef; */
+        /*     text-align: center; */
+        /*     flex-shrink: 0; */
+        /*     font-size: 14px; */
+        /*     color: #333; */
+        /* } */
     </style>
 </head>
 <body>
@@ -133,6 +132,7 @@
                         <a asp-controller="WorkShop" asp-action="Index"><i class="bi bi-building-gear me-2"></i> WorkShop</a>
                         <a asp-controller="Store" asp-action="Index"><i class="bi bi-shop me-2"></i> Store</a>
                         <a asp-controller="Model" asp-action="Index"><i class="bi bi-truck-front me-2"></i> Model</a>
+                        <a asp-controller="PaymentType" asp-action="Index">💳 Payment</a>
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
 
         <a asp-controller="Supplier" asp-action="Index">🚚 Supplier</a>
         <a asp-controller="Customer" asp-action="Index">👥 Customer</a>
-        <a asp-controller="PaymentType" asp-action="Index">💳 Payment</a>
+
         <a asp-controller="Sale" asp-action="Index">🛒 Sale</a>
         <a asp-controller="Transfer" asp-action="Index">🔁 Transfer</a>
         <a asp-controller="Purchase" asp-action="Index">📥 Purchase</a>
@@ -175,9 +175,9 @@
             @RenderBody()
         </main>
 
-        <footer class="footer border-top">
-            &copy; 2025 - VehicleWorkShop || All Rights Reserved
-        </footer>
+        @* <footer class="footer border-top"> *@
+        @*     &copy; 2025 - VehicleWorkShop || All Rights Reserved *@
+        @* </footer> *@
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -187,3 +187,4 @@
 
 </body>
 </html>
+

@@ -13,8 +13,8 @@ namespace VehicleWorkShop.Models
         public int CustomerId { get; set; }
         [ForeignKey("PaymentType")]
         public int PaymentTypeId { get; set; }
-        public string AccNo { get; set; }
-        public string BankName { get; set; }
+        public string? AccNo { get; set; }
+        public string? BankName { get; set; }
         public TimeSpan Time { get; set; }
 
         public virtual Sale Sale { get; set; }
